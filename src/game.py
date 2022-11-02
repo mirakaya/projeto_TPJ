@@ -2,6 +2,7 @@ import pygame
 import os
 from src.inputs import InputHandler
 from src.level_interpreter import LevelInterpreter
+from src.scoreboard import Scoreboard
 
 
 running = True
@@ -41,6 +42,19 @@ while running: #game
 
 	#paint background
 	display.fill("white")
+
+	x = 0
+	y = 0
+	scale = 10
+	# temp code
+	for i in lvl_content:
+		if i != '\n':
+			Scoreboard().render_scoreboard(i, display, x * scale, y * scale)
+			x +=1
+			if x == WIDTH:
+				x=0
+				y+= 1
+
 
 	# update window + fps
 	pygame.display.flip()
