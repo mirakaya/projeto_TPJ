@@ -1,4 +1,6 @@
+import pygame
 
+SCALE = 10
 
 class LevelInterpreter:
 
@@ -30,12 +32,16 @@ class LevelInterpreter:
 
 				counter += 1
 
+
+		#create the display with the desired width and height
+		display = pygame.display.set_mode((SCALE * width, SCALE * height))
+
 		#print("lvl", lvl_content)
-		return window_title, width, height, lvl_content
+		return window_title, width, height, lvl_content, display
 
 
-if __name__ == "__main__":
+'''if __name__ == "__main__":
 
-	LevelInterpreter().interpret_level('../levels/1.txt')
+	LevelInterpreter().interpret_level('../levels/1.txt')'''
 
 

@@ -1,13 +1,23 @@
 import pygame
+import os
 from src.inputs import InputHandler
+from src.level_interpreter import LevelInterpreter
+
 
 running = True
 pygame.init()
 
+#get all files in the levels dir
+lvl_dir = '../levels/'
+entries = os.listdir(lvl_dir)
+current_level = 0
+
+window_title, WIDTH, HEIGHT, lvl_content, display = LevelInterpreter().interpret_level(lvl_dir + entries[current_level])
+
 #initialize display
-WIDTH, HEIGHT = 80, 40
-SCALE = 10
-display = pygame.display.set_mode((SCALE * WIDTH, SCALE * HEIGHT))
+#WIDTH, HEIGHT = 80, 40
+'''SCALE = 10
+display = pygame.display.set_mode((SCALE * WIDTH, SCALE * HEIGHT))'''
 
 #clock
 clock = pygame.time.Clock()
