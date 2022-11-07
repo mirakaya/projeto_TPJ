@@ -23,10 +23,6 @@ class Right(Command):
     def execute(self, actor):
         actor.right()
 
-class Undo(Command):
-    def execute(self, actor):
-        actor.undo()
-
 
 class InputHandler:
     command = {
@@ -43,4 +39,4 @@ class InputHandler:
             return self.command[key]
 
         except KeyError:
-            print("Key not bound")
+            print("Key not bound - ignore input")
