@@ -24,37 +24,37 @@ class Sprites:
 				)'''
 
 
-	class Background_Sprites(pygame.sprite.Sprite):
+	class Background(pygame.sprite.Sprite):
 
 		def __init__(self, position):
 			self.position = position
 
-		def set_sprite(self, s_type):
-			sprt = Sprites.Terrain()
-			self.sprite = sprt.sprite(s_type)
+		def sprite(self, s_type):
+			sprt = Sprites.Background_Sprite()
+			self.sprite = sprt.set_sprite(s_type)
 
 
-	class Terrain(pygame.sprite.Sprite):
+	class Background_Sprite(pygame.sprite.Sprite):
 
-		def __init__(self, b_sprite):
+		def __init__(self):
 			pass
 
-		def sprite (self, type):
+		def set_sprite (self, type):
 			self.type = type
 			self.collision = True #TODO - make a switch case based on type to figure out if collision
 
-		def update(self):
+		'''def update(self):
 			# Render
 			self.image.blit(
 				self.image,
 				(get_scale() * self.position[0], get_scale() * self.position[1]),
-			)
+			)'''
 
 if __name__ == "__main__":
 
-	bs = Sprites.Background_Sprites([0,0])
-	print(bs.position)
+	bs = Sprites.Background([0,0])
+	#print(bs.position)
 
-	bs.set_sprite(1)
+	bs.sprite(1)
 
 
