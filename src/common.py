@@ -1,7 +1,9 @@
-
+import pygame
 SCALE = 10
 WIDTH = 0
 HEIGHT = 0
+
+GAME_EVENT = pygame.event.custom_type()
 
 def set_scale (new_val):
 	SCALE = new_val

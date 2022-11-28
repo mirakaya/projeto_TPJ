@@ -15,10 +15,14 @@ class Scoreboard:
 
 	def render(self, display_surface, width, height):# draw snake - render
 
-		bs = Sprites.Background_Sprites(position=[width * get_scale(), height * get_scale()])
-		terrain = Sprites.Terrain(bs)
+		bs = Sprites.Background_Sprite(position=[width * get_scale(), height * get_scale()])
+		texture = image.load("../resources/sugar.jpg")
+		texture = transform.scale(texture, (SCALE*10, SCALE*10))
 
-		display_surface.blit(bs, (width * get_scale(), height * get_scale()))
+
+		terrain = Sprites.Terrain(bs, texture)
+
+		display_surface.blit(terrain, (width * get_scale(), height * get_scale()))
 
 
 

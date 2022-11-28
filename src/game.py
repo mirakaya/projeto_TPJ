@@ -4,7 +4,8 @@ from src.inputs import InputHandler
 from src.level_interpreter import LevelInterpreter
 from src.scoreboard import Scoreboard
 from src.common import *
-
+from pygame import *
+from src.sprites import *
 
 running = True
 pygame.init()
@@ -28,6 +29,15 @@ display = pygame.display.set_mode((SCALE * WIDTH, SCALE * HEIGHT))'''
 #clock
 clock = pygame.time.Clock()
 
+#TODO - tmp
+texture = image.load("../resources/sugar.jpg")
+texture = transform.scale(texture, (SCALE * 10, SCALE * 10))
+
+terrains = [
+	Sprites.Terrain(texture),
+
+	]
+
 
 while running: #game
 
@@ -38,7 +48,6 @@ while running: #game
 			running = False
 
 		elif event.type == pygame.KEYDOWN: #a key is pressed
-
 			command = InputHandler().handleInput(event.key) #go get the right input
 			#command.execute(snake1) #and execute it with obj snake1
 
@@ -48,17 +57,27 @@ while running: #game
 	#paint background
 	display.fill("white")
 
+	map = [[0 for x in range(get_width())] for y in range(get_height())]
+
 	x = 0
 	y = 0
 
+	#interpret level into
 	for i in lvl_content:
 		if i != '\n':
 			#TODO - tmp
-			Scoreboard().render_scoreboard(i, display, x * get_scale(), y * get_scale())
+			map [x][y] = i
+			#Scoreboard().render_scoreboard(i, display, x * get_scale(), y * get_scale())
 			x += 1
 			if x == WIDTH:
 				x = 0
 				y += 1
+
+	#render level
+
+	for x in map:
+		for y in map:
+			render_position(x, y)
 
 
 	# update window + fps

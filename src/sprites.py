@@ -1,6 +1,7 @@
 import pygame
 from src.common import *
 from src.spritesheet import *
+from src.common import *
 
 class Sprites:
 
@@ -34,10 +35,10 @@ class Sprites:
 			self.sprite = sprt.set_sprite(s_type)
 
 
-	class Background_Sprite(pygame.sprite.Sprite):
+	class Background_Sprite(pygame.sprite.Sprite): #tree
 
-		def __init__(self):
-			pass
+		def __init__(self, position):
+			self.position = position
 
 		def set_sprite (self, type):
 			self.type = type
@@ -49,6 +50,28 @@ class Sprites:
 				self.image,
 				(get_scale() * self.position[0], get_scale() * self.position[1]),
 			)'''
+
+	class Terrain(pygame.sprite.Sprite): #treeModel
+
+		def __init__(self, b_sprite, texture):
+
+			self.b_sprite = b_sprite
+			self.texture = texture
+
+			self.image = pygame.Surface([SCALE, SCALE])
+			#self.image.fill("brown")
+			self.image.blit(self.texture, (0, 0))
+			self.image.set_colorkey("white")
+
+			self.rect = self.image.get_rect()
+			self.rect.x = self.b_sprite.position[0] * SCALE
+			self.rect.y = self.b_sprite.position[1] * SCALE
+
+		def get_texture(self):
+			return self.texture
+
+
+
 
 if __name__ == "__main__":
 
