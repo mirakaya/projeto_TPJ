@@ -22,7 +22,7 @@ class Scoreboard:
 
 		terrain = Sprites.Terrain(bs, texture)
 
-		display_surface.blit(terrain, (width * get_scale(), height * get_scale()))
+		#display_surface.blit(terrain, (width * get_scale(), height * get_scale()))
 
 
 

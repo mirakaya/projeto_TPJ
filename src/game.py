@@ -30,11 +30,17 @@ display = pygame.display.set_mode((SCALE * WIDTH, SCALE * HEIGHT))'''
 clock = pygame.time.Clock()
 
 #TODO - tmp
-texture = image.load("../resources/sugar.jpg")
-texture = transform.scale(texture, (SCALE * 10, SCALE * 10))
+floor = image.load("../resources/sugar.jpg")
+floor = transform.scale(floor, (SCALE * 10, SCALE * 10))
+
+sky = image.load("../resources/sugar.jpg")
+sky = transform.scale(sky, (SCALE * 10, SCALE * 10))
+
+bs = Sprites.Background_Sprite(position=[get_width() * get_scale(), get_height() * get_scale()])
 
 terrains = [
-	Sprites.Terrain(texture),
+	Sprites.Terrain(bs, floor),
+	Sprites.Terrain(bs, sky)
 
 	]
 
@@ -57,27 +63,41 @@ while running: #game
 	#paint background
 	display.fill("white")
 
-	map = [[0 for x in range(get_width())] for y in range(get_height())]
+	map = [[0 for x in range(WIDTH)] for y in range(HEIGHT)]
 
-	x = 0
-	y = 0
+	aux_x = 0
+	aux_y = 0
+
+	'''print("w - ", WIDTH)
+	print("h - ", HEIGHT)'''
 
 	#interpret level into
 	for i in lvl_content:
 		if i != '\n':
 			#TODO - tmp
-			map [x][y] = i
+
+			#convert i to Terrain
+			terrain_chosen = terrains[0]
+			if i == "F":
+				terrain_chosen = terrains[0]
+
+			elif i == "S":
+				terrain_chosen = terrains[1]
+
+			map [aux_x][aux_y] = terrain_chosen
+			'''print("x - ", x)
+			print("y - ", y)'''
 			#Scoreboard().render_scoreboard(i, display, x * get_scale(), y * get_scale())
-			x += 1
-			if x == WIDTH:
-				x = 0
-				y += 1
+			aux_x += 1
+			if aux_x == WIDTH:
+				aux_x = 0
+				aux_y += 1
 
 	#render level
-
-	for x in map:
+	'''for x in map:
 		for y in map:
-			render_position(x, y)
+			
+			display.blit(y , [x * SCALE, y * SCALE])'''
 
 
 	# update window + fps
