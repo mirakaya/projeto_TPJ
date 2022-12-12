@@ -9,19 +9,23 @@ class Command:
 
 class Up(Command):
     def execute(self, actor):
-        actor.up()
+        actor.jump()
 
 class Down(Command):
     def execute(self, actor):
-        actor.down()
+        actor.cancel_jump()
 
 class Left(Command):
     def execute(self, actor):
-        actor.left()
+        actor.move()
 
 class Right(Command):
     def execute(self, actor):
-        actor.right()
+        actor.move()
+
+class Dash(Command):
+    def execute(self, actor):
+        actor.dash()
 
 
 class InputHandler:
@@ -30,6 +34,7 @@ class InputHandler:
         pygame.K_a: Left(),
         pygame.K_s: Down(),
         pygame.K_d: Right(),
+        pygame.K_e: Dash(),
 
     }
 

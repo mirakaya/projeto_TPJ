@@ -51,6 +51,7 @@ class Sprites:
 				(get_scale() * self.position[0], get_scale() * self.position[1]),
 			)'''
 
+	#TODO - terrain doesn't have a texture, or at least isn't using it on the current version
 	class Terrain(pygame.sprite.Sprite): #treeModel
 
 		def __init__(self, b_sprite, texture):
@@ -60,8 +61,8 @@ class Sprites:
 
 			self.image = pygame.Surface([SCALE, SCALE])
 			#self.image.fill("brown")
-			self.image.blit(self.texture, (0, 0))
-			self.image.set_colorkey("white")
+			#self.image.blit(self.texture, (0, 0))
+			'''self.image.set_colorkey("white")'''
 
 			self.rect = self.image.get_rect()
 			self.rect.x = self.b_sprite.position[0] * SCALE
@@ -69,6 +70,13 @@ class Sprites:
 
 		def get_texture(self):
 			return self.texture
+
+	#TODO?
+	class PC_sprites(pygame.sprite.Sprite):
+
+		def __init__(self):
+			pass
+
 
 
 

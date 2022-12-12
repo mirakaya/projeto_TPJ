@@ -6,10 +6,16 @@ from src.scoreboard import Scoreboard
 from src.common import *
 from pygame import *
 from src.sprites import *
+from src.Playable_character import *
 
 running = True
 pygame.init()
 
+#clock
+clock = pygame.time.Clock()
+
+
+#TODO - refactor this to another class or smt
 #get all files in the levels dir
 lvl_dir = '../levels/'
 entries = os.listdir(lvl_dir)
@@ -20,10 +26,6 @@ window_title, WIDTH, HEIGHT, lvl_content, display = LevelInterpreter().interpret
 set_width(WIDTH)
 set_height(HEIGHT)
 
-#clock
-clock = pygame.time.Clock()
-
-#TODO - tmp
 floor = image.load("../resources/floor.png")
 floor = transform.scale(floor, (get_scale(), get_scale()))
 
@@ -46,8 +48,6 @@ map = [[0 for x in range(WIDTH)] for y in range(HEIGHT)]
 aux_x = 0
 aux_y = 0
 
-'''print("w - ", WIDTH)
-print("h - ", HEIGHT)'''
 
 # interpret level into
 for i in lvl_content:
@@ -55,12 +55,10 @@ for i in lvl_content:
 		# convert i to Terrain
 		terrain_chosen = terrains[0]
 		if i == "F":
-			terrain_chosen = terrains[0]
+			map[aux_x][aux_y] = terrains[0]
 
 		elif i == "S":
-			terrain_chosen = terrains[1]
-
-		map[aux_x][aux_y] = terrain_chosen
+			map[aux_x][aux_y] = terrains[1]
 
 		aux_x += 1
 		if aux_x == WIDTH:
@@ -68,9 +66,20 @@ for i in lvl_content:
 			aux_y += 1
 
 # render level textures
-for x in range(0, len(map) ):
-	for y in range(0, len(map[0]) ):
+for x in range(0, len(map)):
+	for y in range(0, len(map[0])):
 		display.blit(map[x][y].texture, [x * get_scale(), y * get_scale()])
+
+
+#initialize mc
+mc = Playable_character()
+score = Scoreboard().render_scoreboard("Score = 1000", display, 0, 0 )
+
+#group of all non level texture sprites - mc, other items
+all_sprites = pygame.sprite.Group()
+#all_sprites.add(score)
+#all_sprites.add(mc)
+
 
 
 while running: #game
@@ -87,6 +96,10 @@ while running: #game
 
 		#elif event.type == GAME_EVENT:
 		#	print(event.txt)
+
+	#update sprites
+	all_sprites.update()
+	all_sprites.draw(display)
 
 
 

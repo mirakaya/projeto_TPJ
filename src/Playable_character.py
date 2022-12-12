@@ -53,10 +53,17 @@ class Playable_character:
 	def __init__(self):
 		self.dead = False
 
+
 	def move(self):
 		pass
 
 	def jump(self):
+		pass
+
+	def cancel_jump(self):
+		pass
+
+	def dash(self):
 		pass
 
 	def update(self):
