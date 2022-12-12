@@ -33,7 +33,7 @@ class LevelInterpreter:
 
 
 		#create the display with the desired width and height
-		display = pygame.display.set_mode((get_scale() * width, get_scale() * height))
+		display = pygame.display.set_mode((get_scale() * width , get_scale() * height))
 
 		#print("lvl", lvl_content)
 		return window_title, width, height, lvl_content, display

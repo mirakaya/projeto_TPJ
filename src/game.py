@@ -20,21 +20,15 @@ window_title, WIDTH, HEIGHT, lvl_content, display = LevelInterpreter().interpret
 set_width(WIDTH)
 set_height(HEIGHT)
 
-
-#initialize display
-#WIDTH, HEIGHT = 80, 40
-'''SCALE = 10
-display = pygame.display.set_mode((SCALE * WIDTH, SCALE * HEIGHT))'''
-
 #clock
 clock = pygame.time.Clock()
 
 #TODO - tmp
-floor = image.load("../resources/black.jpg")
-floor = transform.scale(floor, (SCALE * 10, SCALE * 10))
+floor = image.load("../resources/floor.png")
+floor = transform.scale(floor, (get_scale(), get_scale()))
 
-sky = image.load("../resources/blue.jpg")
-sky = transform.scale(sky, (SCALE * 10, SCALE * 10))
+sky = image.load("../resources/sky.png")
+sky = transform.scale(sky, (get_scale(), get_scale()))
 
 bs = Sprites.Background_Sprite(position=[get_width() * get_scale(), get_height() * get_scale()])
 
@@ -74,9 +68,9 @@ for i in lvl_content:
 			aux_y += 1
 
 # render level textures
-for x in range(0, len(map) - 1):
-	for y in range(0, len(map[0]) - 1):
-		display.blit(map[x][y].texture, [x * SCALE, y * SCALE])
+for x in range(0, len(map) ):
+	for y in range(0, len(map[0]) ):
+		display.blit(map[x][y].texture, [x * get_scale(), y * get_scale()])
 
 
 while running: #game
