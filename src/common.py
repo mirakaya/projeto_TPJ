@@ -1,5 +1,5 @@
 import pygame
-SCALE = 10
+SCALE = 40
 WIDTH = 0
 HEIGHT = 0
 

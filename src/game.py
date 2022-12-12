@@ -44,6 +44,40 @@ terrains = [
 
 	]
 
+# paint background
+display.fill("white")
+
+map = [[0 for x in range(WIDTH)] for y in range(HEIGHT)]
+
+aux_x = 0
+aux_y = 0
+
+'''print("w - ", WIDTH)
+print("h - ", HEIGHT)'''
+
+# interpret level into
+for i in lvl_content:
+	if i != '\n':
+		# convert i to Terrain
+		terrain_chosen = terrains[0]
+		if i == "F":
+			terrain_chosen = terrains[0]
+
+		elif i == "S":
+			terrain_chosen = terrains[1]
+
+		map[aux_x][aux_y] = terrain_chosen
+
+		aux_x += 1
+		if aux_x == WIDTH:
+			aux_x = 0
+			aux_y += 1
+
+# render level textures
+for x in range(0, len(map) - 1):
+	for y in range(0, len(map[0]) - 1):
+		display.blit(map[x][y].texture, [x * SCALE, y * SCALE])
+
 
 while running: #game
 
@@ -60,44 +94,7 @@ while running: #game
 		#elif event.type == GAME_EVENT:
 		#	print(event.txt)
 
-	#paint background
-	display.fill("white")
 
-	map = [[0 for x in range(WIDTH)] for y in range(HEIGHT)]
-
-	aux_x = 0
-	aux_y = 0
-
-	'''print("w - ", WIDTH)
-	print("h - ", HEIGHT)'''
-
-	#interpret level into
-	for i in lvl_content:
-		if i != '\n':
-			#TODO - tmp
-
-			#convert i to Terrain
-			terrain_chosen = terrains[0]
-			if i == "F":
-				terrain_chosen = terrains[0]
-
-			elif i == "S":
-				terrain_chosen = terrains[1]
-
-			map [aux_x][aux_y] = terrain_chosen
-			'''print("x - ", x)
-			print("y - ", y)'''
-			#Scoreboard().render_scoreboard(i, display, x * get_scale(), y * get_scale())
-			aux_x += 1
-			if aux_x == WIDTH:
-				aux_x = 0
-				aux_y += 1
-
-	#render level
-	for x in range(0, len(map) - 4):
-		for y in range(0, len(map[0]) - 4):
-
-			display.blit(map[x][y].texture, [x * SCALE, y * SCALE])
 
 	# update window + fps
 	pygame.display.flip()
