@@ -30,10 +30,10 @@ display = pygame.display.set_mode((SCALE * WIDTH, SCALE * HEIGHT))'''
 clock = pygame.time.Clock()
 
 #TODO - tmp
-floor = image.load("../resources/sugar.jpg")
+floor = image.load("../resources/black.jpg")
 floor = transform.scale(floor, (SCALE * 10, SCALE * 10))
 
-sky = image.load("../resources/sugar.jpg")
+sky = image.load("../resources/blue.jpg")
 sky = transform.scale(sky, (SCALE * 10, SCALE * 10))
 
 bs = Sprites.Background_Sprite(position=[get_width() * get_scale(), get_height() * get_scale()])
@@ -94,11 +94,10 @@ while running: #game
 				aux_y += 1
 
 	#render level
-	'''for x in map:
-		for y in map:
-			
-			display.blit(y , [x * SCALE, y * SCALE])'''
+	for x in range(0, len(map) - 4):
+		for y in range(0, len(map[0]) - 4):
 
+			display.blit(map[x][y].texture, [x * SCALE, y * SCALE])
 
 	# update window + fps
 	pygame.display.flip()
