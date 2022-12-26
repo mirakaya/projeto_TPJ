@@ -1,4 +1,22 @@
-import pygame
+from src.common import EVENT_FOOD_EATEN
+
+
+class ScoreBoard:
+    def __init__(self, *players):
+        self.scores = {}
+        '''for p in players:
+            p.register(EVENT_FOOD_EATEN, self.score)
+            self.scores[p.name] = 0'''
+
+    def score(self, context):
+        self.scores[context.name] += 1
+
+
+
+
+
+
+'''import pygame
 from pygame import *
 from src.sprites import *
 
@@ -10,7 +28,7 @@ class Scoreboard:
 		img = font.render(str(text), True, (0,0,0))
 		display_surface.blit(img, (width, height))
 
-		#self.render(display_surface, width, height)
+		#self.render(display_surface, width, height)'''
 
 
 

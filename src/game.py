@@ -2,11 +2,12 @@ import pygame
 import os
 from src.inputs import InputHandler
 from src.level_interpreter import LevelInterpreter
-from src.scoreboard import Scoreboard
+from src.scoreboard import *
 from src.common import *
 from pygame import *
 from src.sprites import *
 from src.Playable_character import *
+
 
 running = True
 pygame.init()
@@ -73,11 +74,15 @@ for x in range(0, len(map)):
 
 #initialize mc
 mc = Playable_character()
-score = Scoreboard().render_scoreboard("Score = 1000", display, 0, 0 )
+scoreboard = ScoreBoard(mc, mc)
 
-#group of all non level texture sprites - mc, other items
+
+
+#group of all non level texture sprites - mc, scoreboard, other items
 all_sprites = pygame.sprite.Group()
-#all_sprites.add(score)
+#all_sprites.add(ScoreBoardSprite(scoreboard, WIDTH, HEIGHT, SCALE))
+
+all_sprites.add(scoreboard)
 #all_sprites.add(mc)
 
 
