@@ -33,11 +33,11 @@ floor = transform.scale(floor, (get_scale(), get_scale()))
 sky = image.load("../resources/sky.png")
 sky = transform.scale(sky, (get_scale(), get_scale()))
 
-bs = Sprites.Background_Sprite(position=[get_width() * get_scale(), get_height() * get_scale()])
+bs = Background_Sprite(position=[get_width() * get_scale(), get_height() * get_scale()])
 
 terrains = [
-	Sprites.Terrain(bs, floor),
-	Sprites.Terrain(bs, sky)
+	Terrain(bs, floor),
+	Terrain(bs, sky)
 
 	]
 
@@ -74,15 +74,18 @@ for x in range(0, len(map)):
 
 #initialize mc
 mc = Playable_character()
-scoreboard = ScoreBoard(mc, mc)
+scoreboard = ScoreBoard(mc)
+
 
 
 
 #group of all non level texture sprites - mc, scoreboard, other items
 all_sprites = pygame.sprite.Group()
-#all_sprites.add(ScoreBoardSprite(scoreboard, WIDTH, HEIGHT, SCALE))
 
-all_sprites.add(scoreboard)
+
+all_sprites.add(ScoreBoardSprite(scoreboard, WIDTH, HEIGHT, SCALE))
+
+#all_sprites.add(scoreboard)
 #all_sprites.add(mc)
 
 

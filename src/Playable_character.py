@@ -2,11 +2,25 @@ from enum import Enum
 from src.common import *
 from src.fsm_characters import *
 
-class Playable_character:
+class Playable_character(Actor, Subject):
 
-	def __init__(self):
+	def __init__(self, name=None, body=[]):
+		Subject.__init__(self)
+		self.name = name
+		self.body = body
+		self.length = len(self.body)
+		self.direction = Directions.DOWN
 		self.dead = False
+		self.control_keys = dict()
 
+	def controls(self, up, left, down, right):
+		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
+
+	def command(self, control):
+		if control in self.control_keys.keys():
+			cmd = self.control_keys[control]()
+			cmd.execute(self)
+			return cmd
 
 	def move(self):
 		pass
