@@ -7,6 +7,7 @@ from src.common import *
 from pygame import *
 from src.sprites import *
 from src.Playable_character import *
+from src.load_objects import *
 
 
 running = True
@@ -20,7 +21,7 @@ tmp_display = pygame.display.set_mode((0,0))
 measures = Measures(40, 0, 0, tmp_display)
 
 
-#TODO - refactor this to another class or smt
+#TODO - put this in a for cycle
 #get all files in the levels dir
 lvl_dir = '../levels/'
 entries = os.listdir(lvl_dir)
@@ -28,23 +29,11 @@ current_level = 0
 
 window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + entries[current_level], measures)
 
-
-floor = image.load("../resources/floor.png")
-floor = transform.scale(floor, (measures.get_scale(), measures.get_scale()))
-
-sky = image.load("../resources/sky.png")
-sky = transform.scale(sky, (measures.get_scale(), measures.get_scale()))
-
-bs = Background_Sprite(position=[measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
-
-terrains = [
-	Terrain(bs, floor, measures),
-	Terrain(bs, sky, measures)
-
-	]
+#loads terrain TODO - see if it fits better in another class, probs whatever class has the terrains
+terrains = load_terrain(measures)
 
 # paint background
-#display.fill("white")
+display.fill("white")
 
 lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
 
