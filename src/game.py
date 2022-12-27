@@ -33,7 +33,7 @@ window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + entries
 terrains = load_terrain(measures)
 
 # paint background
-display.fill("white")
+measures.get_display().fill("white")
 
 lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
 
