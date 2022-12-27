@@ -5,21 +5,22 @@ from src.scoreboard import *
 from src.Playable_character import *
 
 class ScoreBoardSprite(pygame.sprite.Sprite):
-	def __init__(self, scoreboard: ScoreBoard, WIDTH, HEIGHT, SCALE):
+	def __init__(self, scoreboard: ScoreBoard, measures):
 		self.font = pygame.font.Font(None, 32)
 		super().__init__()
-
+		self.measures = measures
 		self.scoreboard = scoreboard
-		self.image = pygame.Surface([WIDTH * SCALE, len(scoreboard.scores) * SCALE])
+		self.image = pygame.Surface([self.measures.get_width() * self.measures.get_scale(), len(scoreboard.scores) * self.measures.get_scale()])
 		self.rect = self.image.get_rect()
-		self.SCALE = SCALE
+
+
 
 	def update(self):
 		self.image.fill("white")
 		for i, (player, score) in enumerate(self.scoreboard.scores.items()):
 			self.image.blit(
-				self.font.render(f"{player}: {score}", True, "green", "white"),
-				(0, i * self.SCALE),
+				self.font.render(f"{player}: {score}", True, "black", "white"),
+				(0, i * self.measures.get_scale()),
 			)
 
 class CharacterSprite(pygame.sprite.Sprite):

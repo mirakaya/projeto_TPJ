@@ -15,7 +15,7 @@ pygame.init()
 #set clock
 clock = pygame.time.Clock()
 
-#tmp measures
+#init measures
 tmp_display = pygame.display.set_mode((0,0))
 measures = Measures(40, 0, 0, tmp_display)
 
@@ -75,20 +75,14 @@ for i in lvl_content:
 LevelInterpreter.render_level(lvl_map, measures)
 
 
-#initialize mc
+#initialize objects
 mc = Playable_character()
 scoreboard = ScoreBoard(mc)
 
-
-
-
 #group of all non level texture sprites - mc, scoreboard, other items
 all_sprites = pygame.sprite.Group()
-
-
-all_sprites.add(ScoreBoardSprite(scoreboard, measures.get_width(), measures.get_height(), measures.get_scale()))
-
-#all_sprites.add(scoreboard)
+all_sprites.add(ScoreBoardSprite(scoreboard, measures))
+#TODO - add mc
 #all_sprites.add(mc)
 
 
