@@ -1,6 +1,8 @@
 from enum import Enum
 from src.common import *
 from src.fsm_characters import *
+from src.inputs import Up, Down, Left, Right
+
 
 class Playable_character(Actor, Subject):
 

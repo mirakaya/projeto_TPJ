@@ -7,8 +7,6 @@ class Directions(Enum):
     LEFT = (-1, 0)
     RIGHT = (1, 0)
 
-
-
 GAME_EVENT = pygame.event.custom_type()
 
 EVENT_FOOD_EATEN = "event_food_eaten"
