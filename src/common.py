@@ -1,10 +1,12 @@
 import pygame
 from enum import Enum
-
+from datetime import datetime
 
 SCALE = 40
 WIDTH = 0
 HEIGHT = 0
+DISPLAY = pygame.display.set_mode((20,20))
+
 class Directions(Enum):
     UP = (0, -1)
     DOWN = (0, 1)
@@ -35,6 +37,16 @@ def set_width (new_val):
 def get_width():
 	return WIDTH
 
+def set_display(display):
+	DISPLAY = display
+
+def get_display():
+	return DISPLAY
+
+
+#--------------------------------
+
+#TODO - actor probs needs changes
 class Actor:
     def __init__(self):
         self.name = "Unknown"
@@ -58,3 +70,39 @@ class Subject:
 
         ev = pygame.event.Event(GAME_EVENT, {'name': event, 'obj': self})
         pygame.event.post(ev)
+
+class Command:
+    def __init__(self):
+        self.actor = None
+        self.dt = datetime.now()
+
+    def execute(self, actor):
+        raise NotImplemented
+
+    def __str__(self):
+        return f"[{self.dt}] {self.actor.name}: {self.__class__.__name__}"
+
+
+#TODO - change commands
+class Up(Command):
+    def execute(self, actor):
+        self.actor = actor
+        actor.move(Directions.UP)
+
+
+class Down(Command):
+    def execute(self, actor):
+        self.actor = actor
+        actor.move(Directions.DOWN)
+
+
+class Left(Command):
+    def execute(self, actor):
+        self.actor = actor
+        actor.move(Directions.LEFT)
+
+
+class Right(Command):
+    def execute(self, actor):
+        self.actor = actor
+        actor.move(Directions.RIGHT)

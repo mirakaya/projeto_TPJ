@@ -18,9 +18,10 @@ class ScoreBoardSprite(pygame.sprite.Sprite):
 		self.image.fill("white")
 		for i, (player, score) in enumerate(self.scoreboard.scores.items()):
 			self.image.blit(
-				self.font.render(f"{player}: {score}", True, "green", "white"),
+				self.font.render(f"{player}: {score}", True, "black", "white"),
 				(0, i * self.SCALE),
 			)
+
 
 class CharacterSprite(pygame.sprite.Sprite):
 	def __init__(self, character: Playable_character, WIDTH, HEIGHT, SCALE):
@@ -122,7 +123,7 @@ class Background(pygame.sprite.Sprite):
 		self.position = position
 
 	def sprite(self, s_type):
-		sprt = Sprites.Background_Sprite()
+		sprt = Background_Sprite()
 		self.sprite = sprt.set_sprite(s_type)
 
 
@@ -174,7 +175,7 @@ class PC_sprites(pygame.sprite.Sprite):
 
 if __name__ == "__main__":
 
-	bs = Sprites.Background([0,0])
+	bs = Background([0,0])
 	#print(bs.position)
 
 	bs.sprite(1)
