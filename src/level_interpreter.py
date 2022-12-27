@@ -89,10 +89,14 @@ class LevelInterpreter:
 					aux_x = 0
 					aux_y += 1
 
+		LevelInterpreter.render_level(map)
+
+	def render_level(lvl_map):
+
 		# render level textures
-		for x in range(0, len(map)):
-			for y in range(0, len(map[0])):
-				get_display().blit(map[x][y].texture, [x * get_scale(), y * get_scale()])
+		for x in range(0, len(lvl_map)):
+			for y in range(0, len(lvl_map[0])):
+				get_display().blit(lvl_map[x][y].texture, [x * get_scale(), y * get_scale()])
 
 
 
