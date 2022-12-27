@@ -18,6 +18,9 @@ clock = pygame.time.Clock()
 
 #TODO - refactor this to another class or smt
 #get all files in the levels dir
+
+
+
 lvl_dir = '../levels/'
 entries = os.listdir(lvl_dir)
 current_level = 0
@@ -66,10 +69,9 @@ for i in lvl_content:
 			aux_x = 0
 			aux_y += 1
 
-# render level textures
-for x in range(0, len(map)):
-	for y in range(0, len(map[0])):
-		display.blit(map[x][y].texture, [x * get_scale(), y * get_scale()])
+
+
+LevelInterpreter.render_level(map, display)
 
 
 #initialize mc

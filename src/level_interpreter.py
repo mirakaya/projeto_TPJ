@@ -38,6 +38,12 @@ class LevelInterpreter:
 		#print("lvl", lvl_content)
 		return window_title, width, height, lvl_content, display
 
+	def render_level(lvl_map, display):
+		# render level textures
+		for x in range(0, len(lvl_map)):
+			for y in range(0, len(lvl_map[0])):
+				display.blit(lvl_map[x][y].texture, [x * get_scale(), y * get_scale()])
+
 
 '''if __name__ == "__main__":
 

@@ -1,7 +1,6 @@
 import pygame
 from enum import Enum
 
-
 SCALE = 40
 WIDTH = 0
 HEIGHT = 0
@@ -10,6 +9,8 @@ class Directions(Enum):
     DOWN = (0, 1)
     LEFT = (-1, 0)
     RIGHT = (1, 0)
+
+
 
 GAME_EVENT = pygame.event.custom_type()
 
