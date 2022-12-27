@@ -2,9 +2,6 @@ import pygame
 import os
 from src.inputs import InputHandler
 from src.level_interpreter import LevelInterpreter
-from src.scoreboard import *
-from src.common import *
-from pygame import *
 from src.sprites import *
 from src.Playable_character import *
 
