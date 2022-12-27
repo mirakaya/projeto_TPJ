@@ -34,7 +34,7 @@ for level in entries:
 	terrains = load_terrain(measures)
 
 	# paint background
-	measures.get_display().fill("blue")
+	measures.get_display().fill("cyan")
 
 	#convert the content to terrains
 	lvl_map = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
@@ -72,8 +72,6 @@ for level in entries:
 		#update sprites
 		all_sprites.update()
 		all_sprites.draw(measures.get_display())
-
-
 
 		# update window + fps
 		pygame.display.flip()
