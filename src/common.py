@@ -1,9 +1,6 @@
 import pygame
 from enum import Enum
 
-SCALE = 40
-WIDTH = 0
-HEIGHT = 0
 class Directions(Enum):
     UP = (0, -1)
     DOWN = (0, 1)
@@ -19,22 +16,35 @@ EVENT_FOOD_EATEN = "event_food_eaten"
 '''def set_scale (new_val):
 	SCALE = new_val'''
 
+class Measures():
+
+	def __init__(self, scale, width, height, display):
+		self.scale = scale
+		self.width = width
+		self.height = height
+		self.display = display
 
 
-def get_scale():
-	return SCALE
+	def get_scale(self):
+		return self.scale
 
-def set_height (new_val):
-	HEIGHT = new_val
+	def set_height (self, new_height):
+		self.height = new_height
 
-def get_height():
-	return HEIGHT
+	def get_height(self):
+		return self.height
 
-def set_width (new_val):
-	WIDTH = new_val
+	def set_width (self, new_width):
+		self.width = new_width
 
-def get_width():
-	return WIDTH
+	def get_width(self):
+		return self.width
+
+	def set_display (self, display):
+		self.display = display
+
+	def get_display(self):
+		return self.display
 
 class Actor:
     def __init__(self):

@@ -12,42 +12,43 @@ from src.Playable_character import *
 running = True
 pygame.init()
 
-#clock
+#set clock
 clock = pygame.time.Clock()
+
+#tmp measures
+tmp_display = pygame.display.set_mode((0,0))
+measures = Measures(40, 0, 0, tmp_display)
 
 
 #TODO - refactor this to another class or smt
 #get all files in the levels dir
-
-
-
 lvl_dir = '../levels/'
 entries = os.listdir(lvl_dir)
 current_level = 0
 
-window_title, WIDTH, HEIGHT, lvl_content, display = LevelInterpreter().interpret_level(lvl_dir + entries[current_level])
+window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + entries[current_level], measures)
 
-set_width(WIDTH)
-set_height(HEIGHT)
 
 floor = image.load("../resources/floor.png")
-floor = transform.scale(floor, (get_scale(), get_scale()))
+floor = transform.scale(floor, (measures.get_scale(), measures.get_scale()))
 
 sky = image.load("../resources/sky.png")
-sky = transform.scale(sky, (get_scale(), get_scale()))
+sky = transform.scale(sky, (measures.get_scale(), measures.get_scale()))
 
-bs = Background_Sprite(position=[get_width() * get_scale(), get_height() * get_scale()])
+bs = Background_Sprite(position=[measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
 
 terrains = [
-	Terrain(bs, floor),
-	Terrain(bs, sky)
+	Terrain(bs, floor, measures),
+	Terrain(bs, sky, measures)
 
 	]
 
 # paint background
-display.fill("white")
+#display.fill("white")
 
-map = [[0 for x in range(WIDTH)] for y in range(HEIGHT)]
+lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
+
+print(measures.get_width())
 
 aux_x = 0
 aux_y = 0
@@ -59,19 +60,19 @@ for i in lvl_content:
 		# convert i to Terrain
 		terrain_chosen = terrains[0]
 		if i == "F":
-			map[aux_x][aux_y] = terrains[0]
+			lvl_map[aux_x][aux_y] = terrains[0]
 
 		elif i == "S":
-			map[aux_x][aux_y] = terrains[1]
+			lvl_map[aux_x][aux_y] = terrains[1]
 
 		aux_x += 1
-		if aux_x == WIDTH:
+		if aux_x == measures.get_width():
 			aux_x = 0
 			aux_y += 1
 
 
 
-LevelInterpreter.render_level(map, display)
+LevelInterpreter.render_level(lvl_map, measures)
 
 
 #initialize mc
@@ -85,7 +86,7 @@ scoreboard = ScoreBoard(mc)
 all_sprites = pygame.sprite.Group()
 
 
-all_sprites.add(ScoreBoardSprite(scoreboard, WIDTH, HEIGHT, SCALE))
+all_sprites.add(ScoreBoardSprite(scoreboard, measures.get_width(), measures.get_height(), measures.get_scale()))
 
 #all_sprites.add(scoreboard)
 #all_sprites.add(mc)
@@ -109,7 +110,7 @@ while running: #game
 
 	#update sprites
 	all_sprites.update()
-	all_sprites.draw(display)
+	all_sprites.draw(measures.get_display())
 
 
 

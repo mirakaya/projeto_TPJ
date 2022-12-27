@@ -122,7 +122,7 @@ class Background(pygame.sprite.Sprite):
 		self.position = position
 
 	def sprite(self, s_type):
-		sprt = Sprites.Background_Sprite()
+		sprt = Background_Sprite()
 		self.sprite = sprt.set_sprite(s_type)
 
 
@@ -145,38 +145,34 @@ class Background_Sprite(pygame.sprite.Sprite): #tree
 #TODO - terrain doesn't have a texture, or at least isn't using it on the current version
 class Terrain(pygame.sprite.Sprite): #treeModel
 
-	def __init__(self, b_sprite, texture):
+	def __init__(self, b_sprite, texture, measures):
 
 		self.b_sprite = b_sprite
 		self.texture = texture
 
-		self.image = pygame.Surface([SCALE, SCALE])
+		self.image = pygame.Surface([measures.get_scale(), measures.get_scale()])
 		#self.image.fill("brown")
 		#self.image.blit(self.texture, (0, 0))
 		'''self.image.set_colorkey("white")'''
 
 		self.rect = self.image.get_rect()
-		self.rect.x = self.b_sprite.position[0] * SCALE
-		self.rect.y = self.b_sprite.position[1] * SCALE
+		self.rect.x = self.b_sprite.position[0] * measures.get_scale()
+		self.rect.y = self.b_sprite.position[1] * measures.get_scale()
 
 	def get_texture(self):
 		return self.texture
 
-#TODO?
-class PC_sprites(pygame.sprite.Sprite):
-
-	def __init__(self):
-		pass
 
 
 
 
 
-if __name__ == "__main__":
+
+'''if __name__ == "__main__":
 
 	bs = Sprites.Background([0,0])
 	#print(bs.position)
 
-	bs.sprite(1)
+	bs.sprite(1)'''
 
 
