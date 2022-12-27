@@ -35,32 +35,9 @@ terrains = load_terrain(measures)
 # paint background
 measures.get_display().fill("white")
 
-lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
-
-print(measures.get_width())
-
-aux_x = 0
-aux_y = 0
-
-
-# interpret level into
-for i in lvl_content:
-	if i != '\n':
-		# convert i to Terrain
-		terrain_chosen = terrains[0]
-		if i == "F":
-			lvl_map[aux_x][aux_y] = terrains[0]
-
-		elif i == "S":
-			lvl_map[aux_x][aux_y] = terrains[1]
-
-		aux_x += 1
-		if aux_x == measures.get_width():
-			aux_x = 0
-			aux_y += 1
-
-
-
+#convert the content to terrains
+lvl_map = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
+#render the level
 LevelInterpreter.render_level(lvl_map, measures)
 
 

@@ -55,6 +55,33 @@ class LevelInterpreter:
 			for y in range(0, len(lvl_map[0])):
 				measures.get_display().blit(lvl_map[x][y].texture, [x * measures.get_scale(), y * measures.get_scale()])
 
+	def convert_to_terrain(lvl_content, measures, terrains):
+		lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
+
+		print(measures.get_width())
+
+		aux_x = 0
+		aux_y = 0
+
+		# interpret level into
+		for i in lvl_content:
+			if i != '\n':
+				# convert i to Terrain
+				terrain_chosen = terrains[0]
+				if i == "F":
+					lvl_map[aux_x][aux_y] = terrains[0]
+
+				elif i == "S":
+					lvl_map[aux_x][aux_y] = terrains[1]
+
+				aux_x += 1
+				if aux_x == measures.get_width():
+					aux_x = 0
+					aux_y += 1
+
+		return lvl_map
+
+
 
 '''if __name__ == "__main__":
 
