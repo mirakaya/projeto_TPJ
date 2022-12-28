@@ -45,6 +45,7 @@ for level in entries:
 
 	#initialize objects
 	mc = Playable_character("Alex",(5,5))
+	mc.controls(pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d)
 	scoreboard = ScoreBoard(mc)
 	food = Food((0,0))
 
@@ -66,8 +67,9 @@ for level in entries:
 				running = False
 
 			elif event.type == pygame.KEYDOWN: #a key is pressed
-				command = InputHandler().handleInput(event.key) #go get the right input
-				#command.execute(snake1) #and execute it with obj snake1
+				cmd = Playable_character().command(event.key)
+				'''if cmd:
+					command_log.append(cmd)'''
 
 			#elif event.type == GAME_EVENT:
 			#	print(event.txt)

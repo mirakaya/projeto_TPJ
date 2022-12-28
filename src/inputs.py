@@ -1,5 +1,8 @@
 import pygame
 
+from src.common import Directions
+
+
 class Command:
     def execute(self):
         raise NotImplemented
@@ -9,22 +12,32 @@ class Command:
 
 class Up(Command):
     def execute(self, actor):
-        actor.jump()
+        print("here")
+        self.actor = actor
+        actor.move(Directions.UP)
+
 
 class Down(Command):
     def execute(self, actor):
-        actor.cancel_jump()
+        self.actor = actor
+        actor.move(Directions.DOWN)
+
 
 class Left(Command):
     def execute(self, actor):
-        actor.move()
+        self.actor = actor
+        actor.move(Directions.LEFT)
+
 
 class Right(Command):
     def execute(self, actor):
-        actor.move()
+        self.actor = actor
+        actor.move(Directions.RIGHT)
+
 
 class Dash(Command):
     def execute(self, actor):
+        self.actor = actor
         actor.dash()
 
 

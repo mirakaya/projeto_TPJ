@@ -16,16 +16,24 @@ class Playable_character(Actor, Subject):
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
+		print(self.control_keys)
 
 	def command(self, control):
+		print(self.control_keys)
 		if control in self.control_keys.keys():
+			print("2")
 			cmd = self.control_keys[control]()
 			cmd.execute(self)
 			return cmd
+		print("exit")
 
-	def move(self):
+	def move(self, direction: Directions = None):
+		print("me - ", direction)
+		if direction:
+			self.direction = direction
 
-		pass
+
+
 
 	def jump(self):
 		pass

@@ -1,5 +1,6 @@
 import pygame
 from enum import Enum
+from datetime import datetime
 
 class Directions(Enum):
     UP = (0, -1)
@@ -13,6 +14,8 @@ EVENT_FOOD_EATEN = "event_food_eaten"
 
 '''def set_scale (new_val):
 	SCALE = new_val'''
+
+#-----------
 
 class Measures():
 
@@ -44,6 +47,8 @@ class Measures():
 	def get_display(self):
 		return self.display
 
+#-----------
+
 class Actor:
     def __init__(self):
         self.name = "Unknown"
@@ -67,3 +72,5 @@ class Subject:
 
         ev = pygame.event.Event(GAME_EVENT, {'name': event, 'obj': self})
         pygame.event.post(ev)
+
+
