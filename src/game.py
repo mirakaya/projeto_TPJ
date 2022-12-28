@@ -63,16 +63,17 @@ for level in entries:
 		#event handler
 		for event in pygame.event.get():
 
-			if event.type == pygame.QUIT: #quit game
+			if event.type == pygame.QUIT: #quit game TODO - get way to finish game and finish level, probs not the same
 				running = False
 
 			elif event.type == pygame.KEYDOWN: #a key is pressed
-				cmd = Playable_character().command(event.key)
+				cmd = mc.command(event.key)
 				'''if cmd:
 					command_log.append(cmd)'''
 
-			#elif event.type == GAME_EVENT:
-			#	print(event.txt)
+			'''elif event.type == GAME_EVENT:
+				if event.name == EVENT_FOOD_EATEN:
+					pass'''
 
 		#update sprites
 		all_sprites.update()
