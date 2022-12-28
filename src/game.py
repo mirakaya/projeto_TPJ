@@ -44,7 +44,7 @@ for level in entries:
 	LevelInterpreter.render_level(lvl_map, measures)
 
 	#initialize objects
-	mc = Playable_character(measures, "Alex",5,5)
+	mc = Playable_character(measures, "Alex",(5,5))
 	mc.controls(pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d)
 	scoreboard = ScoreBoard(mc)
 	food = Food((0,0))
@@ -75,6 +75,8 @@ for level in entries:
 				if event.name == EVENT_FOOD_EATEN:
 					pass'''
 
+		# render the level
+		LevelInterpreter.render_level(lvl_map, measures)
 		#update sprites
 		all_sprites.update()
 		all_sprites.draw(measures.get_display())

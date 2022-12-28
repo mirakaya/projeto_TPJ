@@ -3,18 +3,22 @@ from src.common import *
 from src.fsm_characters import *
 from src.inputs import Up, Down, Left, Right
 
+ACC = 0.5
+vec = pygame.math.Vector2  # 2 for two dimensional
+
 
 class Playable_character(Actor, Subject):
 
-	def __init__(self, measures, name=None, x=0, y=0):
+	def __init__(self, measures, name=None, init_pos = (0,0)):
 		Subject.__init__(self)
 		self.name = name
 		self.direction = Directions.DOWN
 		self.dead = False
 		self.control_keys = dict()
-		self.x = x
-		self.y = y
 		self.measures = measures
+		self.pos = vec(init_pos)
+		self.vel = vec(0, 0)
+		self.acc = vec(0, 0)
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
@@ -28,13 +32,50 @@ class Playable_character(Actor, Subject):
 			return cmd
 
 	def move(self, direction: Directions = None):
-		print("me - ", direction)
-		if direction:
-			self.direction = direction
+
+		self.vel = vec(1, 0)
+
+		if direction == Directions.LEFT:
+			self.vel.x = -self.vel.x
+		if direction == Directions.RIGHT:
+			self.vel.x = self.vel.x
+
+		#self.acc.x += self.vel.x * FRIC
+		self.vel += self.acc
+		self.pos += self.vel
+
+		'''if self.pos.x > self.measures.get_width():
+			self.pos.x = 0
+		if self.pos.x < 0:
+			self.pos.x = self.measures.get_width()'''
+
+#		self.rect.midbottom = self.pos
+
+	'''def jump(self):
+		hits = pygame.sprite.spritecollide(self, platforms, False)
+		if hits and not self.jumping:
+			self.jumping = True
+			self.vel.y = -15
+
+	def cancel_jump(self):
+		if self.jumping:
+			if self.vel.y < -3:
+				self.vel.y = -3'''
+
+	'''def update(self):
+		#hits = pygame.sprite.spritecollide(self, platforms, False)
+		if self.vel.y > 0:
+			if hits:
+				if self.pos.y < hits[0].rect.bottom:
+					if hits[0].point == True:
+						hits[0].point = False
+						self.score += 1
+					self.pos.y = hits[0].rect.top + 1
+					self.vel.y = 0
+					self.jumping = False'''
 
 
-		if direction == Directions.UP:
-			self.y = self.y - 1
+
 
 
 
