@@ -44,7 +44,7 @@ for level in entries:
 	LevelInterpreter.render_level(lvl_map, measures)
 
 	#initialize objects
-	mc = Playable_character("Alex",(5,5))
+	mc = Playable_character(measures, "Alex",5,5)
 	mc.controls(pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d)
 	scoreboard = ScoreBoard(mc)
 	food = Food((0,0))
