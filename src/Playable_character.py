@@ -6,7 +6,7 @@ from src.inputs import Up, Down, Left, Right
 
 class Playable_character(Actor, Subject):
 
-	def __init__(self, name=None, pos=[0,0]):
+	def __init__(self, name=None, pos=(0,0)):
 		Subject.__init__(self)
 		self.name = name
 		self.direction = Directions.DOWN

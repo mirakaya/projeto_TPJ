@@ -79,8 +79,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.image.fill("white")
 		self.image.set_colorkey("white")
 
-		print(self.character.pos)
-
 		# Render character
 		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos[0], self.measures.get_scale() * self.character.pos[1]), )
 

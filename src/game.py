@@ -44,9 +44,9 @@ for level in entries:
 	LevelInterpreter.render_level(lvl_map, measures)
 
 	#initialize objects
-	mc = Playable_character()
+	mc = Playable_character("Alex",(5,5))
 	scoreboard = ScoreBoard(mc)
-	food = Food([100,100])
+	food = Food((0,0))
 
 
 	#group of all non level texture sprites - mc, scoreboard, other items
