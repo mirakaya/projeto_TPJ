@@ -6,14 +6,13 @@ from src.inputs import Up, Down, Left, Right
 
 class Playable_character(Actor, Subject):
 
-	def __init__(self, name=None, body=[]):
+	def __init__(self, name=None, pos=[0,0]):
 		Subject.__init__(self)
 		self.name = name
-		self.body = body
-		self.length = len(self.body)
 		self.direction = Directions.DOWN
 		self.dead = False
 		self.control_keys = dict()
+		self.pos = pos
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
@@ -25,6 +24,7 @@ class Playable_character(Actor, Subject):
 			return cmd
 
 	def move(self):
+
 		pass
 
 	def jump(self):

@@ -1,8 +1,11 @@
 import pygame
+from pygame import transform
+
 from src.common import *
 from src.spritesheet import *
 from src.scoreboard import *
 from src.Playable_character import *
+from src.food import *
 
 class ScoreBoardSprite(pygame.sprite.Sprite):
 	def __init__(self, scoreboard: ScoreBoard, measures):
@@ -23,84 +26,63 @@ class ScoreBoardSprite(pygame.sprite.Sprite):
 				(0, i * self.measures.get_scale()),
 			)
 
-class CharacterSprite(pygame.sprite.Sprite):
-	def __init__(self, character: Playable_character, measures):
+class FoodSprite(pygame.sprite.Sprite):
+
+	def __init__(self, food: Food, measures):
 		super().__init__()
 
-		character_sprite = SpriteSheet("../resources/Characters run.png")
+		FOOD_SPRITESHEET = SpriteSheet("../resources/Sprite sheet.png")
+		self.measures = measures
+		self.food = food
 		CELL_SIZE = 16
-		self.character = character
 
 
-		character_map = {
-			("walk", Directions.UP): (0, 0),
-			("walk", Directions.RIGHT): (0, 1),
-			("walk", Directions.LEFT): (1, 0),
-			("walk", Directions.DOWN): (1, 1),
-
-		}
-
-		# Load and resize images to SCALE
-		self.character_images = {
-			name: pygame.transform.scale(
-				character_sprite.image_at(
-					(a * CELL_SIZE, b * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1
-				),
-				(measures.get_scale(), measures.get_scale()),
-			)
-			for (name, (a, b)) in character_map.items()
-		}
+		food_image_rect = (0, 7 * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+		self.food_image = FOOD_SPRITESHEET.image_at(food_image_rect, -1)
+		self.food_image = pygame.transform.scale(self.food_image, (measures.get_scale(), measures.get_scale()))
 
 		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
-		self.update()
 		self.rect = self.image.get_rect()
+		self.update()
+
 
 	def update(self):
 		self.image.fill("white")
 		self.image.set_colorkey("white")
 
-		# Render character
-
-		'''def get_direction(x, y, prev_x, prev_y):
-			"""given 2 coordinates returns direction taken."""
-			dir = None
-			if x - prev_x > 0:
-				dir = Directions.RIGHT
-			elif x - prev_x < 0:
-				dir = Directions.LEFT
-			elif y - prev_y > 0:
-				dir = Directions.DOWN
-			elif y - prev_y < 0:
-				dir = Directions.UP
-			return dir
-
-		# Get Head
-		prev_x, prev_y = self.character.body[0]
-		prev_dir = None
-
-		# Walk from 1st body position towards tail
-		for x, y in self.character.body[1:]:
-
-			dir = get_direction(x, y, prev_x, prev_y)
-			if prev_dir is None:
-				image = ("head", self.character.direction)
-			else:
-				image = (prev_dir, dir)
-
-			# blit previous body part now that we now directions taken
-			self.image.blit(
-				self.character_images[image], (self.SCALE * prev_x, self.SCALE * prev_y)
-			)
-
-			prev_x, prev_y = x, y
-			prev_dir = dir
-
-		# Finally blit tail
+		# Render Food
 		self.image.blit(
-			self.character_images[("tail", prev_dir)],
-			(self.SCALE * prev_x, self.SCALE * prev_y),
-		)'''
+		    self.food_image,
+		    (self.measures.get_scale() * self.food.position[0], self.measures.get_scale() * self.food.position[1]),
+		)
 
+
+class Character_Sprite(pygame.sprite.Sprite):
+	def __init__(self, character: Playable_character, measures):
+		super().__init__()
+
+		CHARACTER_SPRITESHEET = SpriteSheet("../resources/Characters run.png")
+
+		self.character = character
+		self.measures = measures
+		CELL_SIZE = 16
+
+		character_image_rect = (0, 0, CELL_SIZE, CELL_SIZE)
+		self.character_image = CHARACTER_SPRITESHEET.image_at(character_image_rect, -1)
+		self.character_image = pygame.transform.scale(self.character_image, (measures.get_scale(), measures.get_scale()))
+
+		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
+		self.rect = self.image.get_rect()
+		self.update()
+
+	def update(self):
+		self.image.fill("white")
+		self.image.set_colorkey("white")
+
+		print(self.character.pos)
+
+		# Render character
+		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos[0], self.measures.get_scale() * self.character.pos[1]), )
 
 class Background(pygame.sprite.Sprite):
 

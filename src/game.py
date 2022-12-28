@@ -8,6 +8,7 @@ from pygame import *
 from src.sprites import *
 from src.Playable_character import *
 from src.load_objects import *
+from src.food import *
 
 
 running = True
@@ -34,7 +35,7 @@ for level in entries:
 	terrains = load_terrain(measures)
 
 	# paint background
-	measures.get_display().fill("cyan")
+	measures.get_display().fill(181425)
 
 	#convert the content to terrains
 	lvl_map = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
@@ -45,12 +46,14 @@ for level in entries:
 	#initialize objects
 	mc = Playable_character()
 	scoreboard = ScoreBoard(mc)
+	food = Food([100,100])
+
 
 	#group of all non level texture sprites - mc, scoreboard, other items
 	all_sprites = pygame.sprite.Group()
 	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
-	#TODO - add mc
-	#all_sprites.add(mc)
+	all_sprites.add(Character_Sprite(mc, measures))
+	all_sprites.add(FoodSprite(food, measures))
 
 
 
