@@ -19,7 +19,7 @@ clock = pygame.time.Clock()
 
 #initialize measures
 tmp_display = pygame.display.set_mode((0,0))
-measures = Measures(40, 0, 0, tmp_display)
+measures = Measures(27, 0, 0, tmp_display)
 
 #get all files in the levels dir
 lvl_dir = '../levels/'

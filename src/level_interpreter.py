@@ -85,6 +85,6 @@ class LevelInterpreter:
 
 '''if __name__ == "__main__":
 
-	LevelInterpreter().interpret_level('../levels/1.txt')'''
+	LevelInterpreter().interpret_level('../levels/9.txt')'''
 
 
