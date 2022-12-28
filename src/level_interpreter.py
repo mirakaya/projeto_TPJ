@@ -50,6 +50,8 @@ class LevelInterpreter:
 		return window_title, lvl_content
 
 	def render_level(lvl_map, measures):
+		# paint background
+		measures.get_display().fill(181425)
 		# render level textures
 		for x in range(0, len(lvl_map)):
 			for y in range(0, len(lvl_map[0])):

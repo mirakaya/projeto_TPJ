@@ -34,9 +34,6 @@ for level in entries:
 	#loads terrain TODO - see if it fits better in another class, probs whatever class has the terrains
 	terrains = load_terrain(measures)
 
-	# paint background
-	measures.get_display().fill(181425)
-
 	#convert the content to terrains
 	lvl_map = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
 
