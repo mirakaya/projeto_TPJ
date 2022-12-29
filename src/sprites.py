@@ -120,12 +120,12 @@ class Character_Sprite(pygame.sprite.Sprite):
 		for i in solids:
 			if pygame.Rect.colliderect(aux_rect, i):
 				hitting = True
+				self.character.character_correction = True
 
 				if self.character.vel.y != 0:
 
 					if self.character.vel.y > 0: #working
 						print("vertical t")
-						print(self.character.pos.y)
 						self.character.pos.y = (i.top / 27) - 1
 						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 						                        self.measures.get_scale() * self.character.pos.y,
@@ -136,22 +136,39 @@ class Character_Sprite(pygame.sprite.Sprite):
 						self.character.jumping = False
 						self.character.jump_count = 0
 
-					#elif self.character.vel.y < 0:
-					#	print("vertical b")
-					#	self.rect.top = i.bottom
-					#	self.character.pos.y += self.character.vel.y
-					#	self.character.vel.y = 0
+					else:
+						print("vertical b")
+						self.character.pos.y = (i.top / 27) - 1
+						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+						                        self.measures.get_scale() * self.character.pos.y,
+						                        self.character_image.get_width(),
+						                        self.character_image.get_height())
+
+						self.character.vel.y = 0
+						self.character.jumping = False
+						self.character.jump_count = self.character.max_jump_val
+
+
 
 				else: #x axis
 
 
 					if self.character.vel.x > 0: #left to right
-						print("horizontal lr")
+						'''print("horizontal lr")
 						self.rect.left = i.right
 						print("bef char pos - ", self.character.pos.x)
 						self.character.pos.x -= self.character.vel.x
 						print("aft char pos - ", self.character.pos.x)
+						self.character.vel.x = 0'''
+
+						self.character.pos.x = (i.right / 27) - 2
+						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+						                        self.measures.get_scale() * self.character.pos.y,
+						                        self.character_image.get_width(),
+						                        self.character_image.get_height())
+
 						self.character.vel.x = 0
+						self.character.vel.y = 0
 
 					'''else: #right to left
 						print("horizontal rl")
@@ -161,10 +178,15 @@ class Character_Sprite(pygame.sprite.Sprite):
 						print("aft char pos - ", self.character.pos.x)
 						self.character.vel.x = 0'''
 
+		if hitting == False and self.character.character_correction == False:
+			self.character.jump_count = self.character.max_jump_val
+			self.character.jumping = True
+
+
 
 
 		self.character.vel.x = 0
-		self.character.vel.y =0
+		self.character.vel.y = 0
 
 		#print("me - ", hitting)
 

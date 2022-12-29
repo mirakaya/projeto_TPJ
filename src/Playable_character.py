@@ -25,7 +25,9 @@ class Playable_character(Actor, Subject):
 		self.jumping = False
 		self.animation_count = 0
 		self.jump_count = 0
+		self.max_jump_val = 5
 		self.fall_count = 0
+		self.character_correction = False
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
@@ -60,7 +62,7 @@ class Playable_character(Actor, Subject):
 
 		self.jumping = True
 
-		if self.jump_count < 5:
+		if self.jump_count < self.max_jump_val:
 			self.vel.y = -velocity
 			self.pos += self.vel
 			self.jump_count += 1
