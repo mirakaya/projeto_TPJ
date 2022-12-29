@@ -87,6 +87,11 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		self.handle_collision()
 
+		if self.character.jumping == True:
+			print("Am jumping")
+			self.character.jump()
+
+
 		# Render character
 		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x - 5,
 			self.measures.get_scale() * self.character.pos.y - 5), )
@@ -119,6 +124,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 						self.rect.bottom = i.top
 						self.character.pos.y -= self.character.vel.y
 						self.character.vel.y = 0
+						self.character.jumping = False
 
 					#elif self.character.vel.y < 0:
 					#	print("vertical b")

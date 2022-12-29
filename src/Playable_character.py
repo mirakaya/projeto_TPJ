@@ -6,13 +6,14 @@ from src.inputs import Up, Down, Left, Right
 ACC = 0.5
 vec = pygame.math.Vector2  # 2 for two dimensional
 
-velocity = 0.1
+velocity = 0.5
 
 
 class Playable_character(Actor, Subject):
 
 	def __init__(self, measures, name=None, init_pos=(0, 0)):
 		Subject.__init__(self)
+		self.GRAVITY = 0.1
 		self.name = name
 		self.direction = Directions.DOWN
 		self.dead = False
@@ -22,6 +23,9 @@ class Playable_character(Actor, Subject):
 		self.vel = vec(0, 0)
 		self.acc = vec(0, 0)
 		self.jumping = False
+		self.animation_count = 0
+		self.jump_count = 0
+		self.fall_count = 0
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
@@ -53,8 +57,17 @@ class Playable_character(Actor, Subject):
 
 
 	def jump(self):
-		self.vel.y = -velocity
-		self.pos += self.vel
+
+		self.jumping = True
+
+		if self.jump_count < 5:
+			self.vel.y = -velocity
+			self.pos += self.vel
+			self.jump_count += 1
+
+		else: #falling
+			self.vel.y = velocity
+			self.pos += self.vel
 
 	def cancel_jump(self):
 		self.vel.y = velocity
