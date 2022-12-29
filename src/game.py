@@ -42,12 +42,12 @@ for level in entries:
 
 
 	#group of all non level texture sprites - mc, scoreboard, background, other items
-	all_sprites.add(background)
-	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
-	all_sprites.add(character)
-	all_sprites.add(FoodSprite(food, measures))
-	all_sprites.add(platforms)
+	#all_sprites.add(background)
+	#all_sprites.add(ScoreBoardSprite(scoreboard, measures))
 
+	#all_sprites.add(FoodSprite(food, measures))
+	all_sprites.add(platforms)
+	all_sprites.add(character)
 
 
 	game_incomplete = True

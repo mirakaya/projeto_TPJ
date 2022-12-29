@@ -19,6 +19,9 @@ platforms = pygame.sprite.Group()  # collision
 background = pygame.sprite.Group()  # no collision
 character = pygame.sprite.Group()
 
+solids = []
+
+
 
 '''class CSAccess():
 
@@ -40,11 +43,12 @@ character = pygame.sprite.Group()
 
 class Measures():
 
-	def __init__(self, scale, width, height, display):
+	def __init__(self, scale, width, height, display, character_image_dimensions=(0,0)):
 		self.scale = scale
 		self.width = width
 		self.height = height
 		self.display = display
+		self.character_image_dimensions = character_image_dimensions
 
 	def get_scale(self):
 		return self.scale
@@ -66,6 +70,12 @@ class Measures():
 
 	def get_display(self):
 		return self.display
+
+	def set_character_image_dimensions(self, width, height):
+		self.character_image_dimensions = (width, height)
+
+	def get_character_image_dimensions(self):
+		return self.character_image_dimensions
 
 
 # -----------

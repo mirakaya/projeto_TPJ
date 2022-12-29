@@ -68,8 +68,13 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.character_image = CHARACTER_SPRITESHEET.image_at(character_image_rect, -1)
 		self.character_image = pygame.transform.scale(self.character_image, (measures.get_scale(), measures.get_scale()))
 
+		self.measures.set_character_image_dimensions(self.character_image.get_width(), self.character_image.get_height())
+
 		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
-		self.rect = self.image.get_rect()
+		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x + 5,
+			self.measures.get_scale() * self.character.pos.y + 5,
+			self.character_image.get_width(),
+			self.character_image.get_height())
 		self.update()
 
 	def update(self):
@@ -78,7 +83,14 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		# Render character
 		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y), )
+		self.rect.update(self.character.pos.x, self.character.pos.y, self.image.get_width(), self.image.get_height())
 
+		pygame.draw.rect(self.measures.get_display(), (255, 0, 0), pygame.Rect(
+			self.measures.get_scale() * self.character.pos.x + 5,
+			self.measures.get_scale() * self.character.pos.y + 5,
+			self.character_image.get_width(),
+			self.character_image.get_height()
+		))
 
 class TerrainIcon():
 
@@ -108,28 +120,61 @@ class TerrainIcon():
 
 class Terrain(pygame.sprite.Sprite):
 
-	def __init__(self, position, t_icon):
+	def __init__(self, position, t_icon, collision):
 		pygame.sprite.Sprite.__init__(self)
 		self.position = position
 		self.t_icon = t_icon
 		self.image = self.t_icon.get_image()
+		self.collision = collision
 
-		self.rect = self.t_icon.get_image().get_rect()
-		self.rect.x = self.position[0] * self.t_icon.get_measures().get_scale()
-		self.rect.y = self.position[1] * self.t_icon.get_measures().get_scale()
+		if self.collision == True:
 
+			self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
+		                 self.t_icon.get_image().get_height())
+
+			solids.append(self.rect)
+			print(self.position[0], self.position[1])
+
+			print(solids)
+
+	'''def update(self):
+		self.image.fill("white")
+		self.image.set_colorkey("white")
+
+		# Render character
+		self.image.blit(self.t_icon.get_image(), (
+		self.t_icon.get_measures().get_scale() * self.position[0], self.t_icon.get_measures().get_scale() * self.position[1]), )
+
+		if self.collision == True:
+			self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
+			                 self.t_icon.get_image().get_height())
+
+			pygame.draw.rect(self.t_icon.get_measures().get_display(), (255, 0, 0), pygame.Rect(
+				self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
+				self.t_icon.get_image().get_height()
+			))
+
+			solids.append(self.rect)
+
+		print(solids)'''
+
+'''		pygame.draw.rect(self.t_icon.get_measures().get_display(), (255,0,0), pygame.Rect(
+			self.position[0] * self.t_icon.get_measures().get_scale(),
+			self.position[1] * self.t_icon.get_measures().get_scale(),
+			self.t_icon.get_image().get_width(),
+			self.t_icon.get_image().get_height()))'''
 
 
 
 
 #if __name__ == "__main__":
 
-	'''bs = Sprites.Background([0,0])
+'''bs = Sprites.Background([0,0])
 	#print(bs.position)
 
 	bs.sprite(1)'''
 
-	'''tmp_display = pygame.display.set_mode((0, 0))
+'''tmp_display = pygame.display.set_mode((0, 0))
 	measures = Measures(27, 0, 0, tmp_display)
 	icon = TerrainIcon(1, measures )
 	Terrain((0,0), icon)'''

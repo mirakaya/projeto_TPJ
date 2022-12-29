@@ -9,7 +9,7 @@ vec = pygame.math.Vector2  # 2 for two dimensional
 
 class Playable_character(Actor, Subject):
 
-	def __init__(self, measures, name=None, init_pos = (0,0)):
+	def __init__(self, measures, name=None, init_pos=(0, 0)):
 		Subject.__init__(self)
 		self.name = name
 		self.direction = Directions.DOWN
@@ -45,13 +45,20 @@ class Playable_character(Actor, Subject):
 	def jump(self):
 		self.vel = vec(0, 1)
 
+		r = pygame.Rect(self.measures.get_scale() * self.pos.x + 5,
+		                   self.measures.get_scale() * self.pos.y + 5,
+		                   self.measures.get_character_image_dimensions()[0],
+		                   self.measures.get_character_image_dimensions()[1]
+		                   )
 
-		hits = pygame.sprite.groupcollide(character, platforms, False, False)
+		hits = r.collidelistall(solids)
+
+		print(r)
 		print("Hits - ", hits)
-		if hits and not self.jumping:
-			self.jumping = True
-			self.vel.y = -self.vel.y
-		#self.vel.y = -self.vel.y
+		#if hits:
+			# self.jumping = True
+			#self.vel.y = -self.vel.y
+		self.vel.y = -self.vel.y
 		self.pos += self.vel
 
 	def cancel_jump(self):
@@ -77,13 +84,6 @@ class Playable_character(Actor, Subject):
 					self.jumping = False'''
 
 
-
-
-
-
-
-
-
 '''	def jump(self):
 		pass
 
@@ -96,12 +96,14 @@ class Playable_character(Actor, Subject):
 	def update(self):
 		pass'''
 
-#-----start of transitions -----
+
+# -----start of transitions -----
 
 class Event(Enum):
 	REGULAR = 1,
 	POWERUP = 2,
 	DIE = 3
+
 
 class Normal(State):
 	def __init__(self):
@@ -111,6 +113,7 @@ class Normal(State):
 	def update(cls, ant):
 		ant.power_down()
 
+
 class Powered(State):
 	def __init__(self):
 		super().__init__(self.__class__.__name__)
@@ -118,6 +121,7 @@ class Powered(State):
 	@classmethod
 	def update(cls, ant):
 		ant.power_up()
+
 
 class Dead(State):
 	def __init__(self):

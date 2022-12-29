@@ -58,11 +58,11 @@ class LevelInterpreter:
 				terrain_chosen = terrains[0]
 				if i == "F":
 					#lvl_map[aux_x][aux_y] = terrains[0]
-					platforms.add(Terrain((aux_x, aux_y), terrains[0]))
+					platforms.add(Terrain((aux_x, aux_y), terrains[0], True))
 
 				elif i == "S":
 					#lvl_map[aux_x][aux_y] = terrains[1]
-					background.add(Terrain((aux_x, aux_y), terrains[1]))
+					background.add(Terrain((aux_x, aux_y), terrains[1], False))
 
 				aux_x += 1
 				if aux_x == measures.get_width():
