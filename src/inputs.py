@@ -14,13 +14,13 @@ class Up(Command):
     def execute(self, actor):
         print("here")
         self.actor = actor
-        actor.move(Directions.UP)
+        actor.jump()
 
 
 class Down(Command):
     def execute(self, actor):
         self.actor = actor
-        actor.move(Directions.DOWN)
+        actor.cancel_jump()
 
 
 class Left(Command):

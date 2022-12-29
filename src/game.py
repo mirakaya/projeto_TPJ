@@ -43,13 +43,11 @@ for level in entries:
 	scoreboard = ScoreBoard(mc)
 	food = Food((0,0))
 
-
 	#group of all non level texture sprites - mc, scoreboard, other items
 	all_sprites = pygame.sprite.Group()
 	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
 	all_sprites.add(Character_Sprite(mc, measures))
 	all_sprites.add(FoodSprite(food, measures))
-
 
 
 	while running: #game
@@ -66,16 +64,17 @@ for level in entries:
 			elif event.type == pygame.KEYUP : #a key is relased
 				list_keys = remove_values_from_list(list_keys, key)
 
-		if len(list_keys) != 0 : #execute if it wasn't executed before
-			for key in list_keys:
-				cmd = mc.command(key)
-
-				'''if cmd:
-					command_log.append(cmd)'''
+			'''if cmd:
+				command_log.append(cmd)'''
 
 			'''elif event.type == GAME_EVENT:
 				if event.name == EVENT_FOOD_EATEN:
 					pass'''
+
+		if len(list_keys) != 0 : #execute key commands
+			for key in list_keys:
+				cmd = mc.command(key)
+
 
 		# render the level
 		LevelInterpreter.render_level(lvl_map, measures)

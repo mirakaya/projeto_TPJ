@@ -19,11 +19,10 @@ class Playable_character(Actor, Subject):
 		self.pos = vec(init_pos)
 		self.vel = vec(0, 0)
 		self.acc = vec(0, 0)
+		self.jumping = False
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
-
-
 
 	def command(self, control):
 		if control in self.control_keys.keys():
@@ -43,16 +42,27 @@ class Playable_character(Actor, Subject):
 
 		self.pos += self.vel
 
-	'''def jump(self):
-		hits = pygame.sprite.spritecollide(self, platforms, False)
-		if hits and not self.jumping:
+	def jump(self):
+		print("jumping")
+		self.vel = vec(0, 1)
+
+		#TODO - tmp comment
+		'''if self.jumping == False:
 			self.jumping = True
-			self.vel.y = -15
+			self.vel.y = -self.vel.y'''
+		self.vel.y = -self.vel.y
+		self.pos += self.vel
 
 	def cancel_jump(self):
-		if self.jumping:
-			if self.vel.y < -3:
-				self.vel.y = -3'''
+		print("jumping")
+		self.vel = vec(0, 1)
+
+		# TODO - tmp comment
+		'''if self.jumping == False:
+			self.jumping = True
+			self.vel.y = self.vel.y'''
+		self.vel.y = self.vel.y
+		self.pos += self.vel
 
 	'''def update(self):
 		#hits = pygame.sprite.spritecollide(self, platforms, False)
@@ -74,7 +84,7 @@ class Playable_character(Actor, Subject):
 
 
 
-	def jump(self):
+'''	def jump(self):
 		pass
 
 	def cancel_jump(self):
@@ -84,7 +94,7 @@ class Playable_character(Actor, Subject):
 		pass
 
 	def update(self):
-		pass
+		pass'''
 
 #-----start of transitions -----
 
