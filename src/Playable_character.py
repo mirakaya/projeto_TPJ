@@ -36,9 +36,13 @@ class Playable_character(Actor, Subject):
 		self.vel = vec(0.1, 0)
 
 		if direction == Directions.LEFT:
-			self.vel.x -= self.vel.x
+			self.vel.x = -self.vel.x
+			print("left")
 		if direction == Directions.RIGHT:
 			self.vel.x += self.vel.x
+			print("right")
+
+		print(self.vel.x)
 
 		#self.acc.x += self.vel.x * FRIC
 		#self.vel += self.acc

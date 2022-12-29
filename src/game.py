@@ -75,8 +75,9 @@ for level in entries:
 						cmd = mc.command(key)
 						list_keys_executed = True
 
-			elif event.type == pygame.KEYDOWN : #a key is relased
-				list_keys.remove(event.key)
+			elif event.type == pygame.KEYUP : #a key is relased
+				list_keys = remove_values_from_list(list_keys, key)
+
 
 			elif len(list_keys) != 0 and list_keys_executed == False: #execute if it wasn't executed before
 				for key in list_keys:

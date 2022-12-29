@@ -73,4 +73,7 @@ class Subject:
         ev = pygame.event.Event(GAME_EVENT, {'name': event, 'obj': self})
         pygame.event.post(ev)
 
+def remove_values_from_list(lst, val):
+   return [value for value in lst if value != val]
+
 
