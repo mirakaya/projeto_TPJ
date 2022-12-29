@@ -1,11 +1,13 @@
 import pygame
-from pygame import transform
+from pygame import *
 from src.spritesheet import *
 from src.scoreboard import *
 from src.Playable_character import *
 from src.food import *
+from src.common import *
 
 class ScoreBoardSprite(pygame.sprite.Sprite):
+
 	def __init__(self, scoreboard: ScoreBoard, measures):
 		self.font = pygame.font.Font(None, 32)
 		super().__init__()
@@ -13,8 +15,6 @@ class ScoreBoardSprite(pygame.sprite.Sprite):
 		self.scoreboard = scoreboard
 		self.image = pygame.Surface([self.measures.get_width() * self.measures.get_scale(), len(scoreboard.scores) * self.measures.get_scale()])
 		self.rect = self.image.get_rect()
-
-
 
 	def update(self):
 		self.image.fill("white")
@@ -33,7 +33,6 @@ class FoodSprite(pygame.sprite.Sprite):
 		self.measures = measures
 		self.food = food
 		CELL_SIZE = 16
-
 
 		food_image_rect = (0, 7 * CELL_SIZE, CELL_SIZE, CELL_SIZE)
 		self.food_image = FOOD_SPRITESHEET.image_at(food_image_rect, -1)

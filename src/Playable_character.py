@@ -43,18 +43,18 @@ class Playable_character(Actor, Subject):
 		self.pos += self.vel
 
 	def jump(self):
-		print("jumping")
 		self.vel = vec(0, 1)
 
-		#TODO - tmp comment
-		'''if self.jumping == False:
+
+		hits = pygame.sprite.groupcollide(character, platforms, False, False)
+		print("Hits - ", hits)
+		if hits and not self.jumping:
 			self.jumping = True
-			self.vel.y = -self.vel.y'''
-		self.vel.y = -self.vel.y
+			self.vel.y = -self.vel.y
+		#self.vel.y = -self.vel.y
 		self.pos += self.vel
 
 	def cancel_jump(self):
-		print("jumping")
 		self.vel = vec(0, 1)
 
 		# TODO - tmp comment

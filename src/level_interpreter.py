@@ -47,15 +47,9 @@ class LevelInterpreter:
 
 
 	def convert_to_terrain(lvl_content, measures, terrains):
-		#lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
-
 
 		aux_x = 0
 		aux_y = 0
-
-		# group of solid blocks
-		platforms = pygame.sprite.Group() #collision
-		background = pygame.sprite.Group() #no collision
 
 		# interpret level into
 		for i in lvl_content:
@@ -74,8 +68,6 @@ class LevelInterpreter:
 				if aux_x == measures.get_width():
 					aux_x = 0
 					aux_y += 1
-
-		return platforms, background
 
 
 

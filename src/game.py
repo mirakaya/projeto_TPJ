@@ -27,33 +27,36 @@ for level in entries:
 	#load level content from file
 	window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + level, measures)
 
-	#loads terrain TODO - see if it fits better in another class, probs whatever class has the terrains
+	#loads terrain
 	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures)]
 
 	#convert the content to terrain groups
-	platforms, background = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
+	LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
 
 	#initialize objects
 	mc = Playable_character(measures, "Alex",(5,5))
 	mc.controls(pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d)
 	scoreboard = ScoreBoard(mc)
 	food = Food((0,0))
+	character.add(Character_Sprite(mc, measures))
+
 
 	#group of all non level texture sprites - mc, scoreboard, background, other items
-	all_sprites = pygame.sprite.Group()
 	all_sprites.add(background)
 	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
-	all_sprites.add(Character_Sprite(mc, measures))
+	all_sprites.add(character)
 	all_sprites.add(FoodSprite(food, measures))
 	all_sprites.add(platforms)
 
 
-	while running: #game
+
+	game_incomplete = True
+	while running and game_incomplete: #game
 
 		#event handler
 		for event in pygame.event.get():
 
-			if event.type == pygame.QUIT: #quit game TODO - get way to finish game and finish level, probs not the same
+			if event.type == pygame.QUIT: #quit game
 				running = False
 
 			elif event.type == pygame.KEYDOWN : #a key is pressed
@@ -61,6 +64,8 @@ for level in entries:
 
 			elif event.type == pygame.KEYUP : #a key is relased
 				list_keys = remove_values_from_list(list_keys, key)
+
+			#TODO - implement event game finished to change game_incomplete to false
 
 			'''if cmd:
 				command_log.append(cmd)'''

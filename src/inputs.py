@@ -12,7 +12,6 @@ class Command:
 
 class Up(Command):
     def execute(self, actor):
-        print("here")
         self.actor = actor
         actor.jump()
 
