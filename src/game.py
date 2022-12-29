@@ -12,6 +12,7 @@ from src.food import *
 
 
 running = True
+list_keys = []
 pygame.init()
 
 #set clock
@@ -56,6 +57,7 @@ for level in entries:
 
 
 	while running: #game
+		list_keys_executed = False
 
 		#event handler
 		for event in pygame.event.get():
@@ -63,8 +65,23 @@ for level in entries:
 			if event.type == pygame.QUIT: #quit game TODO - get way to finish game and finish level, probs not the same
 				running = False
 
-			elif event.type == pygame.KEYDOWN: #a key is pressed
+			elif event.type == pygame.KEYDOWN : #a key is pressed
 				cmd = mc.command(event.key)
+				list_keys.append(event.key)
+				print("am pressed", event.key)
+
+				if len(list_keys) != 0:
+					for key in list_keys:
+						cmd = mc.command(key)
+						list_keys_executed = True
+
+			elif event.type == pygame.KEYDOWN : #a key is relased
+				list_keys.remove(event.key)
+
+			elif len(list_keys) != 0 and list_keys_executed == False: #execute if it wasn't executed before
+				for key in list_keys:
+					cmd = mc.command(key)
+
 				'''if cmd:
 					command_log.append(cmd)'''
 

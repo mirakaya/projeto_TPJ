@@ -33,15 +33,15 @@ class Playable_character(Actor, Subject):
 
 	def move(self, direction: Directions = None):
 
-		self.vel = vec(1, 0)
+		self.vel = vec(0.1, 0)
 
 		if direction == Directions.LEFT:
-			self.vel.x = -self.vel.x
+			self.vel.x -= self.vel.x
 		if direction == Directions.RIGHT:
-			self.vel.x = self.vel.x
+			self.vel.x += self.vel.x
 
 		#self.acc.x += self.vel.x * FRIC
-		self.vel += self.acc
+		#self.vel += self.acc
 		self.pos += self.vel
 
 		'''if self.pos.x > self.measures.get_width():
