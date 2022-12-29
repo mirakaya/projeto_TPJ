@@ -82,14 +82,14 @@ class Character_Sprite(pygame.sprite.Sprite):
 		# Render character
 		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y), )
 
-class Background(pygame.sprite.Sprite):
+'''class Background(pygame.sprite.Sprite):
 
 	def __init__(self, position):
 		self.position = position
 
 	def sprite(self, s_type):
 		sprt = Background_Sprite()
-		self.sprite = sprt.set_sprite(s_type)
+		self.sprite = sprt.set_sprite(s_type)'''
 
 
 class Background_Sprite(pygame.sprite.Sprite): #tree
@@ -97,9 +97,9 @@ class Background_Sprite(pygame.sprite.Sprite): #tree
 	def __init__(self, position):
 		self.position = position
 
-	def set_sprite (self, type):
+	'''def set_sprite (self, type):
 		self.type = type
-		self.collision = True #TODO - make a switch case based on type to figure out if collision
+		self.collision = True #TODO - make a switch case based on type to figure out if collision'''
 
 	'''def update(self):
 		# Render
@@ -108,7 +108,7 @@ class Background_Sprite(pygame.sprite.Sprite): #tree
 			(get_scale() * self.position[0], get_scale() * self.position[1]),
 		)'''
 
-#TODO - terrain doesn't have a texture, or at least isn't using it on the current version
+#inherits position from Background_Sprite and has its own texture
 class Terrain(pygame.sprite.Sprite): #treeModel
 
 	def __init__(self, b_sprite, texture, measures):
@@ -117,16 +117,13 @@ class Terrain(pygame.sprite.Sprite): #treeModel
 		self.texture = texture
 
 		self.image = pygame.Surface([measures.get_scale(), measures.get_scale()])
-		#self.image.fill("brown")
-		#self.image.blit(self.texture, (0, 0))
-		'''self.image.set_colorkey("white")'''
 
 		self.rect = self.image.get_rect()
 		self.rect.x = self.b_sprite.position[0] * measures.get_scale()
 		self.rect.y = self.b_sprite.position[1] * measures.get_scale()
 
-	def get_texture(self):
-		return self.texture
+	'''def get_texture(self):
+		return self.texture'''
 
 
 

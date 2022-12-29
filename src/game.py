@@ -32,7 +32,7 @@ for level in entries:
 	terrains = load_terrain(measures)
 
 	#convert the content to terrains
-	lvl_map = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
+	lvl_map, platforms = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
 
 	#render the level
 	LevelInterpreter.render_level(lvl_map, measures)
@@ -48,7 +48,7 @@ for level in entries:
 	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
 	all_sprites.add(Character_Sprite(mc, measures))
 	all_sprites.add(FoodSprite(food, measures))
-
+	all_sprites.add(platforms)
 
 	while running: #game
 

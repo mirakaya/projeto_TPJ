@@ -58,6 +58,9 @@ class LevelInterpreter:
 		aux_x = 0
 		aux_y = 0
 
+		# group of solid blocks
+		platforms = pygame.sprite.Group()
+
 		# interpret level into
 		for i in lvl_content:
 			if i != '\n':
@@ -65,6 +68,7 @@ class LevelInterpreter:
 				terrain_chosen = terrains[0]
 				if i == "F":
 					lvl_map[aux_x][aux_y] = terrains[0]
+					platforms.add()
 
 				elif i == "S":
 					lvl_map[aux_x][aux_y] = terrains[1]
@@ -74,7 +78,7 @@ class LevelInterpreter:
 					aux_x = 0
 					aux_y += 1
 
-		return lvl_map
+		return lvl_map, platforms
 
 
 
