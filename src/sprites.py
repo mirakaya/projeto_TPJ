@@ -91,7 +91,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 			print("Am jumping")
 			self.character.jump()
 
-
 		# Render character
 		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x - 5,
 			self.measures.get_scale() * self.character.pos.y - 5), )
@@ -113,18 +112,29 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		hitting = False
 
+		aux_rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x + 2 * self.character.vel.x,
+			self.measures.get_scale() * self.character.pos.y + 2 * self.character.vel.y,
+			self.character_image.get_width(),
+			self.character_image.get_height())
+
 		for i in solids:
-			if pygame.Rect.colliderect(self.rect, i):
+			if pygame.Rect.colliderect(aux_rect, i):
 				hitting = True
 
 				if self.character.vel.y != 0:
 
 					if self.character.vel.y > 0: #working
 						print("vertical t")
-						self.rect.bottom = i.top
-						self.character.pos.y -= self.character.vel.y
+						print(self.character.pos.y)
+						self.character.pos.y = (i.top / 27) - 1
+						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+						                        self.measures.get_scale() * self.character.pos.y,
+						                        self.character_image.get_width(),
+						                        self.character_image.get_height())
+
 						self.character.vel.y = 0
 						self.character.jumping = False
+						self.character.jump_count = 0
 
 					#elif self.character.vel.y < 0:
 					#	print("vertical b")
