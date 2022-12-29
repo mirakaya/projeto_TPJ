@@ -112,21 +112,40 @@ class Character_Sprite(pygame.sprite.Sprite):
 			if pygame.Rect.colliderect(self.rect, i):
 				hitting = True
 
-				if self.character.vel.y > 0:
-					print("vertical t")
-					self.rect.bottom = i.top
-					self.character.pos.y -= self.character.vel.y
-					self.character.vel.y = 0
+				if self.character.vel.y != 0:
 
-				elif self.character.vel.y < 0:
-					print("vertical b")
-					self.rect.top = i.bottom
-					self.character.pos.y += self.character.vel.y
-					self.character.vel.y = 0
+					if self.character.vel.y > 0: #working
+						print("vertical t")
+						self.rect.bottom = i.top
+						self.character.pos.y -= self.character.vel.y
+						self.character.vel.y = 0
+
+					#elif self.character.vel.y < 0:
+					#	print("vertical b")
+					#	self.rect.top = i.bottom
+					#	self.character.pos.y += self.character.vel.y
+					#	self.character.vel.y = 0
+
+				else: #x axis
 
 
-			elif self.character.vel.x != 0:
-					print("horizontal")
+					if self.character.vel.x > 0: #left to right
+						print("horizontal lr")
+						self.rect.left = i.right
+						print("bef char pos - ", self.character.pos.x)
+						self.character.pos.x -= self.character.vel.x
+						print("aft char pos - ", self.character.pos.x)
+						self.character.vel.x = 0
+
+					'''else: #right to left
+						print("horizontal rl")
+						self.rect.right = i.left
+						print("bef char pos - ", self.character.pos.x)
+						self.character.pos.x -= self.character.vel.x
+						print("aft char pos - ", self.character.pos.x)
+						self.character.vel.x = 0'''
+
+
 
 		self.character.vel.x = 0
 		self.character.vel.y =0
