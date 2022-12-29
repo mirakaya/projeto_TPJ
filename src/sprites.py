@@ -71,8 +71,8 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.measures.set_character_image_dimensions(self.character_image.get_width(), self.character_image.get_height())
 
 		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
-		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x + 5,
-			self.measures.get_scale() * self.character.pos.y + 5,
+		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+			self.measures.get_scale() * self.character.pos.y,
 			self.character_image.get_width(),
 			self.character_image.get_height())
 		self.update()
@@ -82,12 +82,13 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.image.set_colorkey("white")
 
 		# Render character
-		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y), )
+		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x - 5,
+			self.measures.get_scale() * self.character.pos.y - 5), )
 		self.rect.update(self.character.pos.x, self.character.pos.y, self.image.get_width(), self.image.get_height())
 
 		pygame.draw.rect(self.measures.get_display(), (255, 0, 0), pygame.Rect(
-			self.measures.get_scale() * self.character.pos.x + 5,
-			self.measures.get_scale() * self.character.pos.y + 5,
+			self.measures.get_scale() * self.character.pos.x,
+			self.measures.get_scale() * self.character.pos.y,
 			self.character_image.get_width(),
 			self.character_image.get_height()
 		))

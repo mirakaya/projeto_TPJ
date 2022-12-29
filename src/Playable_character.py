@@ -6,6 +6,8 @@ from src.inputs import Up, Down, Left, Right
 ACC = 0.5
 vec = pygame.math.Vector2  # 2 for two dimensional
 
+velocity = 0.1
+
 
 class Playable_character(Actor, Subject):
 
@@ -32,29 +34,25 @@ class Playable_character(Actor, Subject):
 
 	def move(self, direction: Directions = None):
 
-		self.vel = vec(0.1, 0)
-
 		if direction == Directions.LEFT:
-			self.vel.x = -self.vel.x
+			self.move_left()
 
 		if direction == Directions.RIGHT:
-			pass
+			self.move_right()
 
+	def move_right(self):
+		self.vel.x = velocity
 		self.pos += self.vel
 
+	def move_left(self):
+		self.vel.x = -velocity
+		self.pos += self.vel
+
+
 	def jump(self):
-		self.vel = vec(0, 1)
+		self.vel = vec(0, 0.1)
 
-		r = pygame.Rect(self.measures.get_scale() * self.pos.x + 5,
-		                   self.measures.get_scale() * self.pos.y + 5,
-		                   self.measures.get_character_image_dimensions()[0],
-		                   self.measures.get_character_image_dimensions()[1]
-		                   )
-
-		hits = r.collidelistall(solids)
-
-		print(r)
-		print("Hits - ", hits)
+		hits = self.colliding()
 		#if hits:
 			# self.jumping = True
 			#self.vel.y = -self.vel.y
@@ -62,7 +60,9 @@ class Playable_character(Actor, Subject):
 		self.pos += self.vel
 
 	def cancel_jump(self):
-		self.vel = vec(0, 1)
+		self.vel = vec(0, 0.1)
+
+		hits = self.colliding()
 
 		# TODO - tmp comment
 		'''if self.jumping == False:
@@ -82,6 +82,34 @@ class Playable_character(Actor, Subject):
 					self.pos.y = hits[0].rect.top + 1
 					self.vel.y = 0
 					self.jumping = False'''
+
+	def colliding(self):
+
+		r = pygame.Rect(self.measures.get_scale() * self.pos.x,
+		    self.measures.get_scale() * self.pos.y,
+            self.measures.get_character_image_dimensions()[0],
+            self.measures.get_character_image_dimensions()[1]
+        )
+
+		hits = r.collidelist(solids)
+
+		'''if hits != []: #there is a collision
+
+			#find on which sides
+			self.collision[0] = rect.collidepoint(self.rect.midbottom)
+'''
+
+		print("Hits - ", hits)
+
+		'''if hits == 1:
+			print(r)'''
+		return hits
+
+	def handle_vertical_collision(self):
+		collided_objects = []
+
+		'''for obj in solids:
+			if pygame.sprite.collide_mask()'''
 
 
 '''	def jump(self):
