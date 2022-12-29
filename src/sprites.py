@@ -112,9 +112,20 @@ class Character_Sprite(pygame.sprite.Sprite):
 			if pygame.Rect.colliderect(self.rect, i):
 				hitting = True
 
-				if self.character.vel.y != 0:
-					print("vertical")
-				elif self.character.vel.x != 0:
+				if self.character.vel.y > 0:
+					print("vertical t")
+					self.rect.bottom = i.top
+					self.character.pos.y -= self.character.vel.y
+					self.character.vel.y = 0
+
+				elif self.character.vel.y < 0:
+					print("vertical b")
+					self.rect.top = i.bottom
+					self.character.pos.y += self.character.vel.y
+					self.character.vel.y = 0
+
+
+			elif self.character.vel.x != 0:
 					print("horizontal")
 
 		self.character.vel.x = 0
