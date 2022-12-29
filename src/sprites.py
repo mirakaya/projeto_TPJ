@@ -92,16 +92,17 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character.jump()
 
 		# Render character
-		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x - 5,
-			self.measures.get_scale() * self.character.pos.y - 5), )
+		self.character.measures.get_display().blit(self.character_image, [self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y])
+		'''self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x - 5,
+			self.measures.get_scale() * self.character.pos.y - 5), )'''
 		#self.rect.update(self.character.pos.x, self.character.pos.y, self.image.get_width(), self.image.get_height())
 
-		pygame.draw.rect(self.measures.get_display(), (255, 0, 0), pygame.Rect(
+		'''pygame.draw.rect(self.measures.get_display(), (255, 0, 0), pygame.Rect(
 			self.measures.get_scale() * self.character.pos.x,
 			self.measures.get_scale() * self.character.pos.y,
 			self.character_image.get_width(),
 			self.character_image.get_height()
-		))
+		))'''
 
 		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 		                        self.measures.get_scale() * self.character.pos.y,
@@ -126,32 +127,27 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 					if self.character.vel.y > 0: #working
 						print("vertical t")
-						self.character.pos.y = (i.top / 27) - 1
+						self.character.pos.y = (i.top / self.character.measures.get_scale()) - 1
 						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 						                        self.measures.get_scale() * self.character.pos.y,
 						                        self.character_image.get_width(),
 						                        self.character_image.get_height())
 
-						self.character.vel.y = 0
 						self.character.jumping = False
 						self.character.jump_count = 0
 
 					else:
 						print("vertical b")
-						self.character.pos.y = (i.top / 27) - 1
+						self.character.pos.y = (i.top / self.character.measures.get_scale()) - 1
 						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 						                        self.measures.get_scale() * self.character.pos.y,
 						                        self.character_image.get_width(),
 						                        self.character_image.get_height())
 
-						self.character.vel.y = 0
 						self.character.jumping = False
 						self.character.jump_count = self.character.max_jump_val
 
-
-
 				else: #x axis
-
 
 					if self.character.vel.x > 0: #left to right
 						'''print("horizontal lr")
@@ -161,22 +157,26 @@ class Character_Sprite(pygame.sprite.Sprite):
 						print("aft char pos - ", self.character.pos.x)
 						self.character.vel.x = 0'''
 
-						self.character.pos.x = (i.right / 27) - 2
+						self.character.pos.x = (i.right / self.character.measures.get_scale()) - 2
 						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 						                        self.measures.get_scale() * self.character.pos.y,
 						                        self.character_image.get_width(),
 						                        self.character_image.get_height())
 
-						self.character.vel.x = 0
-						self.character.vel.y = 0
 
-					'''else: #right to left
-						print("horizontal rl")
+
+					else: #right to left
+						'''print("horizontal rl")
 						self.rect.right = i.left
 						print("bef char pos - ", self.character.pos.x)
 						self.character.pos.x -= self.character.vel.x
 						print("aft char pos - ", self.character.pos.x)
 						self.character.vel.x = 0'''
+						self.character.pos.x = (i.right / self.character.measures.get_scale())
+						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+						                        self.measures.get_scale() * self.character.pos.y,
+						                        self.character_image.get_width(),
+						                        self.character_image.get_height())
 
 		if hitting == False and self.character.character_correction == False:
 			self.character.jump_count = self.character.max_jump_val
