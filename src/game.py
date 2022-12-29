@@ -43,11 +43,11 @@ for level in entries:
 
 	#group of all non level texture sprites - mc, scoreboard, background, other items
 	all_sprites.add(background)
-	#all_sprites.add(ScoreBoardSprite(scoreboard, measures))
+	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
 
 
 	#all_sprites.add(FoodSprite(food, measures))
-	#all_sprites.add(platforms)
+	all_sprites.add(platforms)
 	#all_sprites.add(character)
 
 
@@ -57,11 +57,15 @@ for level in entries:
 		#event handler
 		for event in pygame.event.get():
 
+			if pygame.key.get_pressed()[pygame.K_d] == True:
+				print("Right")
+
 			if event.type == pygame.QUIT: #quit game
 				running = False
 
 			elif event.type == pygame.KEYDOWN : #a key is pressed
 				list_keys.append(event.key)
+
 
 			elif event.type == pygame.KEYUP : #a key is relased
 				list_keys = remove_values_from_list(list_keys, key)
@@ -84,8 +88,8 @@ for level in entries:
 		measures.get_display().fill(181425)
 		all_sprites.update()
 		all_sprites.draw(measures.get_display())
-		platforms.update()
-		platforms.draw(measures.get_display())
+		'''platforms.update()
+		platforms.draw(measures.get_display())'''
 		character.update()
 		character.draw(measures.get_display())
 

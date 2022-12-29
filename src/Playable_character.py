@@ -13,21 +13,17 @@ class Playable_character(Actor, Subject):
 
 	def __init__(self, measures, name=None, init_pos=(0, 0)):
 		Subject.__init__(self)
-		self.GRAVITY = 0.1
 		self.name = name
-		self.direction = Directions.DOWN
 		self.dead = False
 		self.control_keys = dict()
 		self.measures = measures
 		self.pos = vec(init_pos)
 		self.vel = vec(0, 0)
-		self.acc = vec(0, 0)
 		self.jumping = False
-		self.animation_count = 0
 		self.jump_count = 0
 		self.max_jump_val = 5
-		self.fall_count = 0
 		self.character_correction = False
+		self.former_vel_x = 0
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
@@ -40,22 +36,16 @@ class Playable_character(Actor, Subject):
 
 	def move(self, direction: Directions = None):
 		if direction == Directions.LEFT:
-			self.move_left()
+			self.vel.x = -velocity
 
 		if direction == Directions.RIGHT:
-			self.move_right()
+			self.vel.x = velocity
 
+		self.pos.x += self.vel.x
+		self.former_vel_x = self.vel.x
 		self.vel.x = 0
 
 
-	def move_right(self):
-		self.vel.x = velocity
-		self.pos += self.vel
-
-
-	def move_left(self):
-		self.vel.x = -velocity
-		self.pos += self.vel
 
 
 	def jump(self):

@@ -150,39 +150,19 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 				else: #x axis
 
-					if self.character.vel.x > 0: #left to right
-						'''print("horizontal lr")
-						self.rect.left = i.right
-						print("bef char pos - ", self.character.pos.x)
-						self.character.pos.x -= self.character.vel.x
-						print("aft char pos - ", self.character.pos.x)
-						self.character.vel.x = 0'''
+					if self.character.former_vel_x > 0:
 
-						self.character.pos.x = (i.right / self.character.measures.get_scale()) - 2
-						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-						                        self.measures.get_scale() * self.character.pos.y,
-						                        self.character_image.get_width(),
-						                        self.character_image.get_height())
-
-						self.character.jump_count = self.character.max_jump_val
-						self.character.vel.x = 0
-
-
-
-					else: #right to left
-						'''print("horizontal rl")
-						self.rect.right = i.left
-						print("bef char pos - ", self.character.pos.x)
-						self.character.pos.x -= self.character.vel.x
-						print("aft char pos - ", self.character.pos.x)
-						self.character.vel.x = 0'''
+						self.character.pos.x = (i.right / self.character.measures.get_scale()) -2
+					else:
 						self.character.pos.x = (i.right / self.character.measures.get_scale())
-						self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-						                        self.measures.get_scale() * self.character.pos.y,
-						                        self.character_image.get_width(),
-						                        self.character_image.get_height())
-						self.character.jump_count = self.character.max_jump_val
-						self.character.vel.x = 0
+
+					self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+					                        self.measures.get_scale() * self.character.pos.y,
+					                        self.character_image.get_width(),
+					                        self.character_image.get_height())
+					self.character.jump_count = self.character.max_jump_val
+					self.character.vel.x = 0
+
 
 		if hitting == False and self.character.character_correction == False:
 			self.character.jump_count = self.character.max_jump_val
