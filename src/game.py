@@ -1,10 +1,6 @@
 import pygame
 import os
-from src.inputs import InputHandler
 from src.level_interpreter import LevelInterpreter
-from src.scoreboard import *
-from src.common import *
-from pygame import *
 from src.sprites import *
 from src.Playable_character import *
 from src.load_objects import *
@@ -57,7 +53,6 @@ for level in entries:
 
 
 	while running: #game
-		list_keys_executed = False
 
 		#event handler
 		for event in pygame.event.get():
@@ -66,22 +61,14 @@ for level in entries:
 				running = False
 
 			elif event.type == pygame.KEYDOWN : #a key is pressed
-				cmd = mc.command(event.key)
 				list_keys.append(event.key)
-				print("am pressed", event.key)
-
-				if len(list_keys) != 0:
-					for key in list_keys:
-						cmd = mc.command(key)
-						list_keys_executed = True
 
 			elif event.type == pygame.KEYUP : #a key is relased
 				list_keys = remove_values_from_list(list_keys, key)
 
-
-			elif len(list_keys) != 0 and list_keys_executed == False: #execute if it wasn't executed before
-				for key in list_keys:
-					cmd = mc.command(key)
+		if len(list_keys) != 0 : #execute if it wasn't executed before
+			for key in list_keys:
+				cmd = mc.command(key)
 
 				'''if cmd:
 					command_log.append(cmd)'''

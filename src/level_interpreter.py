@@ -41,11 +41,6 @@ class LevelInterpreter:
 
 		measures.set_display(display)
 
-
-
-		print(measures.get_height())
-		print(measures.get_width())
-
 		#print("lvl", lvl_content)
 		return window_title, lvl_content
 
@@ -59,8 +54,6 @@ class LevelInterpreter:
 
 	def convert_to_terrain(lvl_content, measures, terrains):
 		lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
-
-		print(measures.get_width())
 
 		aux_x = 0
 		aux_y = 0

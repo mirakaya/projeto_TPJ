@@ -37,23 +37,11 @@ class Playable_character(Actor, Subject):
 
 		if direction == Directions.LEFT:
 			self.vel.x = -self.vel.x
-			print("left")
+
 		if direction == Directions.RIGHT:
-			self.vel.x += self.vel.x
-			print("right")
+			pass
 
-		print(self.vel.x)
-
-		#self.acc.x += self.vel.x * FRIC
-		#self.vel += self.acc
 		self.pos += self.vel
-
-		'''if self.pos.x > self.measures.get_width():
-			self.pos.x = 0
-		if self.pos.x < 0:
-			self.pos.x = self.measures.get_width()'''
-
-#		self.rect.midbottom = self.pos
 
 	'''def jump(self):
 		hits = pygame.sprite.spritecollide(self, platforms, False)
