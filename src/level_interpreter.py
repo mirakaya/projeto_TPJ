@@ -1,6 +1,5 @@
 import pygame
 
-from src import common
 from src.common import *
 from src.sprites import Terrain
 
@@ -46,13 +45,6 @@ class LevelInterpreter:
 		#print("lvl", lvl_content)
 		return window_title, lvl_content
 
-	'''def render_level(lvl_map, measures):
-		# paint background
-		measures.get_display().fill(181425)
-		# render level textures
-		for x in range(0, len(lvl_map)):
-			for y in range(0, len(lvl_map[0])):
-				measures.get_display().blit(lvl_map[x][y].texture, [x * measures.get_scale(), y * measures.get_scale()])'''
 
 	def convert_to_terrain(lvl_content, measures, terrains):
 		#lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]

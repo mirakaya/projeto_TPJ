@@ -3,7 +3,6 @@ import os
 from src.level_interpreter import LevelInterpreter
 from src.sprites import *
 from src.Playable_character import *
-from src.load_objects import *
 from src.food import *
 
 
@@ -31,11 +30,8 @@ for level in entries:
 	#loads terrain TODO - see if it fits better in another class, probs whatever class has the terrains
 	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures)]
 
-	#convert the content to terrains
+	#convert the content to terrain groups
 	platforms, background = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
-
-	#render the level
-	#LevelInterpreter.render_level(lvl_map, measures)
 
 	#initialize objects
 	mc = Playable_character(measures, "Alex",(5,5))
@@ -43,7 +39,7 @@ for level in entries:
 	scoreboard = ScoreBoard(mc)
 	food = Food((0,0))
 
-	#group of all non level texture sprites - mc, scoreboard, other items
+	#group of all non level texture sprites - mc, scoreboard, background, other items
 	all_sprites = pygame.sprite.Group()
 	all_sprites.add(background)
 	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
