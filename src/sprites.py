@@ -92,16 +92,16 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.sprite = sprt.set_sprite(s_type)'''
 
 
-class Background_Sprite(pygame.sprite.Sprite): #tree
+'''class Background_Sprite(pygame.sprite.Sprite): #tree
 
-	def __init__(self, position):
-		self.position = position
-
-	'''def set_sprite (self, type):
+	def __init__(self, measures):
+		self.measures = measures
+		
+	def set_sprite (self, type):
 		self.type = type
-		self.collision = True #TODO - make a switch case based on type to figure out if collision'''
-
-	'''def update(self):
+		self.collision = True #TODO - make a switch case based on type to figure out if collision
+		
+	def update(self):
 		# Render
 		self.image.blit(
 			self.image,
@@ -109,33 +109,77 @@ class Background_Sprite(pygame.sprite.Sprite): #tree
 		)'''
 
 #inherits position from Background_Sprite and has its own texture
-class Terrain(pygame.sprite.Sprite): #treeModel
+'''class Terrain(pygame.sprite.Sprite): #treeModel
 
-	def __init__(self, b_sprite, texture, measures):
+	def __init__(self, b_sprite, texture, position):
 
 		self.b_sprite = b_sprite
 		self.texture = texture
+		self.position = position
 
-		self.image = pygame.Surface([measures.get_scale(), measures.get_scale()])
+		self.image = pygame.Surface([self.measures.get_scale(), self.measures.get_scale()])
 
 		self.rect = self.image.get_rect()
-		self.rect.x = self.b_sprite.position[0] * measures.get_scale()
-		self.rect.y = self.b_sprite.position[1] * measures.get_scale()
-
-	'''def get_texture(self):
+		self.rect.x = self.b_sprite.position[0] * self.measures.get_scale()
+		self.rect.y = self.b_sprite.position[1] * self.measures.get_scale()
+		
+	def get_texture(self):
 		return self.texture'''
 
 
 
+class TerrainIcon():
+
+	def __init__(self, typeTerrain, measures):
+		self.typeTerrain = typeTerrain
+		self.measures = measures
+		CELL_SIZE = 16
+
+		if typeTerrain == 0: #load floor
+			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
+				(1 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
+				(self.measures.get_scale(), self.measures.get_scale()),
+			)
+		elif typeTerrain == 1: #load sky
+			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
+				(8 * CELL_SIZE, 12 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
+				(self.measures.get_scale(), self.measures.get_scale()),
+			)
+
+	def get_image(self):
+		return self.image
+
+	def get_measures(self):
+		return self.measures
+
+
+
+class Terrain(pygame.sprite.Sprite):
+
+	def __init__(self, position, t_icon):
+		pygame.sprite.Sprite.__init__(self)
+		self.position = position
+		self.t_icon = t_icon
+		self.image = self.t_icon.get_image()
+
+		self.rect = self.t_icon.get_image().get_rect()
+		self.rect.x = self.position[0] * self.t_icon.get_measures().get_scale()
+		self.rect.y = self.position[1] * self.t_icon.get_measures().get_scale()
 
 
 
 
-'''if __name__ == "__main__":
 
-	bs = Sprites.Background([0,0])
+#if __name__ == "__main__":
+
+	'''bs = Sprites.Background([0,0])
 	#print(bs.position)
 
 	bs.sprite(1)'''
+
+	'''tmp_display = pygame.display.set_mode((0, 0))
+	measures = Measures(27, 0, 0, tmp_display)
+	icon = TerrainIcon(1, measures )
+	Terrain((0,0), icon)'''
 
 

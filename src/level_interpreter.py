@@ -2,6 +2,8 @@ import pygame
 
 from src import common
 from src.common import *
+from src.sprites import Terrain
+
 
 class LevelInterpreter:
 
@@ -44,22 +46,24 @@ class LevelInterpreter:
 		#print("lvl", lvl_content)
 		return window_title, lvl_content
 
-	def render_level(lvl_map, measures):
+	'''def render_level(lvl_map, measures):
 		# paint background
 		measures.get_display().fill(181425)
 		# render level textures
 		for x in range(0, len(lvl_map)):
 			for y in range(0, len(lvl_map[0])):
-				measures.get_display().blit(lvl_map[x][y].texture, [x * measures.get_scale(), y * measures.get_scale()])
+				measures.get_display().blit(lvl_map[x][y].texture, [x * measures.get_scale(), y * measures.get_scale()])'''
 
 	def convert_to_terrain(lvl_content, measures, terrains):
-		lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
+		#lvl_map = [[0 for x in range(measures.get_width())] for y in range(measures.get_height())]
+
 
 		aux_x = 0
 		aux_y = 0
 
 		# group of solid blocks
-		platforms = pygame.sprite.Group()
+		platforms = pygame.sprite.Group() #collision
+		background = pygame.sprite.Group() #no collision
 
 		# interpret level into
 		for i in lvl_content:
@@ -67,18 +71,19 @@ class LevelInterpreter:
 				# convert i to Terrain
 				terrain_chosen = terrains[0]
 				if i == "F":
-					lvl_map[aux_x][aux_y] = terrains[0]
-					platforms.add()
+					#lvl_map[aux_x][aux_y] = terrains[0]
+					platforms.add(Terrain((aux_x, aux_y), terrains[0]))
 
 				elif i == "S":
-					lvl_map[aux_x][aux_y] = terrains[1]
+					#lvl_map[aux_x][aux_y] = terrains[1]
+					background.add(Terrain((aux_x, aux_y), terrains[1]))
 
 				aux_x += 1
 				if aux_x == measures.get_width():
 					aux_x = 0
 					aux_y += 1
 
-		return lvl_map, platforms
+		return platforms, background
 
 
 
