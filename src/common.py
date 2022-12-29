@@ -19,6 +19,7 @@ platforms = pygame.sprite.Group()  # collision
 background = pygame.sprite.Group()  # no collision
 character = pygame.sprite.Group()
 
+
 solids = []
 
 

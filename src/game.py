@@ -45,9 +45,10 @@ for level in entries:
 	#all_sprites.add(background)
 	#all_sprites.add(ScoreBoardSprite(scoreboard, measures))
 
+
 	#all_sprites.add(FoodSprite(food, measures))
-	all_sprites.add(platforms)
-	all_sprites.add(character)
+	#all_sprites.add(platforms)
+	#all_sprites.add(character)
 
 
 	game_incomplete = True
@@ -83,6 +84,10 @@ for level in entries:
 		measures.get_display().fill(181425)
 		all_sprites.update()
 		all_sprites.draw(measures.get_display())
+		platforms.update()
+		platforms.draw(measures.get_display())
+		character.update()
+		character.draw(measures.get_display())
 
 		# update window + fps
 		pygame.display.flip()

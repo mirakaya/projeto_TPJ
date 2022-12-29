@@ -70,21 +70,27 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		self.measures.set_character_image_dimensions(self.character_image.get_width(), self.character_image.get_height())
 
+		print(self.character_image.get_width())
+
 		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
 		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 			self.measures.get_scale() * self.character.pos.y,
 			self.character_image.get_width(),
 			self.character_image.get_height())
+
+		print("test - ", self.rect)
 		self.update()
 
 	def update(self):
 		self.image.fill("white")
 		self.image.set_colorkey("white")
 
+		self.handle_collision()
+
 		# Render character
 		self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x - 5,
 			self.measures.get_scale() * self.character.pos.y - 5), )
-		self.rect.update(self.character.pos.x, self.character.pos.y, self.image.get_width(), self.image.get_height())
+		#self.rect.update(self.character.pos.x, self.character.pos.y, self.image.get_width(), self.image.get_height())
 
 		pygame.draw.rect(self.measures.get_display(), (255, 0, 0), pygame.Rect(
 			self.measures.get_scale() * self.character.pos.x,
@@ -92,6 +98,29 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character_image.get_width(),
 			self.character_image.get_height()
 		))
+
+		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+		                        self.measures.get_scale() * self.character.pos.y,
+		                        self.character_image.get_width(),
+		                        self.character_image.get_height())
+
+	def handle_collision(self):
+
+		hitting = False
+
+		for i in solids:
+			if pygame.Rect.colliderect(self.rect, i):
+				hitting = True
+
+				if self.character.vel.y != 0:
+					print("vertical")
+				elif self.character.vel.x != 0:
+					print("horizontal")
+
+		self.character.vel.x = 0
+		self.character.vel.y =0
+
+		#print("me - ", hitting)
 
 class TerrainIcon():
 
