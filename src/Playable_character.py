@@ -39,13 +39,13 @@ class Playable_character(Actor, Subject):
 			return cmd
 
 	def move(self, direction: Directions = None):
-
-
 		if direction == Directions.LEFT:
 			self.move_left()
 
 		if direction == Directions.RIGHT:
 			self.move_right()
+
+		self.vel.x = 0
 
 
 	def move_right(self):
@@ -71,29 +71,19 @@ class Playable_character(Actor, Subject):
 			self.vel.y = velocity
 			self.pos += self.vel
 
+
 	def cancel_jump(self):
-		self.vel.y = velocity
+		self.vel.y = 2 * velocity
 		self.pos += self.vel
 
 
-	def handle_vertical_collision(self):
-		collided_objects = []
 
-		'''for obj in solids:
-			if pygame.sprite.collide_mask()'''
-
-
-'''	def jump(self):
-		pass
-
-	def cancel_jump(self):
-		pass
+'''
 
 	def dash(self):
 		pass
 
-	def update(self):
-		pass'''
+'''
 
 
 # -----start of transitions -----

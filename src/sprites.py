@@ -88,7 +88,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.handle_collision()
 
 		if self.character.jumping == True:
-			print("Am jumping")
 			self.character.jump()
 
 		# Render character
@@ -135,6 +134,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 						self.character.jumping = False
 						self.character.jump_count = 0
+						self.character.vel.y = 0
 
 					else:
 						print("vertical b")
@@ -146,6 +146,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 						self.character.jumping = False
 						self.character.jump_count = self.character.max_jump_val
+						self.character.vel.y = 0
 
 				else: #x axis
 
@@ -163,6 +164,9 @@ class Character_Sprite(pygame.sprite.Sprite):
 						                        self.character_image.get_width(),
 						                        self.character_image.get_height())
 
+						self.character.jump_count = self.character.max_jump_val
+						self.character.vel.x = 0
+
 
 
 					else: #right to left
@@ -177,6 +181,8 @@ class Character_Sprite(pygame.sprite.Sprite):
 						                        self.measures.get_scale() * self.character.pos.y,
 						                        self.character_image.get_width(),
 						                        self.character_image.get_height())
+						self.character.jump_count = self.character.max_jump_val
+						self.character.vel.x = 0
 
 		if hitting == False and self.character.character_correction == False:
 			self.character.jump_count = self.character.max_jump_val
@@ -184,9 +190,9 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 
 
-
+'''
 		self.character.vel.x = 0
-		self.character.vel.y = 0
+		self.character.vel.y = 0'''
 
 		#print("me - ", hitting)
 
@@ -225,15 +231,14 @@ class Terrain(pygame.sprite.Sprite):
 		self.image = self.t_icon.get_image()
 		self.collision = collision
 
-		if self.collision == True:
 
-			self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
+
+		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
 		                 self.t_icon.get_image().get_height())
 
+		if self.collision == True:
 			solids.append(self.rect)
-			print(self.position[0], self.position[1])
 
-			print(solids)
 
 	'''def update(self):
 		self.image.fill("white")
