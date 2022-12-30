@@ -120,64 +120,80 @@ class Character_Sprite(pygame.sprite.Sprite):
 		for i in solids:
 			if pygame.Rect.colliderect(aux_rect, i):
 				hitting = True
-				print(hitting)
+				#print(hitting)
+
 				self.character.character_correction = True
+				print(self.character.vel)
+
+				if self.character.vel.x !=0:
+					self.horizontal_collision(i)
+
+				if self.character.vel.y != 0:
+					self.vertical_collision(i)
 
 
-				if self.character.vel.y > 0:
-					print("vertical t")
-					self.character.pos.y = (i.top / self.character.measures.get_scale()) - 1
-					self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-					                        self.measures.get_scale() * self.character.pos.y,
-					                        self.character_image.get_width(),
-					                        self.character_image.get_height())
-
-					self.character.jumping = False
-					self.character.jump_count = 0
-					self.character.vel.y = 0
-
-				elif self.character.vel.y < 0:
-					print("vertical b")
-					self.character.pos.y = (i.top / self.character.measures.get_scale()) + 1
-					self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-					                        self.measures.get_scale() * self.character.pos.y,
-					                        self.character_image.get_width(),
-					                        self.character_image.get_height())
-
-					self.character.jump_count = self.character.max_jump_val
-					self.character.vel.y = 0
-
-				if self.character.former_vel_x > 0:
-					print("l t r")
-					self.character.pos.x = (i.right / self.character.measures.get_scale()) -2
-					self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-					                        self.measures.get_scale() * self.character.pos.y,
-					                        self.character_image.get_width(),
-					                        self.character_image.get_height())
-					self.character.jump_count = self.character.max_jump_val
-					self.character.vel.x = 0
-
-				elif self.character.former_vel_x < 0:
-					print("rtl")
-					self.character.pos.x = (i.right / self.character.measures.get_scale())
-
-					self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-					                        self.measures.get_scale() * self.character.pos.y,
-					                        self.character_image.get_width(),
-					                        self.character_image.get_height())
-					self.character.jump_count = self.character.max_jump_val
-					self.character.vel.x = 0
 
 
-		if hitting == False and self.character.character_correction == False:
+		'''if hitting == False :
 			self.character.jump_count = self.character.max_jump_val
-			self.character.jumping = True
+			self.character.jumping = True'''
+
 
 		#print(self.character.vel)
 
 
 
 		#print("me - ", self.character.pos)
+
+	def vertical_collision(self, i):
+		if self.character.vel.y > 0:
+			print("vertical t")
+			self.character.pos.y = (i.top / self.character.measures.get_scale()) - 1
+			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+			                        self.measures.get_scale() * self.character.pos.y,
+			                        self.character_image.get_width(),
+			                        self.character_image.get_height())
+
+			self.character.jumping = False
+			self.character.jump_count = 0
+			self.character.vel.y = 0
+			self.character.vel.x = 0
+
+		elif self.character.vel.y < 0:
+			print("vertical b")
+			self.character.pos.y = (i.top / self.character.measures.get_scale()) + 1
+			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+			                        self.measures.get_scale() * self.character.pos.y,
+			                        self.character_image.get_width(),
+			                        self.character_image.get_height())
+
+			self.character.jump_count = self.character.max_jump_val
+			self.character.vel.y = 0
+			self.character.vel.x = 0
+
+	def horizontal_collision(self, i):
+		if self.character.vel.x > 0:
+			print("->", self.character.pos.x)
+
+			self.character.pos.x = (i.left / self.character.measures.get_scale()) - 1
+			print(self.character.pos.x)
+			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+			                        self.measures.get_scale() * self.character.pos.y,
+			                        self.character_image.get_width(),
+			                        self.character_image.get_height())
+			self.character.jump_count = self.character.max_jump_val
+			self.character.vel.x = 0
+
+		elif self.character.vel.x < 0:
+			print("<-", self.character.pos.x)
+			self.character.pos.x = (i.right / self.character.measures.get_scale())
+			print(self.character.pos.x)
+			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+			                        self.measures.get_scale() * self.character.pos.y,
+			                        self.character_image.get_width(),
+			                        self.character_image.get_height())
+			self.character.jump_count = self.character.max_jump_val
+			self.character.vel.x = 0
 
 class TerrainIcon():
 
