@@ -112,8 +112,8 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		hitting = False
 
-		aux_rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x + 2 * self.character.vel.x,
-			self.measures.get_scale() * self.character.pos.y + 2 * self.character.vel.y,
+		aux_rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x + 3 * self.character.vel.x,
+			self.measures.get_scale() * self.character.pos.y + 3*  self.character.vel.y,
 			self.character_image.get_width(),
 			self.character_image.get_height())
 
@@ -125,8 +125,8 @@ class Character_Sprite(pygame.sprite.Sprite):
 				self.character.character_correction = True
 				print(self.character.vel)
 
-				'''if self.character.vel.x != 0:
-					self.horizontal_collision(i)'''
+				if self.character.vel.x != 0:
+					self.horizontal_collision(i)
 
 				if self.character.vel.y != 0:
 					self.vertical_collision(i)
@@ -230,10 +230,12 @@ class Terrain(pygame.sprite.Sprite):
 		self.image = self.t_icon.get_image()
 		self.collision = collision
 
+		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
 
 
-		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
-		                 self.t_icon.get_image().get_height())
+
+		'''self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
+		                 self.t_icon.get_image().get_height())'''
 
 		if self.collision == True:
 			solids.append(self.rect)

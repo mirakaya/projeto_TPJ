@@ -3,10 +3,7 @@ from src.common import *
 from src.fsm_characters import *
 from src.inputs import Up, Down, Left, Right
 
-ACC = 0.5
-vec = pygame.math.Vector2  # 2 for two dimensional
 
-velocity = 0.5
 
 
 class Playable_character(Actor, Subject):
@@ -17,13 +14,13 @@ class Playable_character(Actor, Subject):
 		self.dead = False
 		self.control_keys = dict()
 		self.measures = measures
-		self.pos = vec(init_pos)
-		self.vel = vec(0, 0)
+		self.pos = pygame.math.Vector2(init_pos)
+		self.vel = pygame.math.Vector2(0, 0)
+		self.velocity_value = 0.5
 		self.jumping = False
 		self.jump_count = 0
 		self.max_jump_val = 5
 		self.character_correction = False
-		self.former_vel_x = 0
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
@@ -36,10 +33,10 @@ class Playable_character(Actor, Subject):
 
 	def move(self, direction: Directions = None):
 		if direction == Directions.LEFT:
-			self.vel.x = -velocity
+			self.vel.x = -self.velocity_value
 
 		if direction == Directions.RIGHT:
-			self.vel.x = velocity
+			self.vel.x = self.velocity_value
 
 		self.pos.x += self.vel.x
 
@@ -48,18 +45,18 @@ class Playable_character(Actor, Subject):
 		self.jumping = True
 
 		if self.jump_count < self.max_jump_val:
-			self.vel.y = -velocity
+			self.vel.y = -self.velocity_value
 			self.pos.y += self.vel.y
 
 		else: #falling
-			self.vel.y = velocity
+			self.vel.y = self.velocity_value
 			self.pos.y += self.vel.y
 
 		self.jump_count += 1
 
 
 	def cancel_jump(self):
-		self.vel.y = 2 * velocity
+		self.vel.y = 2 * self.velocity_value
 		self.pos.y += self.vel.y
 
 
