@@ -42,11 +42,6 @@ class Playable_character(Actor, Subject):
 			self.vel.x = velocity
 
 		self.pos.x += self.vel.x
-		self.former_vel_x = self.vel.x
-		self.vel.x = 0
-
-
-
 
 	def jump(self):
 
@@ -54,12 +49,12 @@ class Playable_character(Actor, Subject):
 
 		if self.jump_count < self.max_jump_val:
 			self.vel.y = -velocity
-			self.pos += self.vel
+			self.pos.y += self.vel.y
 			self.jump_count += 1
 
 		else: #falling
 			self.vel.y = velocity
-			self.pos += self.vel
+			self.pos.y += self.vel.y
 
 
 	def cancel_jump(self):
