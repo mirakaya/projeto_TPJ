@@ -14,6 +14,8 @@ class LevelInterpreter:
 		width = 0
 		height = 0
 
+		is_First_line = True
+
 		with open(path) as content:
 			for line in content:
 
@@ -26,10 +28,15 @@ class LevelInterpreter:
 					#print("wid", width)
 
 				elif counter == 2:
-					height = int(line)
+					height = int(line) + 1
 					#print("ht", height)
 
 				else:
+
+					if is_First_line == True:
+						lvl_content += "I" * width
+						is_First_line = False
+
 					lvl_content += line
 
 				counter += 1
@@ -55,14 +62,17 @@ class LevelInterpreter:
 		for i in lvl_content:
 			if i != '\n':
 				# convert i to Terrain
-				terrain_chosen = terrains[0]
-				if i == "F":
+				terrain_chosen = terrains[2]
+				if i == "F": #floor
 					#lvl_map[aux_x][aux_y] = terrains[0]
 					platforms.add(Terrain((aux_x, aux_y), terrains[0], True))
 
-				elif i == "S":
+				elif i == "S": #sky
 					#lvl_map[aux_x][aux_y] = terrains[1]
 					background.add(Terrain((aux_x, aux_y), terrains[1], False))
+
+				elif i == "I": #invisible
+					background.add(Terrain((aux_x, aux_y), terrains[2], False))
 
 				aux_x += 1
 				if aux_x == measures.get_width():

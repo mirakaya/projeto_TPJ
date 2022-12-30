@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 
 #initialize measures
 tmp_display = pygame.display.set_mode((0,0))
-measures = Measures(27, 0, 0, tmp_display)
+measures = Measures(25, 0, 0, tmp_display)
 
 #get all files in the levels dir
 lvl_dir = '../levels/'
@@ -28,7 +28,7 @@ for level in entries:
 	window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + level, measures)
 
 	#loads terrain
-	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures)]
+	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures), TerrainIcon(2, measures)]
 
 	#convert the content to terrain groups
 	LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)

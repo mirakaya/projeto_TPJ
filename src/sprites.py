@@ -213,6 +213,12 @@ class TerrainIcon():
 				(self.measures.get_scale(), self.measures.get_scale()),
 			)
 
+		elif typeTerrain == 2: #load sky
+			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
+				(30 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
+				(self.measures.get_scale(), self.measures.get_scale()),
+			)
+
 	def get_image(self):
 		return self.image
 
