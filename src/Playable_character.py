@@ -50,25 +50,28 @@ class Playable_character(Actor, Subject):
 		if self.jump_count < self.max_jump_val:
 			self.vel.y = -velocity
 			self.pos.y += self.vel.y
-			self.jump_count += 1
 
 		else: #falling
 			self.vel.y = velocity
 			self.pos.y += self.vel.y
 
+		self.jump_count += 1
+
 
 	def cancel_jump(self):
 		self.vel.y = 2 * velocity
-		self.pos += self.vel
+		self.pos.y += self.vel.y
 
-
-
-'''
 
 	def dash(self):
-		pass
+		self.vel.x = 4 * self.vel.x
+		self.vel.y = 4 * self.vel.y
+		self.pos += self.vel
 
-'''
+	def stop(self):
+		self.vel.x = 0
+		self.vel.y = 0
+
 
 
 # -----start of transitions -----

@@ -125,11 +125,14 @@ class Character_Sprite(pygame.sprite.Sprite):
 				self.character.character_correction = True
 				print(self.character.vel)
 
-				if self.character.vel.x !=0:
-					self.horizontal_collision(i)
+				'''if self.character.vel.x != 0:
+					self.horizontal_collision(i)'''
 
 				if self.character.vel.y != 0:
 					self.vertical_collision(i)
+
+		if hitting:
+			self.character.stop()
 
 
 
@@ -156,8 +159,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 			self.character.jumping = False
 			self.character.jump_count = 0
-			self.character.vel.y = 0
-			self.character.vel.x = 0
 
 		elif self.character.vel.y < 0:
 			print("vertical b")
@@ -168,32 +169,31 @@ class Character_Sprite(pygame.sprite.Sprite):
 			                        self.character_image.get_height())
 
 			self.character.jump_count = self.character.max_jump_val
-			self.character.vel.y = 0
-			self.character.vel.x = 0
+
 
 	def horizontal_collision(self, i):
 		if self.character.vel.x > 0:
-			print("->", self.character.pos.x)
+			#print("->", self.character.pos.x)
 
 			self.character.pos.x = (i.left / self.character.measures.get_scale()) - 1
-			print(self.character.pos.x)
+			#print(self.character.pos.x)
 			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 			                        self.measures.get_scale() * self.character.pos.y,
 			                        self.character_image.get_width(),
 			                        self.character_image.get_height())
 			self.character.jump_count = self.character.max_jump_val
-			self.character.vel.x = 0
+
 
 		elif self.character.vel.x < 0:
-			print("<-", self.character.pos.x)
+			#print("<-", self.character.pos.x)
 			self.character.pos.x = (i.right / self.character.measures.get_scale())
-			print(self.character.pos.x)
+			#print(self.character.pos.x)
 			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 			                        self.measures.get_scale() * self.character.pos.y,
 			                        self.character_image.get_width(),
 			                        self.character_image.get_height())
 			self.character.jump_count = self.character.max_jump_val
-			self.character.vel.x = 0
+
 
 class TerrainIcon():
 
