@@ -138,13 +138,12 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 				elif self.character.vel.y < 0:
 					print("vertical b")
-					self.character.pos.y = (i.top / self.character.measures.get_scale()) - 1
+					self.character.pos.y = (i.top / self.character.measures.get_scale()) + 1
 					self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 					                        self.measures.get_scale() * self.character.pos.y,
 					                        self.character_image.get_width(),
 					                        self.character_image.get_height())
 
-					self.character.jumping = False
 					self.character.jump_count = self.character.max_jump_val
 					self.character.vel.y = 0
 
