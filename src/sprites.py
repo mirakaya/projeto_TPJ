@@ -231,14 +231,12 @@ class Terrain(pygame.sprite.Sprite):
 		self.collision = collision
 
 		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
-
-
-
-		'''self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
-		                 self.t_icon.get_image().get_height())'''
+		hit = 10
+		self.fake_rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale() - hit, self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width() + 2*hit, self.t_icon.get_image().get_height())
+		pygame.draw.rect(self.t_icon.get_measures().get_display(), (255, 0, 0),self.fake_rect)
 
 		if self.collision == True:
-			solids.append(self.rect)
+			solids.append(self.fake_rect)
 
 
 	'''def update(self):

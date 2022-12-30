@@ -19,8 +19,9 @@ class Playable_character(Actor, Subject):
 		self.velocity_value = 0.5
 		self.jumping = False
 		self.jump_count = 0
-		self.max_jump_val = 5
-		self.character_correction = False
+		self.max_jump_val = 10
+		self.prev_pos = pygame.math.Vector2(0,0)
+
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}
@@ -32,6 +33,13 @@ class Playable_character(Actor, Subject):
 			return cmd
 
 	def move(self, direction: Directions = None):
+
+		print("prev - ", self.prev_pos)
+
+		self.prev_pos = self.pos
+
+		print("prev2 - ", self.prev_pos)
+
 		if direction == Directions.LEFT:
 			self.vel.x = -self.velocity_value
 
@@ -40,9 +48,13 @@ class Playable_character(Actor, Subject):
 
 		self.pos.x += self.vel.x
 
+		print("me - ", self.prev_pos , self.pos)
+
 	def jump(self):
 
 		self.jumping = True
+
+		self.prev_pos = self.pos
 
 		if self.jump_count < self.max_jump_val:
 			self.vel.y = -self.velocity_value
@@ -56,6 +68,9 @@ class Playable_character(Actor, Subject):
 
 
 	def cancel_jump(self):
+
+		self.prev_pos = self.pos
+
 		self.vel.y = 2 * self.velocity_value
 		self.pos.y += self.vel.y
 
