@@ -26,13 +26,15 @@ class ScoreBoardSprite(pygame.sprite.Sprite):
 
 class Character_Sprite(pygame.sprite.Sprite):
 
-	def __init__(self, character: Playable_character, measures):
+	def __init__(self, character: Playable_character, measures, type):
 		super().__init__()
 
-		CHARACTER_SPRITESHEET = SpriteSheet("../resources/Characters run.png")
+		CHARACTER_SPRITESHEET = SpriteSheet("../resources/01-generic.png")
 
 		self.character = character
 		self.measures = measures
+		self.type = type
+
 		CELL_SIZE = 16
 
 		character_image_rect = (0, 0, CELL_SIZE, CELL_SIZE)
@@ -107,8 +109,8 @@ class TerrainIcon():
 		CELL_SIZE = 16
 
 		if typeTerrain == 0: #load floor
-			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
-				(1 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
+			self.image = transform.scale(SpriteSheet("../resources/Textures-16.jpg").image_at(
+				(15 * CELL_SIZE, 4 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
 			).convert_alpha()
 
@@ -119,13 +121,13 @@ class TerrainIcon():
 			).convert_alpha()
 
 		elif typeTerrain == 2: #load invisible
-			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
+			self.image = transform.scale(SpriteSheet("../resources/Textures-16.jpg").image_at(
 				(30 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
 			).convert_alpha()
 
 		elif typeTerrain == 3: #load finish
-			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
+			self.image = transform.scale(SpriteSheet("../resources/Textures-16.jpg").image_at(
 				(0 * CELL_SIZE, 31 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
 			).convert_alpha()

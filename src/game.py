@@ -54,8 +54,8 @@ for level in entries:
 	all_sprites.add(hearts)
 
 	#group with character
-	character.add(Character_Sprite(mc, measures))
-	character.add(Character_Sprite(mc2, measures))
+	character.add(Character_Sprite(mc, measures, 1))
+	character.add(Character_Sprite(mc2, measures, 2))
 
 	game_incomplete = True
 
