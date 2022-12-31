@@ -98,6 +98,10 @@ class Character_Sprite(pygame.sprite.Sprite):
 				self.character.jumping = False
 				self.character.jump_count = 0
 
+		if self.character.check_collision(end):
+			pygame.event.post(EVENT_END_LEVEL)
+			print("end")
+
 
 		# Render character
 		self.character.measures.get_display().blit(self.character_image, [self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y])
@@ -168,9 +172,9 @@ class Terrain(pygame.sprite.Sprite):
 
 		if self.t_icon.get_type() == 0:
 			solids.append(self.rect)
-		elif self.t_icon.get_type() == 2:
-			end.append(self.rect)
 		elif self.t_icon.get_type() == 3:
+			end.append(self.rect)
+		elif self.t_icon.get_type() == 4:
 			collectibles.append(self.rect)
 
 

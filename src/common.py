@@ -11,6 +11,8 @@ class Directions(Enum):
 GAME_EVENT = pygame.event.custom_type()
 
 EVENT_FOOD_EATEN = "event_food_eaten"
+EVENT_END_LEVEL = pygame.event.Event(pygame.USEREVENT, attr1='EVENT_END_LEVEL')
+
 
 all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()  # collision

@@ -64,7 +64,11 @@ for level in entries:
 			elif event.type == pygame.KEYUP : #a key is relased
 				list_keys = remove_values_from_list(list_keys, key)
 
-			#TODO - implement event game finished to change game_incomplete to false
+			elif event.type == pygame.KEYUP : #a key is relased
+				list_keys = remove_values_from_list(list_keys, key)
+
+			if event == EVENT_END_LEVEL :
+					game_incomplete = False
 
 			'''if cmd:
 				command_log.append(cmd)'''

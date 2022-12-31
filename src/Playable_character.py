@@ -9,7 +9,7 @@ class Playable_character(Actor, Subject):
 	def __init__(self, measures, name=None, init_pos=(0, 0)):
 		Subject.__init__(self)
 		self.name = name
-		self.dead = False
+		self.dead = 0
 		self.control_keys = dict()
 		self.measures = measures
 
@@ -22,6 +22,8 @@ class Playable_character(Actor, Subject):
 		self.max_jump_val = 5
 
 		self.character_dimensions = pygame.math.Vector2(0, 0)
+
+
 
 
 	def controls(self, up, left, down, right):
@@ -77,28 +79,28 @@ class Playable_character(Actor, Subject):
 		self.vel.x = 0
 		self.vel.y = 0
 
-	def horizontal_collision(self, object):
+	def horizontal_collision(self, object_list):
 
 		aux_rect = pygame.Rect(self.measures.get_scale() * self.pos.x + 2 * self.vel.x,
 		                       self.measures.get_scale() * self.pos.y + 2 * self.vel.y,
 		                       self.character_dimensions.x,
 		                       self.character_dimensions.y)
 
-		for i in object:
+		for i in object_list:
 			if pygame.Rect.colliderect(aux_rect, i) :
 				self.stop()
 				return True
 
 		return False
 
-	def vertical_collision(self, object):
+	def vertical_collision(self, object_list):
 
 		aux_rect = pygame.Rect(self.measures.get_scale() * self.pos.x + 2 * self.vel.x,
 		                       self.measures.get_scale() * self.pos.y + 2 * self.vel.y,
 		                       self.character_dimensions.x,
 		                       self.character_dimensions.y)
 
-		for i in object:
+		for i in object_list:
 			if pygame.Rect.colliderect(aux_rect, i) :
 
 				if self.pos.y == i.top / self.measures.get_scale() - 1:
@@ -118,8 +120,18 @@ class Playable_character(Actor, Subject):
 
 		return 0
 
+	def check_collision(self, object_list):
 
+		aux_rect = pygame.Rect(self.measures.get_scale() * self.pos.x + 2 * self.vel.x,
+		                       self.measures.get_scale() * self.pos.y + 2 * self.vel.y,
+		                       self.character_dimensions.x,
+		                       self.character_dimensions.y)
 
+		for i in object_list:
+			if pygame.Rect.colliderect(aux_rect, i):
+				return True
+
+		return False
 
 
 # -----start of transitions -----
