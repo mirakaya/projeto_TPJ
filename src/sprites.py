@@ -67,11 +67,9 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		character_image_rect = (0, 0, CELL_SIZE, CELL_SIZE)
 		self.character_image = CHARACTER_SPRITESHEET.image_at(character_image_rect, -1)
-		self.character_image = pygame.transform.scale(self.character_image, (measures.get_scale(), measures.get_scale()))
+		self.character_image = pygame.transform.scale(self.character_image, (measures.get_scale(), measures.get_scale())).convert()
 
 		self.measures.set_character_image_dimensions(self.character_image.get_width(), self.character_image.get_height())
-
-		print(self.character_image.get_width())
 
 		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
 		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
@@ -82,7 +80,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.character.character_dimensions.x = self.character_image.get_width()
 		self.character.character_dimensions.y = self.character_image.get_height()
 
-		print("test - ", self.rect)
 		self.update()
 
 	def update(self):
@@ -128,18 +125,18 @@ class TerrainIcon():
 			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
 				(1 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
-			)
+			).convert()
 		elif typeTerrain == 1: #load sky
 			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
 				(8 * CELL_SIZE, 12 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
-			)
+			).convert()
 
 		elif typeTerrain == 2: #load sky
 			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
 				(30 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
-			)
+			).convert()
 
 	def get_image(self):
 		return self.image

@@ -50,10 +50,10 @@ class InputHandler:
 
     }
 
-    def handleInput(self, key):
+'''    def handleInput(self, key):
         try:
             print(self.command[key])
             return self.command[key]
 
         except KeyError:
-            print("Key not bound - ignore input")
+            print("Key not bound - ignore input")'''

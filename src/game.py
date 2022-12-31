@@ -92,9 +92,9 @@ for level in entries:
 
 		# update window + fps
 		pygame.display.flip()
-		clock.tick(30)
+		clock.tick(15)
 
-		print("FPS:", int(clock.get_fps()))
+		#print("FPS:", int(clock.get_fps()))
 
 
 #exit
