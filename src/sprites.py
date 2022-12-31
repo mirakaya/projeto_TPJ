@@ -94,7 +94,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character.jump()
 		else:
 			is_collision = self.character.vertical_collision(solids)
-			if is_collision == False:
+			if is_collision == 0:
 				self.character.jump_count = self.character.max_jump_val
 				self.character.jumping = True
 			else:

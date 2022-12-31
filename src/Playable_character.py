@@ -19,7 +19,7 @@ class Playable_character(Actor, Subject):
 
 		self.jumping = False
 		self.jump_count = 0
-		self.max_jump_val = 10
+		self.max_jump_val = 5
 
 		self.character_dimensions = pygame.math.Vector2(0, 0)
 
@@ -57,7 +57,7 @@ class Playable_character(Actor, Subject):
 			self.vel.y = self.velocity_value
 
 		#print(self.new_vertical_collision(solids))
-		if self.vertical_collision(solids) == False:
+		if self.vertical_collision(solids) == 0:
 			self.pos.y += self.vel.y
 
 		self.jump_count += 1
@@ -106,17 +106,17 @@ class Playable_character(Actor, Subject):
 					#print("hitting feet\n\n")
 					self.jumping = False
 					self.jump_count = 0
+					self.stop()
+					return 1
 
 				else:
 					#hitting head
 					#print("hitting head")
 					self.jump_count = self.max_jump_val
+					self.stop()
+					return 2
 
-				self.stop()
-
-				return True
-
-		return False
+		return 0
 
 
 
