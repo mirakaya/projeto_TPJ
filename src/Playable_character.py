@@ -12,6 +12,7 @@ class Playable_character(Actor, Subject):
 		self.dead = 0
 		self.control_keys = dict()
 		self.measures = measures
+		self.score = 0
 
 		self.pos = pygame.math.Vector2(init_pos)
 		self.vel = pygame.math.Vector2(0, 0)
@@ -129,9 +130,9 @@ class Playable_character(Actor, Subject):
 
 		for i in object_list:
 			if pygame.Rect.colliderect(aux_rect, i):
-				return True
+				return i
 
-		return False
+		return None
 
 
 # -----start of transitions -----

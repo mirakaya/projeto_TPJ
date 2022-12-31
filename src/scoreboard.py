@@ -9,7 +9,7 @@ class ScoreBoard:
             self.scores[p.name] = 0
 
     def score(self, context):
-        self.scores[context.name] += 1
+        self.scores[context.name] += 1000
 
 
 
