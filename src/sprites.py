@@ -99,10 +99,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 				self.character.jumping = False
 				self.character.jump_count = 0
 '''
-		#check if character reached the end
-		if self.character.check_collision(end) != None:
-			pygame.event.post(EVENT_END_LEVEL)
-			print("end")
+
 
 		#check if character is collecting a heart
 		collected = self.character.check_collision(collectibles)
@@ -123,6 +120,11 @@ class Character_Sprite(pygame.sprite.Sprite):
 		                        self.measures.get_scale() * self.character.pos.y,
 		                        self.character_image.get_width(),
 		                        self.character_image.get_height())
+
+		# check if character reached the end
+		if self.character.check_collision(end) != None:
+			pygame.event.post(EVENT_END_LEVEL)
+			print("end")
 
 
 class TerrainIcon():

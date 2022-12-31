@@ -20,7 +20,7 @@ class Playable_character(Actor, Subject):
 
 		self.jumping = False
 		self.jump_count = 0
-		self.max_jump_val = 5
+		self.max_jump_val = 8
 
 		self.character_dimensions = pygame.math.Vector2(0, 0)
 
