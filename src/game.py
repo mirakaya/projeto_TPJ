@@ -30,26 +30,21 @@ for level in entries:
 	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures), TerrainIcon(2, measures), TerrainIcon(3, measures), TerrainIcon(4, measures)]
 
 	#convert the content to terrain groups
-	LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
+	character_coordinates = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
 
 	#initialize objects
-	mc = Playable_character(measures, "Alex",(5,5))
+	mc = Playable_character(measures, "Alex",character_coordinates)
 	mc.controls(pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d)
 	scoreboard = ScoreBoard(mc)
-	food = Food((0,0))
 	character.add(Character_Sprite(mc, measures))
 
 	#group of all non level texture sprites - mc, scoreboard, background, other items
 	all_sprites.add(background)
 	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
-
-
-	#all_sprites.add(FoodSprite(food, measures))
 	all_sprites.add(platforms)
-	#all_sprites.add(character)
-
 
 	game_incomplete = True
+
 	while running and game_incomplete: #game
 
 		#event handler
@@ -103,6 +98,7 @@ for level in entries:
 	platforms.empty()
 	character.empty()
 	background.empty()
+
 	solids.clear()
 	end.clear()
 	collectibles.clear()

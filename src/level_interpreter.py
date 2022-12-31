@@ -63,6 +63,8 @@ class LevelInterpreter:
 		aux_x = 0
 		aux_y = 0
 
+		character_coordinates = (0,0)
+
 		# interpret level into
 		for i in lvl_content:
 			if i != '\n':
@@ -84,10 +86,16 @@ class LevelInterpreter:
 					background.add(Terrain((aux_x, aux_y), terrains[1], False))
 					background.add(Terrain((aux_x, aux_y), terrains[4], False))
 
+				elif i == "C": #character
+					background.add(Terrain((aux_x, aux_y), terrains[1], False))
+					character_coordinates = (aux_x, aux_y - 1)
+
 				aux_x += 1
 				if aux_x == measures.get_width():
 					aux_x = 0
 					aux_y += 1
+
+		return character_coordinates
 
 
 
