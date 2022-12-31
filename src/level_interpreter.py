@@ -41,7 +41,9 @@ class LevelInterpreter:
 
 				counter += 1
 
-		scale = min(pygame.display.Info().current_h / height, pygame.display.Info().current_w / width)
+		scale = int(min(pygame.display.Info().current_h / height, pygame.display.Info().current_w / width))
+
+		print("Scale is ", scale)
 
 		measures.set_height(height)
 		measures.set_width(width)
