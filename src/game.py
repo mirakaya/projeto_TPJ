@@ -3,7 +3,6 @@ import os
 from src.level_interpreter import LevelInterpreter
 from src.sprites import *
 from src.Playable_character import *
-from src.food import *
 
 running = True
 list_keys = []
@@ -47,15 +46,16 @@ for level in entries:
 	mc2.controls(pygame.K_UP, pygame.K_LEFT, pygame.K_DOWN, pygame.K_RIGHT)
 
 	scoreboard = ScoreBoard([mc, mc2])
-	character.add(Character_Sprite(mc, measures))
-	character.add(Character_Sprite(mc2, measures))
 
-
-	#group of all non level texture sprites - mc, scoreboard, background, other items
+	#group of all non level texture sprites - scoreboard, background, platforms and hearts
 	all_sprites.add(background)
 	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
 	all_sprites.add(platforms)
 	all_sprites.add(hearts)
+
+	#group with character
+	character.add(Character_Sprite(mc, measures))
+	character.add(Character_Sprite(mc2, measures))
 
 	game_incomplete = True
 
