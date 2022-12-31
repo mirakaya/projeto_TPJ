@@ -57,9 +57,6 @@ for level in entries:
 		#event handler
 		for event in pygame.event.get():
 
-			if pygame.key.get_pressed()[pygame.K_d] == True:
-				print("Right")
-
 			if event.type == pygame.QUIT: #quit game
 				running = False
 

@@ -78,14 +78,15 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character_image.get_width(),
 			self.character_image.get_height())
 
+		self.character.character_dimensions.x = self.character_image.get_width()
+		self.character.character_dimensions.y = self.character_image.get_height()
+
 		print("test - ", self.rect)
 		self.update()
 
 	def update(self):
 		self.image.fill("white")
 		self.image.set_colorkey("white")
-
-		self.handle_collision(solids)
 
 		if self.character.jumping == True:
 			self.character.jump()
@@ -98,120 +99,9 @@ class Character_Sprite(pygame.sprite.Sprite):
 		                        self.character_image.get_width(),
 		                        self.character_image.get_height())
 
-		'''self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x - 5,
-			self.measures.get_scale() * self.character.pos.y - 5), )'''
-		#self.rect.update(self.character.pos.x, self.character.pos.y, self.image.get_width(), self.image.get_height())
-
-		'''pygame.draw.rect(self.measures.get_display(), (255, 0, 0), pygame.Rect(
-			self.measures.get_scale() * self.character.pos.x,
-			self.measures.get_scale() * self.character.pos.y,
-			self.character_image.get_width(),
-			self.character_image.get_height()
-		))'''
+		self.character.rect = self.rect
 
 
-
-	def handle_collision(self, object):
-
-		hitting = False
-
-		aux_rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x + 3 * self.character.vel.x,
-			self.measures.get_scale() * self.character.pos.y + 3 * self.character.vel.y,
-			self.character_image.get_width(),
-			self.character_image.get_height())
-
-		print("pos y -> ", self.character.pos)
-		for i in object:
-
-			if pygame.Rect.colliderect(aux_rect, i):
-
-				if hitting == False:
-
-					hitting = True
-					#print(hitting)
-
-					self.character.character_correction = True
-					print(self.character.vel)
-
-					print("before trans -> ", self.character.pos)
-
-					if self.character.vel.x != 0:
-						self.horizontal_collision(i)
-
-					print("after x -> ", self.character.pos)
-
-					if self.character.vel.y != 0:
-						self.vertical_collision(i)
-
-					print("after x y -> ", self.character.pos)
-
-			if hitting == True:
-				break
-
-		if hitting == False: #am flying, no collision
-			self.character.stop()
-
-
-
-
-		'''if hitting == False :
-			self.character.jump_count = self.character.max_jump_val
-			self.character.jumping = True'''
-
-
-		#print(self.character.vel)
-
-
-
-		#print("me - ", self.character.pos)
-
-	def vertical_collision(self, collided_obj):
-		if self.character.vel.y > 0:
-			print("vertical t")
-
-			self.character.pos.y = (collided_obj.top / self.character.measures.get_scale()) - 1
-
-			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-			                        self.measures.get_scale() * self.character.pos.y,
-			                        self.character_image.get_width(),
-			                        self.character_image.get_height())
-
-			self.character.jumping = False
-			self.character.jump_count = 0
-			print("y -> ", self.character.pos)
-		elif self.character.vel.y < 0:
-			print("vertical b")
-			#self.character.pos.y = (collided_obj.top / self.character.measures.get_scale()) + 1
-			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-			                        self.measures.get_scale() * self.character.pos.y,
-			                        self.character_image.get_width(),
-			                        self.character_image.get_height())
-
-			self.character.jump_count = self.character.max_jump_val
-
-
-	def horizontal_collision(self, collided_obj):
-		if self.character.vel.x > 0:
-			print("->", self.character.pos.x)
-
-			#self.character.pos.x = (collided_obj.left / self.character.measures.get_scale()) - 1
-			#print(self.character.pos.x)
-			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-			                        self.measures.get_scale() * self.character.pos.y,
-			                        self.character_image.get_width(),
-			                        self.character_image.get_height())
-			#self.character.jump_count = self.character.max_jump_val
-
-
-		elif self.character.vel.x < 0:
-			print("<-", self.character.pos.x)
-			#self.character.pos.x = (collided_obj.right / self.character.measures.get_scale())
-			#print(self.character.pos.x)
-			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-			                        self.measures.get_scale() * self.character.pos.y,
-			                        self.character_image.get_width(),
-			                        self.character_image.get_height())
-			#self.character.jump_count = self.character.max_jump_val
 
 
 class TerrainIcon():
@@ -256,9 +146,9 @@ class Terrain(pygame.sprite.Sprite):
 		self.collision = collision
 
 		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
-		hit = 0
-		self.fake_rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale() - hit, self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width() + 2*hit, self.t_icon.get_image().get_height())
-		pygame.draw.rect(self.t_icon.get_measures().get_display(), (255, 0, 0),self.fake_rect)
+		#hit = 0
+		self.fake_rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
+		#pygame.draw.rect(self.t_icon.get_measures().get_display(), (255, 0, 0),self.fake_rect)
 
 		if self.collision == True:
 			solids.append(self.fake_rect)
