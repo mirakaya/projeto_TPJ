@@ -21,7 +21,7 @@ class ScoreBoardSprite(pygame.sprite.Sprite):
 		for i, (player, score) in enumerate(self.scoreboard.scores.items()):
 			self.image.blit(
 				self.font.render(f"{player}: {score}", True, "black", "white"),
-				(0, i * self.measures.get_scale()),
+				(0, i * self.measures.get_scale() / 2),
 			)
 
 class FoodSprite(pygame.sprite.Sprite):

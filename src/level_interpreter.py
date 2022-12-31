@@ -6,7 +6,7 @@ from src.sprites import Terrain
 
 class LevelInterpreter:
 
-	def interpret_level(self, path, measures):
+	def interpret_level(self, path, measures, scale):
 		# reads a .txt file per line and returns its contents
 		counter = 0
 		lvl_content = ""
@@ -41,13 +41,13 @@ class LevelInterpreter:
 
 				counter += 1
 
-		scale = int(min(pygame.display.Info().current_h / height, pygame.display.Info().current_w / width))
+		'''scale = int(min(pygame.display.Info().current_h / height, pygame.display.Info().current_w / width))
 
-		print("Scale is ", scale - 4)
+		print("Scale is ", , scale - 4)'''
 
 		measures.set_height(height)
 		measures.set_width(width)
-		measures.set_scale(scale - 4)
+		measures.set_scale(scale)
 
 		#create the display with the desired width and height
 		display = pygame.display.set_mode((measures.get_scale() * measures.get_width() , measures.get_scale() * measures.get_height()) )

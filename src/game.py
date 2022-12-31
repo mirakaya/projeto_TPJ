@@ -18,17 +18,20 @@ entries = os.listdir(lvl_dir)
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" %(0, 30)
 
-score = 0
+score1 = 0
+score2 = 0
+
+scale = 47
+
+# initialize measures
+tmp_display = pygame.display.set_mode((0, 0))
+measures = Measures(1, 0, 0, tmp_display)
 
 
 for level in entries:
 
-	# initialize measures
-	tmp_display = pygame.display.set_mode((0, 0))
-	measures = Measures(1, 0, 0, tmp_display)
-
 	#load level content from file
-	window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + level, measures)
+	window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + level, measures, scale)
 
 	# loads terrain
 	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures), TerrainIcon(2, measures), TerrainIcon(3, measures), TerrainIcon(4, measures)]
@@ -37,10 +40,16 @@ for level in entries:
 	character_coordinates = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
 
 	#initialize objects
-	mc = Playable_character(measures, "Alex",character_coordinates)
+	mc = Playable_character(measures, score1, "Player 1", character_coordinates)
 	mc.controls(pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d)
-	scoreboard = ScoreBoard(mc)
+
+	mc2 = Playable_character(measures, score2, "Player 2", character_coordinates)
+	mc2.controls(pygame.K_UP, pygame.K_LEFT, pygame.K_DOWN, pygame.K_RIGHT)
+
+	scoreboard = ScoreBoard([mc, mc2])
 	character.add(Character_Sprite(mc, measures))
+	character.add(Character_Sprite(mc2, measures))
+
 
 	#group of all non level texture sprites - mc, scoreboard, background, other items
 	all_sprites.add(background)
@@ -85,13 +94,15 @@ for level in entries:
 		if len(list_keys) != 0 : #execute key commands
 			for key in list_keys:
 				cmd = mc.command(key)
+				cmd = mc2.command(key)
 
+
+		# render the level
+		measures.get_display().fill(181425)
+		all_sprites.update()
+		all_sprites.draw(measures.get_display())
 
 		if game_incomplete == True:
-			# render the level
-			measures.get_display().fill(181425)
-			all_sprites.update()
-			all_sprites.draw(measures.get_display())
 			character.update()
 			character.draw(measures.get_display())
 
@@ -111,6 +122,9 @@ for level in entries:
 	solids.clear()
 	end.clear()
 	collectibles.clear()
+
+	score1 = mc.score
+	score2 = mc2.score
 
 #exit
 pygame.quit()
