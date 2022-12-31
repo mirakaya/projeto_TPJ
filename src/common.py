@@ -18,6 +18,7 @@ all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()  # collision
 background = pygame.sprite.Group()  # no collision
 character = pygame.sprite.Group()
+hearts = pygame.sprite.Group()
 
 solids = []
 end = []

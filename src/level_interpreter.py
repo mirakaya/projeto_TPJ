@@ -84,7 +84,7 @@ class LevelInterpreter:
 
 				elif i == "H": #heart
 					background.add(Terrain((aux_x, aux_y), terrains[1], False))
-					background.add(Terrain((aux_x, aux_y), terrains[4], False))
+					hearts.add(Terrain((aux_x, aux_y), terrains[4], False))
 
 				elif i == "C": #character
 					background.add(Terrain((aux_x, aux_y), terrains[1], False))

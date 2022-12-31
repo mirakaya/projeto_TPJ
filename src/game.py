@@ -42,6 +42,7 @@ for level in entries:
 	all_sprites.add(background)
 	all_sprites.add(ScoreBoardSprite(scoreboard, measures))
 	all_sprites.add(platforms)
+	all_sprites.add(hearts)
 
 	game_incomplete = True
 
@@ -86,8 +87,6 @@ for level in entries:
 		measures.get_display().fill(181425)
 		all_sprites.update()
 		all_sprites.draw(measures.get_display())
-		'''platforms.update()
-		platforms.draw(measures.get_display())'''
 		character.update()
 		character.draw(measures.get_display())
 
@@ -102,6 +101,7 @@ for level in entries:
 	platforms.empty()
 	character.empty()
 	background.empty()
+	hearts.empty()
 
 	solids.clear()
 	end.clear()

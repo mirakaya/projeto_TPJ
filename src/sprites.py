@@ -98,17 +98,21 @@ class Character_Sprite(pygame.sprite.Sprite):
 				self.character.jumping = False
 				self.character.jump_count = 0
 
+		#check if character reached the end
 		if self.character.check_collision(end) != None:
 			pygame.event.post(EVENT_END_LEVEL)
 			print("end")
 
+		#check if character is collecting a heart
 		collected = self.character.check_collision(collectibles)
 		if collected != None:
 			self.character.score += 1000
 			self.character.notify(EVENT_FOOD_EATEN)
 			collectibles.remove(collected)
-			character.add(Terrain((collected.x / self.character.measures.get_scale(), collected.y / self.character.measures.get_scale()), TerrainIcon(1, self.character.measures), False))
-			print(collected)
+
+			for i in hearts:
+				if i.rect == collected:
+					i.kill()
 
 
 		# Render character
