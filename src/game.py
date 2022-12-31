@@ -18,6 +18,8 @@ entries = os.listdir(lvl_dir)
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" %(0, 30)
 
+score = 0
+
 
 for level in entries:
 
@@ -71,7 +73,7 @@ for level in entries:
 				list_keys = remove_values_from_list(list_keys, key)
 
 			if event == EVENT_END_LEVEL :
-					game_incomplete = False
+				game_incomplete = False
 
 			'''if cmd:
 				command_log.append(cmd)'''
@@ -85,12 +87,13 @@ for level in entries:
 				cmd = mc.command(key)
 
 
-		# render the level
-		measures.get_display().fill(181425)
-		all_sprites.update()
-		all_sprites.draw(measures.get_display())
-		character.update()
-		character.draw(measures.get_display())
+		if game_incomplete == True:
+			# render the level
+			measures.get_display().fill(181425)
+			all_sprites.update()
+			all_sprites.draw(measures.get_display())
+			character.update()
+			character.draw(measures.get_display())
 
 		# update window + fps
 		pygame.display.flip()
