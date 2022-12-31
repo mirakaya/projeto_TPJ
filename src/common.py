@@ -1,7 +1,5 @@
 import pygame
 from enum import Enum
-from datetime import datetime
-
 
 class Directions(Enum):
 	UP = (0, -1)
@@ -19,28 +17,10 @@ platforms = pygame.sprite.Group()  # collision
 background = pygame.sprite.Group()  # no collision
 character = pygame.sprite.Group()
 
-
 solids = []
+end = []
+collectibles = []
 
-
-
-'''class CSAccess():
-
-	def __init__(self):
-		self.char_sprite = None
-
-	def set_char_sprite(self, cs):
-		self.char_sprite = cs
-
-	def get_char_sprite(self):
-		return self.char_sprite'''
-
-
-'''def set_scale (new_val):
-	SCALE = new_val'''
-
-
-# -----------
 
 class Measures():
 
@@ -81,8 +61,6 @@ class Measures():
 	def get_character_image_dimensions(self):
 		return self.character_image_dimensions
 
-
-# -----------
 
 class Actor:
 	def __init__(self):

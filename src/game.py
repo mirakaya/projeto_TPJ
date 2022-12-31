@@ -5,17 +5,12 @@ from src.sprites import *
 from src.Playable_character import *
 from src.food import *
 
-
 running = True
 list_keys = []
 pygame.init()
 
 #set clock
 clock = pygame.time.Clock()
-
-#initialize measures
-tmp_display = pygame.display.set_mode((0,0))
-measures = Measures(1, 0, 0, tmp_display)
 
 #get all files in the levels dir
 lvl_dir = '../levels/'
@@ -24,10 +19,14 @@ entries = os.listdir(lvl_dir)
 
 for level in entries:
 
+	# initialize measures
+	tmp_display = pygame.display.set_mode((0, 0))
+	measures = Measures(1, 0, 0, tmp_display)
+
 	#load level content from file
 	window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + level, measures)
 
-	#loads terrain
+	# loads terrain
 	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures), TerrainIcon(2, measures)]
 
 	#convert the content to terrain groups
@@ -39,7 +38,6 @@ for level in entries:
 	scoreboard = ScoreBoard(mc)
 	food = Food((0,0))
 	character.add(Character_Sprite(mc, measures))
-
 
 	#group of all non level texture sprites - mc, scoreboard, background, other items
 	all_sprites.add(background)
@@ -56,6 +54,10 @@ for level in entries:
 
 		#event handler
 		for event in pygame.event.get():
+
+			if pygame.key.get_pressed()[K_ESCAPE]:
+				print("esc")
+				game_incomplete = False
 
 			if event.type == pygame.QUIT: #quit game
 				running = False
@@ -96,6 +98,14 @@ for level in entries:
 
 		#print("FPS:", int(clock.get_fps()))
 
+	#clean up
+	all_sprites.empty()
+	platforms.empty()
+	character.empty()
+	background.empty()
+	solids.clear()
+	end.clear()
+	collectibles.clear()
 
 #exit
 pygame.quit()
