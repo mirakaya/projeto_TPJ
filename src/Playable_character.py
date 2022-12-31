@@ -6,13 +6,13 @@ from src.inputs import Up, Down, Left, Right
 
 class Playable_character(Actor, Subject):
 
-	def __init__(self, measures, name=None, init_pos=(0, 0)):
+	def __init__(self, measures, score,  name=None, init_pos=(0, 0)):
 		Subject.__init__(self)
 		self.name = name
 		self.dead = 0
 		self.control_keys = dict()
 		self.measures = measures
-		self.score = 0
+		self.score = score
 
 		self.pos = pygame.math.Vector2(init_pos)
 		self.vel = pygame.math.Vector2(0, 0)
@@ -133,6 +133,9 @@ class Playable_character(Actor, Subject):
 				return i
 
 		return None
+
+	def set_position(self, position):
+		self.pos = position
 
 
 # -----start of transitions -----
