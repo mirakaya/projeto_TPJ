@@ -16,6 +16,8 @@ clock = pygame.time.Clock()
 lvl_dir = '../levels/'
 entries = os.listdir(lvl_dir)
 
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" %(0, 30)
+
 
 for level in entries:
 

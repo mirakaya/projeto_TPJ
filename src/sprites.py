@@ -87,17 +87,18 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.image.fill("white")
 		self.image.set_colorkey("white")
 
+		#if jumping, continue jump
 		if self.character.jumping == True:
 			self.character.jump()
-		else:
+		else: #else, check if feet are hitting the ground, if not, jump at max
 			is_collision = self.character.vertical_collision(solids)
 			if is_collision == 0:
 				self.character.jump_count = self.character.max_jump_val
 				self.character.jumping = True
-			else:
+			'''else:
 				self.character.jumping = False
 				self.character.jump_count = 0
-
+'''
 		#check if character reached the end
 		if self.character.check_collision(end) != None:
 			pygame.event.post(EVENT_END_LEVEL)
