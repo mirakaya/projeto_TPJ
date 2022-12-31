@@ -55,6 +55,7 @@ class FoodSprite(pygame.sprite.Sprite):
 
 
 class Character_Sprite(pygame.sprite.Sprite):
+
 	def __init__(self, character: Playable_character, measures):
 		super().__init__()
 
@@ -85,11 +86,21 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.update()
 
 	def update(self):
+
 		self.image.fill("white")
 		self.image.set_colorkey("white")
 
 		if self.character.jumping == True:
 			self.character.jump()
+		else:
+			is_collision = self.character.vertical_collision(solids)
+			if is_collision == False:
+				self.character.jump_count = self.character.max_jump_val
+				self.character.jumping = True
+			else:
+				self.character.jumping = False
+				self.character.jump_count = 0
+
 
 		# Render character
 		self.character.measures.get_display().blit(self.character_image, [self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y])
@@ -99,7 +110,9 @@ class Character_Sprite(pygame.sprite.Sprite):
 		                        self.character_image.get_width(),
 		                        self.character_image.get_height())
 
-		self.character.rect = self.rect
+
+
+
 
 
 
