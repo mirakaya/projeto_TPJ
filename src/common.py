@@ -51,6 +51,9 @@ class Measures():
 		self.display = display
 		self.character_image_dimensions = character_image_dimensions
 
+	def set_scale(self, new_scale):
+		self.scale = new_scale
+
 	def get_scale(self):
 		return self.scale
 

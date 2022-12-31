@@ -85,13 +85,19 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.image.fill("white")
 		self.image.set_colorkey("white")
 
-		self.handle_collision()
+		self.handle_collision(solids)
 
 		if self.character.jumping == True:
 			self.character.jump()
 
 		# Render character
 		self.character.measures.get_display().blit(self.character_image, [self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y])
+
+		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+		                        self.measures.get_scale() * self.character.pos.y,
+		                        self.character_image.get_width(),
+		                        self.character_image.get_height())
+
 		'''self.image.blit(self.character_image,(self.measures.get_scale() * self.character.pos.x - 5,
 			self.measures.get_scale() * self.character.pos.y - 5), )'''
 		#self.rect.update(self.character.pos.x, self.character.pos.y, self.image.get_width(), self.image.get_height())
@@ -103,12 +109,9 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character_image.get_height()
 		))'''
 
-		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-		                        self.measures.get_scale() * self.character.pos.y,
-		                        self.character_image.get_width(),
-		                        self.character_image.get_height())
 
-	def handle_collision(self):
+
+	def handle_collision(self, object):
 
 		hitting = False
 
@@ -117,21 +120,29 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character_image.get_width(),
 			self.character_image.get_height())
 
-		for i in solids:
+
+		for i in object:
+
 			if pygame.Rect.colliderect(aux_rect, i):
-				hitting = True
-				#print(hitting)
 
-				self.character.character_correction = True
-				print(self.character.vel)
+				if hitting == False:
 
-				if self.character.vel.x != 0:
-					self.horizontal_collision(i)
+					hitting = True
+					#print(hitting)
 
-				if self.character.vel.y != 0:
-					self.vertical_collision(i)
+					self.character.character_correction = True
+					print(self.character.vel)
 
-		if hitting:
+					if self.character.vel.x != 0:
+						self.horizontal_collision(i)
+
+					if self.character.vel.y != 0:
+						self.vertical_collision(i)
+
+			if hitting == True:
+				break
+
+		if hitting == True: #am flying, no collision
 			self.character.stop()
 
 
@@ -148,10 +159,10 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		#print("me - ", self.character.pos)
 
-	def vertical_collision(self, i):
+	def vertical_collision(self, collided_obj):
 		if self.character.vel.y > 0:
 			print("vertical t")
-			self.character.pos.y = (i.top / self.character.measures.get_scale()) - 1
+			self.character.pos.y = (collided_obj.top / self.character.measures.get_scale()) - 1
 			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 			                        self.measures.get_scale() * self.character.pos.y,
 			                        self.character_image.get_width(),
@@ -162,7 +173,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		elif self.character.vel.y < 0:
 			print("vertical b")
-			self.character.pos.y = (i.top / self.character.measures.get_scale()) + 1
+			self.character.pos.y = (collided_obj.top / self.character.measures.get_scale()) + 1
 			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 			                        self.measures.get_scale() * self.character.pos.y,
 			                        self.character_image.get_width(),
@@ -171,11 +182,11 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character.jump_count = self.character.max_jump_val
 
 
-	def horizontal_collision(self, i):
+	def horizontal_collision(self, collided_obj):
 		if self.character.vel.x > 0:
 			#print("->", self.character.pos.x)
 
-			self.character.pos.x = (i.left / self.character.measures.get_scale()) - 1
+			self.character.pos.x = (collided_obj.left / self.character.measures.get_scale()) - 1
 			#print(self.character.pos.x)
 			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 			                        self.measures.get_scale() * self.character.pos.y,
@@ -186,7 +197,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		elif self.character.vel.x < 0:
 			#print("<-", self.character.pos.x)
-			self.character.pos.x = (i.right / self.character.measures.get_scale())
+			self.character.pos.x = (collided_obj.right / self.character.measures.get_scale())
 			#print(self.character.pos.x)
 			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 			                        self.measures.get_scale() * self.character.pos.y,
@@ -237,7 +248,7 @@ class Terrain(pygame.sprite.Sprite):
 		self.collision = collision
 
 		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
-		hit = 10
+		hit = 0
 		self.fake_rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale() - hit, self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width() + 2*hit, self.t_icon.get_image().get_height())
 		pygame.draw.rect(self.t_icon.get_measures().get_display(), (255, 0, 0),self.fake_rect)
 

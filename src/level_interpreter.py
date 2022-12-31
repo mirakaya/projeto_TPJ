@@ -41,11 +41,14 @@ class LevelInterpreter:
 
 				counter += 1
 
+		scale = min(pygame.display.Info().current_h / height, pygame.display.Info().current_w / width)
+
 		measures.set_height(height)
 		measures.set_width(width)
+		measures.set_scale(scale - 4)
 
 		#create the display with the desired width and height
-		display = pygame.display.set_mode((measures.get_scale() * measures.get_width() , measures.get_scale() * measures.get_height()))
+		display = pygame.display.set_mode((measures.get_scale() * measures.get_width() , measures.get_scale() * measures.get_height()) )
 
 		measures.set_display(display)
 
