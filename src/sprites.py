@@ -3,7 +3,6 @@ from pygame import *
 from src.spritesheet import *
 from src.scoreboard import *
 from src.Playable_character import *
-from src.food import *
 from src.common import *
 
 class ScoreBoardSprite(pygame.sprite.Sprite):
@@ -23,35 +22,6 @@ class ScoreBoardSprite(pygame.sprite.Sprite):
 				self.font.render(f"{player}: {score}", True, "black", "white"),
 				(0, i * self.measures.get_scale() / 2),
 			)
-
-class FoodSprite(pygame.sprite.Sprite):
-
-	def __init__(self, food: Food, measures):
-		super().__init__()
-
-		FOOD_SPRITESHEET = SpriteSheet("../resources/Sprite sheet.png")
-		self.measures = measures
-		self.food = food
-		CELL_SIZE = 16
-
-		food_image_rect = (0, 7 * CELL_SIZE, CELL_SIZE, CELL_SIZE)
-		self.food_image = FOOD_SPRITESHEET.image_at(food_image_rect, -1)
-		self.food_image = pygame.transform.scale(self.food_image, (measures.get_scale(), measures.get_scale()))
-
-		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
-		self.rect = self.image.get_rect()
-		self.update()
-
-
-	def update(self):
-		self.image.fill("white")
-		self.image.set_colorkey("white")
-
-		# Render Food
-		self.image.blit(
-		    self.food_image,
-		    (self.measures.get_scale() * self.food.position[0], self.measures.get_scale() * self.food.position[1]),
-		)
 
 
 class Character_Sprite(pygame.sprite.Sprite):
