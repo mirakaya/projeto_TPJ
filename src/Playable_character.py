@@ -34,11 +34,11 @@ class Playable_character(Actor, Subject):
 
 	def move(self, direction: Directions = None):
 
-		print("prev - ", self.prev_pos)
+		#print("prev - ", self.prev_pos)
 
 		self.prev_pos = self.pos
 
-		print("prev2 - ", self.prev_pos)
+		#print("prev2 - ", self.prev_pos)
 
 		if direction == Directions.LEFT:
 			self.vel.x = -self.velocity_value
@@ -48,7 +48,7 @@ class Playable_character(Actor, Subject):
 
 		self.pos.x += self.vel.x
 
-		print("me - ", self.prev_pos , self.pos)
+		#print("me - ", self.prev_pos , self.pos)
 
 	def jump(self):
 
