@@ -42,13 +42,9 @@ class Playable_character(Actor, Subject):
 		if direction == Directions.RIGHT:
 			self.vel.x = self.velocity_value
 
-		print(self.new_horizontal_collision(solids))
+		#print(self.new_horizontal_collision(solids))
 		if self.new_horizontal_collision(solids) == False:
 			self.pos.x += self.vel.x
-
-
-
-
 
 
 	def jump(self):
@@ -58,18 +54,17 @@ class Playable_character(Actor, Subject):
 		if self.jump_count < self.max_jump_val:
 			self.vel.y = -self.velocity_value
 
-
 		else: #falling
 			self.vel.y = self.velocity_value
 
-
-		self.pos.y += self.vel.y
+		#print(self.new_vertical_collision(solids))
+		if self.new_vertical_collision(solids) == False:
+			self.pos.y += self.vel.y
 
 		self.jump_count += 1
 
 
 	def cancel_jump(self):
-
 		self.vel.y = 2 * self.velocity_value
 		self.pos.y += self.vel.y
 
@@ -86,12 +81,46 @@ class Playable_character(Actor, Subject):
 	def new_horizontal_collision(self, object):
 
 		aux_rect = pygame.Rect(self.measures.get_scale() * self.pos.x + 2 * self.vel.x,
-		                       self.measures.get_scale() * self.pos.y - self.vel.y,
+		                       self.measures.get_scale() * self.pos.y + 2 * self.vel.y,
 		                       self.character_dimensions.x,
 		                       self.character_dimensions.y)
 
 		for i in object:
 			if pygame.Rect.colliderect(aux_rect, i) :
+				self.stop()
+				return True
+
+		return False
+
+	def new_vertical_collision(self, object):
+
+		aux_rect = pygame.Rect(self.measures.get_scale() * self.pos.x + 2 * self.vel.x,
+		                       self.measures.get_scale() * self.pos.y + 2 * self.vel.y,
+		                       self.character_dimensions.x,
+		                       self.character_dimensions.y)
+
+		for i in object:
+			if pygame.Rect.colliderect(aux_rect, i) :
+
+				print("i top - ", i.top)
+				print("i bott - ", i.bottom)
+				print("pos - ", self.pos)
+				print("self pos div - ", self.pos.y, i.top / self.measures.get_scale())
+				print()
+				print()
+				if self.pos.y == i.top / self.measures.get_scale() - 1:
+					#hitting feet
+					print("feet\n\n")
+					self.jumping = False
+					self.jump_count = 0
+
+				else:
+					#hitting head
+					print("head")
+					self.jump_count = self.max_jump_val
+
+				self.stop()
+
 				return True
 
 		return False

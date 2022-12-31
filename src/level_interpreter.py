@@ -43,7 +43,7 @@ class LevelInterpreter:
 
 		scale = int(min(pygame.display.Info().current_h / height, pygame.display.Info().current_w / width))
 
-		print("Scale is ", scale)
+		print("Scale is ", scale - 4)
 
 		measures.set_height(height)
 		measures.set_width(width)
