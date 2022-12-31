@@ -108,12 +108,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 		                        self.character_image.get_height())
 
 
-
-
-
-
-
-
 class TerrainIcon():
 
 	def __init__(self, typeTerrain, measures):
