@@ -125,24 +125,39 @@ class TerrainIcon():
 			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
 				(1 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
-			).convert()
+			).convert_alpha()
+
 		elif typeTerrain == 1: #load sky
 			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
 				(8 * CELL_SIZE, 12 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
-			).convert()
+			).convert_alpha()
 
-		elif typeTerrain == 2: #load sky
+		elif typeTerrain == 2: #load invisible
 			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
 				(30 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
-			).convert()
+			).convert_alpha()
+
+		elif typeTerrain == 3: #load finish
+			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
+				(0 * CELL_SIZE, 31 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
+				(self.measures.get_scale(), self.measures.get_scale()),
+			).convert_alpha()
+
+		elif typeTerrain == 4: #load heart
+			self.image = transform.scale(pygame.image.load("../resources/heart.png"),
+				(self.measures.get_scale(), self.measures.get_scale()),
+			).convert_alpha()
 
 	def get_image(self):
 		return self.image
 
 	def get_measures(self):
 		return self.measures
+
+	def get_type(self):
+		return self.typeTerrain
 
 
 
@@ -156,12 +171,13 @@ class Terrain(pygame.sprite.Sprite):
 		self.collision = collision
 
 		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
-		#hit = 0
-		self.fake_rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
-		#pygame.draw.rect(self.t_icon.get_measures().get_display(), (255, 0, 0),self.fake_rect)
 
-		if self.collision == True:
-			solids.append(self.fake_rect)
+		if self.t_icon.get_type() == 0:
+			solids.append(self.rect)
+		elif self.t_icon.get_type() == 2:
+			end.append(self.rect)
+		elif self.t_icon.get_type() == 3:
+			collectibles.append(self.rect)
 
 
 	'''def update(self):

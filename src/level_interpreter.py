@@ -67,17 +67,22 @@ class LevelInterpreter:
 		for i in lvl_content:
 			if i != '\n':
 				# convert i to Terrain
-				terrain_chosen = terrains[2]
+
 				if i == "F": #floor
-					#lvl_map[aux_x][aux_y] = terrains[0]
 					platforms.add(Terrain((aux_x, aux_y), terrains[0], True))
 
 				elif i == "S": #sky
-					#lvl_map[aux_x][aux_y] = terrains[1]
 					background.add(Terrain((aux_x, aux_y), terrains[1], False))
 
 				elif i == "I": #invisible
 					background.add(Terrain((aux_x, aux_y), terrains[2], False))
+
+				elif i == "E": #finish
+					background.add(Terrain((aux_x, aux_y), terrains[3], False))
+
+				elif i == "H": #heart
+					#background.add(Terrain((aux_x, aux_y), terrains[2], False))
+					background.add(Terrain((aux_x, aux_y), terrains[4], False))
 
 				aux_x += 1
 				if aux_x == measures.get_width():
