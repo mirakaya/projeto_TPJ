@@ -1,4 +1,4 @@
-from src.common import EVENT_FOOD_EATEN
+from src.common import EVENT_INCREASE_SCORE
 
 
 class ScoreBoard:
@@ -7,7 +7,7 @@ class ScoreBoard:
 
         for p in players:
 
-            p.register(EVENT_FOOD_EATEN, self.score)
+            p.register(EVENT_INCREASE_SCORE, self.score)
             self.scores[p.name] = p.score
 
             print(self.scores[p.name], p.name)

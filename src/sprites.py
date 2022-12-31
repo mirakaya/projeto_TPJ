@@ -105,7 +105,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 		collected = self.character.check_collision(collectibles)
 		if collected != None:
 			self.character.score += 1000
-			self.character.notify(EVENT_FOOD_EATEN)
+			self.character.notify(EVENT_INCREASE_SCORE)
 			collectibles.remove(collected)
 
 			for i in hearts:
@@ -123,6 +123,8 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		# check if character reached the end
 		if self.character.check_collision(end) != None:
+			self.character.score += 1000
+			self.character.notify(EVENT_INCREASE_SCORE)
 			pygame.event.post(EVENT_END_LEVEL)
 			print("end")
 

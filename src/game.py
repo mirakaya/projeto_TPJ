@@ -123,6 +123,7 @@ for level in entries:
 	end.clear()
 	collectibles.clear()
 
+	#save scores for next level
 	score1 = mc.score
 	score2 = mc2.score
 
