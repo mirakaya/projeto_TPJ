@@ -184,7 +184,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 	def aux_walk(self, list):
 
-		vel_change_sprite = 5
+		vel_change_sprite = 45
 
 		self.character_image = self.image_collection.get(list[self.stage_animation])
 

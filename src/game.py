@@ -23,8 +23,20 @@ score2 = 0
 scale = 30
 
 # initialize measures
-tmp_display = pygame.display.set_mode((0, 0))
+tmp_display = pygame.display.set_mode((500, 500))
 measures = Measures(1, 0, 0, tmp_display)
+
+tmp_display.fill("blue")
+
+#start screen
+no_start = True
+while no_start:
+	for event in pygame.event.get():
+
+		if event.type == pygame.KEYDOWN:  # a key is pressed
+			print("break")
+			no_start = False
+
 
 
 for level in entries:
@@ -64,9 +76,9 @@ for level in entries:
 		#event handler
 		for event in pygame.event.get():
 
-			if pygame.key.get_pressed()[K_ESCAPE]:
+			'''if pygame.key.get_pressed()[K_ESCAPE]:
 				print("esc")
-				game_incomplete = False
+				game_incomplete = False'''
 
 			if event.type == pygame.QUIT: #quit game
 				running = False
@@ -78,8 +90,6 @@ for level in entries:
 			elif event.type == pygame.KEYUP : #a key is relased
 				list_keys = remove_values_from_list(list_keys, key)
 
-			elif event.type == pygame.KEYUP : #a key is relased
-				list_keys = remove_values_from_list(list_keys, key)
 
 			if event == EVENT_END_LEVEL :
 				game_incomplete = False
@@ -108,7 +118,7 @@ for level in entries:
 
 		# update window + fps
 		pygame.display.flip()
-		clock.tick(5)
+		clock.tick(15)
 
 		#print("FPS:", int(clock.get_fps()))
 
