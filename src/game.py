@@ -20,7 +20,7 @@ os.environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" %(0, 30)
 score1 = 0
 score2 = 0
 
-scale = 47
+scale = 30
 
 # initialize measures
 tmp_display = pygame.display.set_mode((0, 0))
@@ -55,7 +55,7 @@ for level in entries:
 
 	#group with character
 	character.add(Character_Sprite(mc, measures, 1))
-	character.add(Character_Sprite(mc2, measures, 1))
+	character.add(Character_Sprite(mc2, measures, 2))
 
 	game_incomplete = True
 

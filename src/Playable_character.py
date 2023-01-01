@@ -89,7 +89,7 @@ class Playable_character(Actor, Subject):
 
 		for i in object_list:
 			if pygame.Rect.colliderect(aux_rect, i) :
-				self.stop()
+				#self.stop()
 				return True
 
 		return False
