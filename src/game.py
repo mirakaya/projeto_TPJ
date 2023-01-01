@@ -55,7 +55,7 @@ for level in entries:
 
 	#group with character
 	character.add(Character_Sprite(mc, measures, 1))
-	character.add(Character_Sprite(mc2, measures, 2))
+	character.add(Character_Sprite(mc2, measures, 1))
 
 	game_incomplete = True
 

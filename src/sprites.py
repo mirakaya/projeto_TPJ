@@ -34,16 +34,74 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.character = character
 		self.measures = measures
 		self.type = type
+		self.sequence_f = ["f1", "f2", "f1", "f0"]
+		self.sequence_b = ["b1", "b2", "b1", "b0"]
+
+		self.stage_animation = 0
+		self.frame_counter = 0
+		self.sequence_used = 0
+
 
 		CELL_SIZE = 16
 
-		character_image_rect = (0, 0, CELL_SIZE, CELL_SIZE)
-		self.character_image = CHARACTER_SPRITESHEET.image_at(character_image_rect, -1)
-		self.character_image = pygame.transform.scale(self.character_image, (measures.get_scale(), measures.get_scale())).convert()
+		character_map = dict()
 
-		self.measures.set_character_image_dimensions(self.character_image.get_width(), self.character_image.get_height())
+		if type == 1:
+			character_map = {
+				"f0": (0, 2),
+				"f1": (1, 2),
+				"f2": (2, 2),
+				"b0": (0, 1),
+				"b1": (1, 1),
+				"b2": (2, 1)
+			}
+		elif type == 2:
+			character_map = {
+				("head", Directions.UP): (3, 0),
+				("head", Directions.RIGHT): (4, 0),
+				("head", Directions.LEFT): (3, 1),
+				("head", Directions.DOWN): (4, 1),
+				(Directions.UP, Directions.RIGHT): (0, 0),
+				(Directions.LEFT, Directions.DOWN): (0, 0),
+				(Directions.DOWN, Directions.RIGHT): (0, 1),
+				(Directions.LEFT, Directions.UP): (0, 1),
+				(Directions.LEFT, Directions.LEFT): (1, 0),
+				(Directions.RIGHT, Directions.RIGHT): (1, 0),
+				(Directions.RIGHT, Directions.DOWN): (2, 0),
+				(Directions.UP, Directions.LEFT): (2, 0),
+				(Directions.UP, Directions.UP): (2, 1),
+				(Directions.DOWN, Directions.DOWN): (2, 1),
+				(Directions.RIGHT, Directions.UP): (2, 2),
+				(Directions.DOWN, Directions.LEFT): (2, 2),
+				("tail", Directions.UP): (4, 3),
+				("tail", Directions.DOWN): (3, 2),
+				("tail", Directions.RIGHT): (3, 3),
+				("tail", Directions.LEFT): (4, 2),
+			}
+		else:
+			raise Exception("Invalid character type")
+
+		print(character_map)
+
+		# Load and resize images to SCALE
+		self.image_collection = {
+			name: pygame.transform.scale(
+				CHARACTER_SPRITESHEET.image_at(
+					(a * CELL_SIZE, b * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1
+				),
+				(self.character.measures.get_scale(), self.character.measures.get_scale()),
+			)
+			for (name, (a, b)) in character_map.items()
+		}
+
+		print(self.image_collection)
+
+		self.character_image = self.image_collection.get("f1")
+
+		#self.measures.set_character_image_dimensions(self.character_image.get_width(), self.character_image.get_height())
 
 		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
+
 		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
 			self.measures.get_scale() * self.character.pos.y,
 			self.character_image.get_width(),
@@ -71,7 +129,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 				self.character.jumping = False
 				self.character.jump_count = 0
 '''
-
+		self.change_sprite()
 
 		#check if character is collecting a heart
 		collected = self.character.check_collision(collectibles)
@@ -99,6 +157,40 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character.notify(EVENT_INCREASE_SCORE)
 			pygame.event.post(EVENT_END_LEVEL)
 			print("end")
+
+	def change_sprite(self):
+
+		vel_change_sprite = 4
+
+		if self.character.jumping == True:
+
+			if self.character.vel.x > 0:
+				self.character_image = self.image_collection.get("f1")
+				self.sequence_used = 0
+			elif self.character.vel.x < 0:
+				self.character_image = self.image_collection.get("b1")
+				self.sequence_used = 1
+
+		elif self.sequence_used == 0:  #forwards
+
+			self.character_image = self.image_collection.get(self.sequence_f[self.stage_animation])
+
+			if self.frame_counter % vel_change_sprite == 0:
+				self.stage_animation = (self.stage_animation + 1) % len(self.sequence_f)
+				self.frame_counter = 0
+
+		elif self.sequence_used == 1: #backwards
+
+			self.character_image = self.image_collection.get(self.sequence_b[self.stage_animation])
+
+			if self.frame_counter % vel_change_sprite == 0:
+				self.stage_animation = (self.stage_animation + 1) % len(self.sequence_f)
+				self.frame_counter = 0
+
+
+
+
+
 
 
 class TerrainIcon():
