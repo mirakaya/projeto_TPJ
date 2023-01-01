@@ -36,7 +36,7 @@ class Playable_character(Actor, Subject):
 			cmd.execute(self)
 			return cmd
 
-	def move(self, direction: Directions = None):
+	def move(self, direction: Directions):
 
 		if direction == Directions.LEFT:
 			self.vel.x = -self.velocity_value
@@ -47,6 +47,9 @@ class Playable_character(Actor, Subject):
 		#print(self.new_horizontal_collision(solids))
 		if self.horizontal_collision(solids) == False:
 			self.pos.x += self.vel.x
+
+	def print_vel_x(self):
+		print(self.vel.x)
 
 
 	def jump(self):

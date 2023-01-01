@@ -100,10 +100,12 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 	def update(self):
 
+		self.character.print_vel_x()
+
 		self.change_sprite()
 
-		if self.character.name == "Player 1":
-			print("1 - ", self.character.name ,self.character.vel)
+		'''if self.character.name == "Player 1":
+			print("1 - ", self.character.name ,self.character.vel)'''
 
 		self.image.fill("white")
 		self.image.set_colorkey("white")
@@ -134,8 +136,8 @@ class Character_Sprite(pygame.sprite.Sprite):
 				if i.rect == collected:
 					i.kill()
 
-		if self.character.name == "Player 1":
-			print("mid - ", self.character.name, self.character.vel)
+		'''if self.character.name == "Player 1":
+			print("mid - ", self.character.name, self.character.vel)'''
 
 		# Render character
 		self.character.measures.get_display().blit(self.character_image, [self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y])
@@ -152,63 +154,37 @@ class Character_Sprite(pygame.sprite.Sprite):
 			pygame.event.post(EVENT_END_LEVEL)
 			print("end")
 
-		if self.character.name == "Player 1":
-			print("2 - ", self.character.name, self.character.vel)
+		'''if self.character.name == "Player 1":
+			print("2 - ", self.character.name, self.character.vel)'''
 
 	def change_sprite(self):
-
-		vel_change_sprite = 4
 
 		if self.character.jumping == True:
 
 			if self.character.vel.x > 0:
-				self.character_image = self.image_collection.get("f1")
-
-				if self.sequence_used != 0:
-					self.sequence_used = 0
-					self.frame_counter = 0
-					self.stage_animation = 0
+				self.aux_jump("f1", 0)
 
 			elif self.character.vel.x < 0:
-				self.character_image = self.image_collection.get("b1")
-
-				if self.sequence_used != 1:
-					self.sequence_used = 1
-					self.frame_counter = 0
-					self.stage_animation = 0
-
-		elif self.character.vel.x > 0: #forwards
-
-			self.character_image = self.image_collection.get(self.sequence_f[self.stage_animation])
-
-			if self.frame_counter % vel_change_sprite == 0:
-				self.stage_animation = (self.stage_animation + 1) % len(self.sequence_f)
-				self.frame_counter = 0
-
-		elif self.character.vel.x < 0: #backwards
-
-			self.character_image = self.image_collection.get(self.sequence_b[self.stage_animation])
-
-			if self.frame_counter % vel_change_sprite == 0:
-				self.stage_animation = (self.stage_animation + 1) % len(self.sequence_f)
-				self.frame_counter = 0
+				self.aux_jump("b1", 1)
 
 		else:
-			if self.sequence_used == 0:
-				self.character_image = self.image_collection.get(self.sequence_f[self.stage_animation])
+			if self.character.vel.x > 0: #forwards
+				print("here")
+				self.aux_walk(self.sequence_f)
 
-				if self.frame_counter % vel_change_sprite == 0:
-					self.stage_animation = (self.stage_animation + 1) % len(self.sequence_f)
-					self.frame_counter = 0
+			elif self.character.vel.x < 0: #backwards
+				self.aux_walk(self.sequence_b)
 
-			if self.sequence_used == 1:
-				self.character_image = self.image_collection.get(self.sequence_b[self.stage_animation])
+			else:
+				if self.sequence_used == 0:
+					self.character_image = self.image_collection.get("f1")
 
-				if self.frame_counter % vel_change_sprite == 0:
-					self.stage_animation = (self.stage_animation + 1) % len(self.sequence_f)
-					self.frame_counter = 0
+				if self.sequence_used == 1:
+					self.character_image = self.image_collection.get("b1")
 
-	def aux_walk(self, list, vel_change_sprite):
+	def aux_walk(self, list):
+
+		vel_change_sprite = 5
 
 		self.character_image = self.image_collection.get(list[self.stage_animation])
 
@@ -216,8 +192,13 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.stage_animation = (self.stage_animation + 1) % len(self.sequence_f)
 			self.frame_counter = 0
 
-	def aux_jump(self):
-		pass
+	def aux_jump(self, image, sequence):
+		self.character_image = self.image_collection.get(image)
+
+		if self.sequence_used != sequence:
+			self.sequence_used = sequence
+			self.frame_counter = 0
+			self.stage_animation = 0
 
 
 class TerrainIcon():
