@@ -22,13 +22,30 @@ score2 = 0
 
 scale = 30
 
+tmp_x = 30 * 30
+tmp_y = 30 * 15
 # initialize measures
-tmp_display = pygame.display.set_mode((500, 500))
+tmp_display = pygame.display.set_mode((tmp_x, tmp_y))
 measures = Measures(1, 0, 0, tmp_display)
 
-tmp_display.fill("blue")
 
 #start screen
+measures.get_display().fill("gray")
+
+font_t = pygame.font.Font(None, 80)
+text_t = font_t.render('Speed & Gather', True, "black")
+textRect = text_t.get_rect()
+textRect.center = (tmp_x // 2, tmp_y // 2 - 40)
+measures.get_display().blit(text_t, textRect)
+
+font_s = pygame.font.Font(None, 40)
+text_s = font_s.render('Press any key to start', True, "black")
+textRect = text_s.get_rect()
+textRect.center = (tmp_x // 2, tmp_y // 2 + 40)
+measures.get_display().blit(text_s, textRect)
+
+pygame.display.flip()
+
 no_start = True
 while no_start:
 	for event in pygame.event.get():
@@ -38,7 +55,7 @@ while no_start:
 			no_start = False
 
 
-
+#game
 for level in entries:
 
 	#load level content from file
@@ -136,6 +153,36 @@ for level in entries:
 	#save scores for next level
 	score1 = mc.score
 	score2 = mc2.score
+
+
+#end screen
+measures.get_display().fill("gray")
+
+font_t = pygame.font.Font(None, 80)
+text_t = font_t.render('Scores', True, "black")
+textRect = text_t.get_rect()
+textRect.center = (tmp_x // 2, tmp_y // 2 - 40)
+measures.get_display().blit(text_t, textRect)
+
+font_s = pygame.font.Font(None, 40)
+text_s = font_s.render(mc.name + " : " + str(mc.score), True, "black")
+text_s2 = font_s.render(mc2.name + " : " + str(mc2.score), True, "black")
+textRect_s = text_s.get_rect()
+textRect_s2 = text_s2.get_rect()
+textRect_s.center = (tmp_x // 2, tmp_y // 2 + 50)
+textRect_s2.center = (tmp_x // 2, tmp_y // 2 + 100)
+measures.get_display().blit(text_s, textRect_s)
+measures.get_display().blit(text_s2, textRect_s2)
+
+pygame.display.flip()
+
+no_end = True
+while no_end:
+	for event in pygame.event.get():
+
+		if event.type == pygame.KEYDOWN:  # a key is pressed
+			print("break")
+			no_end = False
 
 #exit
 pygame.quit()
