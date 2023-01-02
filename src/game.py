@@ -93,9 +93,9 @@ for level in entries:
 		#event handler
 		for event in pygame.event.get():
 
-			'''if pygame.key.get_pressed()[K_ESCAPE]:
+			if pygame.key.get_pressed()[K_ESCAPE]:
 				print("esc")
-				game_incomplete = False'''
+				game_incomplete = False
 
 			if event.type == pygame.QUIT: #quit game
 				running = False
