@@ -70,6 +70,7 @@ class LevelInterpreter:
 					background.add(Terrain((aux_x, aux_y), terrains[2], False))
 
 				elif i == "E": #finish
+					background.add(Terrain((aux_x, aux_y), terrains[1], False))
 					background.add(Terrain((aux_x, aux_y), terrains[3], False))
 
 				elif i == "H": #heart

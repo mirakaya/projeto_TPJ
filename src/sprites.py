@@ -213,7 +213,7 @@ class TerrainIcon():
 
 		elif typeTerrain == 1: #load sky
 			self.image = transform.scale(SpriteSheet("../resources/Textures-16.png").image_at(
-				(8 * CELL_SIZE, 12 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
+				(12 * CELL_SIZE, 2 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
 			).convert_alpha()
 
@@ -224,8 +224,8 @@ class TerrainIcon():
 			).convert_alpha()
 
 		elif typeTerrain == 3: #load finish
-			self.image = transform.scale(SpriteSheet("../resources/Textures-16.jpg").image_at(
-				(0 * CELL_SIZE, 31 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
+			self.image = transform.scale(SpriteSheet("../resources/stars.png").image_at(
+				(0 * CELL_SIZE, 0 * CELL_SIZE, CELL_SIZE, CELL_SIZE), -1),
 				(self.measures.get_scale(), self.measures.get_scale()),
 			).convert_alpha()
 

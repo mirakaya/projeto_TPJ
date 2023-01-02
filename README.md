@@ -1,7 +1,7 @@
 # projeto_TPJ - "Speed & Gather"
 
 ## Jogo
-“Speed and Gather” é um jogo de plataformas para dois jogadores em que o objetivo é obter mais pontos que o adversário. Existem duas formas de ganhar pontos: acabar o nível mais rapidamente que o adversário ou recolher corações, sendo que ambos os objetivos valem 1000 pontos. 
+“Speed & Gather” é um jogo de plataformas para dois jogadores em que o objetivo é obter mais pontos que o adversário. Existem duas formas de ganhar pontos: acabar o nível mais rapidamente que o adversário ou recolher corações, sendo que ambos os objetivos valem 1000 pontos. 
 
 
 ## Recursos utilizados

@@ -25,13 +25,15 @@ scale = 30
 tmp_x = 30 * 30
 tmp_y = 30 * 15
 
+color = (91, 104, 136)
+
 # initialize measures
 tmp_display = pygame.display.set_mode((tmp_x, tmp_y))
 pygame.display.set_caption("Speed & Gather")
 measures = Measures(1, 0, 0, tmp_display)
 
 #start screen
-measures.get_display().fill("gray")
+measures.get_display().fill(color)
 
 font_t = pygame.font.Font(None, 80)
 text_t = font_t.render('Speed & Gather', True, "black")
@@ -125,7 +127,7 @@ for level in entries:
 
 
 		# render the level
-		measures.get_display().fill("gray")
+		measures.get_display().fill(color)
 		all_sprites.update()
 		all_sprites.draw(measures.get_display())
 
@@ -156,7 +158,7 @@ for level in entries:
 
 
 #end screen
-measures.get_display().fill("gray")
+measures.get_display().fill(color)
 
 font_t = pygame.font.Font(None, 80)
 text_t = font_t.render('Scores', True, "black")

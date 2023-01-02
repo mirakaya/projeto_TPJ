@@ -71,14 +71,13 @@ class Playable_character(Actor, Subject):
 
 
 	def cancel_jump(self):
-		self.vel.y = 2 * self.velocity_value
-		self.pos.y += self.vel.y
+		self.jump_count = self.max_jump_val
 
 
-	def dash(self):
-		self.vel.x = 4 * self.vel.x
-		self.vel.y = 4 * self.vel.y
-		self.pos += self.vel
+#	def dash(self):
+#		self.vel.x = 4 * self.vel.x
+#		self.vel.y = 4 * self.vel.y
+#		self.pos += self.vel
 
 	def stop(self):
 		self.vel.x = 0
@@ -145,9 +144,8 @@ class Playable_character(Actor, Subject):
 # -----start of transitions -----
 
 class Event(Enum):
-	REGULAR = 1,
-	POWERUP = 2,
-	DIE = 3
+	JUMP = 1,
+	LAND = 2
 
 
 class Normal(State):
@@ -158,31 +156,18 @@ class Normal(State):
 	def update(cls, ant):
 		ant.power_down()
 
-
-class Powered(State):
+class Jumping(State):
 	def __init__(self):
 		super().__init__(self.__class__.__name__)
 
 	@classmethod
 	def update(cls, ant):
-		ant.power_up()
+		ant.power_down()
 
 
-class Dead(State):
-	def __init__(self):
-		super().__init__(self.__class__.__name__)
-
-	@classmethod
-	def enter(cls, ant):
-		ant.dead = True
-
-
-STATES = [Normal, Powered, Dead]
+STATES = [Normal, Jumping]
 
 TRANSITIONS = {
-	Event.REGULAR: [Transition(Powered, Normal)],
-	Event.POWERUP: [Transition(Normal, Powered)],
-	Event.DIE: [
-		Transition(Normal, Dead),
-	]
+	Event.JUMP: [Transition(Normal, Jumping)],
+	Event.LAND: [Transition(Jumping, Normal)],
 }
