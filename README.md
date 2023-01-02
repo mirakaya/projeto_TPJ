@@ -7,5 +7,5 @@
 # Recursos utilizados
 
 * Textura do chão e de fundo - Recurso criado por Poloviiinkin e disponivel em https://poloviiinkin.itch.io/textures
-* Textura do coração (modificado) - Recurso criado por Poloviiinkin e disponivel em https://poloviiinkin.itch.io/platformer
+* Textura do coração - Recurso criado por Poloviiinkin e disponivel em https://poloviiinkin.itch.io/platformer
 * Personagens - Recurso criado por javikolog e disponivel em https://route1rodent.itch.io/16x16-rpg-character-sprite-sheet
