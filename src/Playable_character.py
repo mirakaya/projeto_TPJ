@@ -24,7 +24,7 @@ class Playable_character(Actor, Subject):
 
 		self.character_dimensions = pygame.math.Vector2(0, 0)
 
-
+		self.rectified = False
 
 
 	def controls(self, up, left, down, right):
@@ -47,6 +47,7 @@ class Playable_character(Actor, Subject):
 		#print(self.new_horizontal_collision(solids))
 		if self.horizontal_collision(solids) == False:
 			self.pos.x += self.vel.x
+			self.rectified = False
 
 	def print_vel_x(self):
 		print(self.vel.x)

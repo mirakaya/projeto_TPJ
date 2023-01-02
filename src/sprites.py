@@ -40,6 +40,8 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.frame_counter = 0
 		self.sequence_used = 0
 
+		self.test_counter = 0
+
 
 		CELL_SIZE = 16
 
@@ -99,7 +101,10 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 	def update(self):
 
-		self.character.print_vel_x()
+		#self.character.print_vel_x()
+		if self.character.name == "Player 1":
+			print(str(self.character.jumping) + " "+ str(self.test_counter))
+			self.test_counter +=1
 
 		self.change_sprite()
 
@@ -109,11 +114,18 @@ class Character_Sprite(pygame.sprite.Sprite):
 		#if jumping, continue jump
 		if self.character.jumping == True:
 			self.character.jump()
-		else: #else, check if feet are hitting the ground, if not, jump at max
+			if self.character.name == "Player 1":
+				print("1 - ", str(self.character.jumping) + " " + str(self.test_counter))
+
+		elif self.character.rectified == False: #else, check if feet are hitting the ground, if not, jump at max
 			is_collision = self.character.vertical_collision(solids)
 			if is_collision == 0:
 				self.character.jump_count = self.character.max_jump_val
 				self.character.jumping = True
+				if self.character.name == "Player 1":
+					print("2 - ", str(self.character.jumping) + " " + str(self.test_counter))
+			else:
+				self.character.rectified = True
 
 		#check if character is collecting a heart
 		collected = self.character.check_collision(collectibles)
