@@ -1,13 +1,10 @@
-import pygame
-
 from src.common import *
 from src.sprites import Terrain
 
-
 class LevelInterpreter:
 
-	def interpret_level(self, path, measures, scale):
-		# reads a .txt file per line and returns its contents
+	def interpret_level(self, path, measures, scale): # reads a .txt file per line and returns its contents
+
 		counter = 0
 		lvl_content = ""
 		window_title = ""
@@ -21,15 +18,12 @@ class LevelInterpreter:
 
 				if counter == 0:
 					window_title = line
-					#print("wt", window_title)
 
 				elif counter == 1:
 					width = int(line)
-					#print("wid", width)
 
 				elif counter == 2:
 					height = int(line) + 1
-					#print("ht", height)
 
 				else:
 
@@ -41,17 +35,13 @@ class LevelInterpreter:
 
 				counter += 1
 
-		'''scale = int(min(pygame.display.Info().current_h / height, pygame.display.Info().current_w / width))
-
-		print("Scale is ", , scale - 4)'''
-
 		measures.set_height(height)
 		measures.set_width(width)
 		measures.set_scale(scale)
 
 		#create the display with the desired width and height
 		display = pygame.display.set_mode((measures.get_scale() * measures.get_width() , measures.get_scale() * measures.get_height()) )
-
+		pygame.display.set_caption(window_title)
 		measures.set_display(display)
 
 		#print("lvl", lvl_content)
@@ -68,8 +58,8 @@ class LevelInterpreter:
 		# interpret level into
 		for i in lvl_content:
 			if i != '\n':
-				# convert i to Terrain
 
+				# convert i to Terrain
 				if i == "F": #floor
 					platforms.add(Terrain((aux_x, aux_y), terrains[0], True))
 
@@ -96,11 +86,3 @@ class LevelInterpreter:
 					aux_y += 1
 
 		return character_coordinates
-
-
-
-'''if __name__ == "__main__":
-
-	LevelInterpreter().interpret_level('../levels/9.txt')'''
-
-

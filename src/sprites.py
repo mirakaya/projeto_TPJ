@@ -1,4 +1,3 @@
-import pygame
 from pygame import *
 from src.spritesheet import *
 from src.scoreboard import *
@@ -104,9 +103,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		self.change_sprite()
 
-		'''if self.character.name == "Player 1":
-			print("1 - ", self.character.name ,self.character.vel)'''
-
 		self.image.fill("white")
 		self.image.set_colorkey("white")
 
@@ -118,12 +114,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 			if is_collision == 0:
 				self.character.jump_count = self.character.max_jump_val
 				self.character.jumping = True
-			'''else:
-				self.character.jumping = False
-				self.character.jump_count = 0
-'''
-
-
 
 		#check if character is collecting a heart
 		collected = self.character.check_collision(collectibles)
@@ -135,9 +125,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 			for i in hearts:
 				if i.rect == collected:
 					i.kill()
-
-		'''if self.character.name == "Player 1":
-			print("mid - ", self.character.name, self.character.vel)'''
 
 		# Render character
 		self.character.measures.get_display().blit(self.character_image, [self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y])
@@ -154,8 +141,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 			pygame.event.post(EVENT_END_LEVEL)
 			print("end")
 
-		'''if self.character.name == "Player 1":
-			print("2 - ", self.character.name, self.character.vel)'''
 
 	def change_sprite(self):
 
@@ -247,7 +232,6 @@ class TerrainIcon():
 		return self.typeTerrain
 
 
-
 class Terrain(pygame.sprite.Sprite):
 
 	def __init__(self, position, t_icon, collision):
@@ -265,48 +249,3 @@ class Terrain(pygame.sprite.Sprite):
 			end.append(self.rect)
 		elif self.t_icon.get_type() == 4:
 			collectibles.append(self.rect)
-
-
-	'''def update(self):
-		self.image.fill("white")
-		self.image.set_colorkey("white")
-
-		# Render character
-		self.image.blit(self.t_icon.get_image(), (
-		self.t_icon.get_measures().get_scale() * self.position[0], self.t_icon.get_measures().get_scale() * self.position[1]), )
-
-		if self.collision == True:
-			self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
-			                 self.t_icon.get_image().get_height())
-
-			pygame.draw.rect(self.t_icon.get_measures().get_display(), (255, 0, 0), pygame.Rect(
-				self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(),
-				self.t_icon.get_image().get_height()
-			))
-
-			solids.append(self.rect)
-
-		print(solids)'''
-
-'''		pygame.draw.rect(self.t_icon.get_measures().get_display(), (255,0,0), pygame.Rect(
-			self.position[0] * self.t_icon.get_measures().get_scale(),
-			self.position[1] * self.t_icon.get_measures().get_scale(),
-			self.t_icon.get_image().get_width(),
-			self.t_icon.get_image().get_height()))'''
-
-
-
-
-#if __name__ == "__main__":
-
-'''bs = Sprites.Background([0,0])
-	#print(bs.position)
-
-	bs.sprite(1)'''
-
-'''tmp_display = pygame.display.set_mode((0, 0))
-	measures = Measures(27, 0, 0, tmp_display)
-	icon = TerrainIcon(1, measures )
-	Terrain((0,0), icon)'''
-
-

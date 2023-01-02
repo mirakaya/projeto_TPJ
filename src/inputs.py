@@ -1,7 +1,5 @@
 import pygame
-
 from src.common import Directions
-
 
 class Command:
     def execute(self):
