@@ -1,8 +1,8 @@
-import pygame
 import os
 from src.level_interpreter import LevelInterpreter
 from src.sprites import *
 from src.Playable_character import *
+from src.measures import *
 
 running = True
 list_keys = []
@@ -69,7 +69,7 @@ for level in entries:
 	#convert the content to terrain groups
 	character_coordinates = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
 
-	#initialize objects
+	#initialize players and scoreboard
 	mc = Playable_character(measures, score1, "Player 1", character_coordinates)
 	mc.controls(pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d)
 

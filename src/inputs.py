@@ -27,28 +27,3 @@ class Right(Command):
     def execute(self, actor):
         self.actor = actor
         actor.move(Directions.RIGHT)
-
-
-'''class Dash(Command):
-    def execute(self, actor):
-        self.actor = actor
-        actor.dash()'''
-'''
-
-class InputHandler:
-    command = {
-        pygame.K_w: Up(),
-        pygame.K_a: Left(),
-        pygame.K_s: Down(),
-        pygame.K_d: Right(),
-        #pygame.K_e: Dash(),
-
-    }
-
-    def handleInput(self, key):
-        try:
-            print(self.command[key])
-            return self.command[key]
-
-        except KeyError:
-            print("Key not bound - ignore input")'''

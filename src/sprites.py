@@ -32,7 +32,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		self.character = character
 		self.measures = measures
-		self.type = type
 		self.sequence_f = ["f1", "f2", "f1", "f0"]
 		self.sequence_b = ["b1", "b2", "b1", "b0"]
 
@@ -40,13 +39,9 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.frame_counter = 0
 		self.sequence_used = 0
 
-		self.test_counter = 0
-
-
 		CELL_SIZE = 16
 
-		character_map = dict()
-
+		#locations of the sprites on the sheet
 		if type == 1:
 			character_map = {
 				"f0": (0, 2),
@@ -79,10 +74,8 @@ class Character_Sprite(pygame.sprite.Sprite):
 			for (name, (a, b)) in character_map.items()
 		}
 
-
+		#load first image
 		self.character_image = self.image_collection.get("f1")
-
-		#self.measures.set_character_image_dimensions(self.character_image.get_width(), self.character_image.get_height())
 
 		self.image = pygame.Surface([measures.get_width() * measures.get_scale(), measures.get_height() * measures.get_scale()])
 
@@ -125,18 +118,21 @@ class Character_Sprite(pygame.sprite.Sprite):
 				if i.rect == collected:
 					i.kill()
 
-		# Render character
-		self.character.measures.get_display().blit(self.character_image, [self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y])
-
-		self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
-		                        self.measures.get_scale() * self.character.pos.y,
-		                        self.character_image.get_width(),
-		                        self.character_image.get_height())
-
 		# check if character reached the end
 		if self.character.check_collision(end) != None:
 			self.character.notify(EVENT_INCREASE_SCORE)
 			pygame.event.post(EVENT_END_LEVEL)
+
+		else:
+			# Render character
+			self.character.measures.get_display().blit(self.character_image, [self.measures.get_scale() * self.character.pos.x, self.measures.get_scale() * self.character.pos.y])
+
+			self.rect = pygame.Rect(self.measures.get_scale() * self.character.pos.x,
+			                        self.measures.get_scale() * self.character.pos.y,
+			                        self.character_image.get_width(),
+			                        self.character_image.get_height())
+
+
 
 	def change_sprite(self):
 
@@ -216,6 +212,8 @@ class TerrainIcon():
 			self.image = transform.scale(pygame.image.load("../resources/heart.png"),
 				(self.measures.get_scale(), self.measures.get_scale()),
 			).convert_alpha()
+		else:
+			raise Exception("Invalid terrain type")
 
 	def get_image(self):
 		return self.image
@@ -237,6 +235,7 @@ class Terrain(pygame.sprite.Sprite):
 
 		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
 
+		#append rect to the respective list if it has collision
 		if self.t_icon.get_type() == 0:
 			solids.append(self.rect)
 		elif self.t_icon.get_type() == 3:
