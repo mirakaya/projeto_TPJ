@@ -12,7 +12,6 @@ class Playable_character(Actor, Subject):
 		self.dead = 0
 		self.control_keys = dict()
 		self.measures = measures
-		self.score = score
 
 		self.pos = pygame.math.Vector2(init_pos)
 		self.vel = pygame.math.Vector2(0, 0)
@@ -26,6 +25,11 @@ class Playable_character(Actor, Subject):
 
 		self.rectified = False
 
+		self.register(EVENT_INCREASE_SCORE, self.increase_score)
+		self.my_score = score
+
+	def increase_score(self, context):
+		self.my_score += 1000
 
 	def controls(self, up, left, down, right):
 		self.control_keys = {up: Up, left: Left, down: Down, right: Right}

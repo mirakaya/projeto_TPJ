@@ -1,10 +1,7 @@
-import pygame
 from src.common import Directions
 
 class Command:
     def execute(self):
-        raise NotImplemented
-    def fast_forward(self):
         raise NotImplemented
 
 
@@ -36,9 +33,9 @@ class Right(Command):
     def execute(self, actor):
         self.actor = actor
         actor.dash()'''
+'''
 
-
-'''class InputHandler:
+class InputHandler:
     command = {
         pygame.K_w: Up(),
         pygame.K_a: Left(),
@@ -46,9 +43,9 @@ class Right(Command):
         pygame.K_d: Right(),
         #pygame.K_e: Dash(),
 
-    }'''
+    }
 
-'''    def handleInput(self, key):
+    def handleInput(self, key):
         try:
             print(self.command[key])
             return self.command[key]

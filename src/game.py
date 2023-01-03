@@ -151,8 +151,8 @@ for level in entries:
 	collectibles.clear()
 
 	#save scores for next level
-	score1 = mc.score
-	score2 = mc2.score
+	score1 = mc.my_score
+	score2 = mc2.my_score
 
 
 #end screen
@@ -165,8 +165,8 @@ textRect.center = (tmp_x // 2, tmp_y // 2 - 40)
 measures.get_display().blit(text_t, textRect)
 
 font_s = pygame.font.Font(None, 40)
-text_s = font_s.render(mc.name + " : " + str(mc.score), True, "black")
-text_s2 = font_s.render(mc2.name + " : " + str(mc2.score), True, "black")
+text_s = font_s.render(mc.name + " : " + str(mc.my_score), True, "black")
+text_s2 = font_s.render(mc2.name + " : " + str(mc2.my_score), True, "black")
 textRect_s = text_s.get_rect()
 textRect_s2 = text_s2.get_rect()
 textRect_s.center = (tmp_x // 2, tmp_y // 2 + 50)

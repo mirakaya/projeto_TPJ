@@ -118,7 +118,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 		#check if character is collecting a heart
 		collected = self.character.check_collision(collectibles)
 		if collected != None:
-			self.character.score += 1000
 			self.character.notify(EVENT_INCREASE_SCORE)
 			collectibles.remove(collected)
 
@@ -136,7 +135,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		# check if character reached the end
 		if self.character.check_collision(end) != None:
-			self.character.score += 1000
 			self.character.notify(EVENT_INCREASE_SCORE)
 			pygame.event.post(EVENT_END_LEVEL)
 
@@ -231,12 +229,11 @@ class TerrainIcon():
 
 class Terrain(pygame.sprite.Sprite):
 
-	def __init__(self, position, t_icon, collision):
+	def __init__(self, position, t_icon):
 		pygame.sprite.Sprite.__init__(self)
 		self.position = position
 		self.t_icon = t_icon
 		self.image = self.t_icon.get_image()
-		self.collision = collision
 
 		self.rect = pygame.Rect(self.position[0] * self.t_icon.get_measures().get_scale(), self.position[1] * self.t_icon.get_measures().get_scale(), self.t_icon.get_image().get_width(), self.t_icon.get_image().get_height())
 

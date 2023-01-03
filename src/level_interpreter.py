@@ -60,24 +60,24 @@ class LevelInterpreter:
 
 				# convert i to Terrain
 				if i == "F": #floor
-					platforms.add(Terrain((aux_x, aux_y), terrains[0], True))
+					platforms.add(Terrain((aux_x, aux_y), terrains[0]))
 
 				elif i == "S": #sky
-					background.add(Terrain((aux_x, aux_y), terrains[1], False))
+					background.add(Terrain((aux_x, aux_y), terrains[1]))
 
 				elif i == "I": #invisible
-					background.add(Terrain((aux_x, aux_y), terrains[2], False))
+					background.add(Terrain((aux_x, aux_y), terrains[2]))
 
 				elif i == "E": #finish
-					background.add(Terrain((aux_x, aux_y), terrains[1], False))
-					background.add(Terrain((aux_x, aux_y), terrains[3], False))
+					background.add(Terrain((aux_x, aux_y), terrains[1]))
+					background.add(Terrain((aux_x, aux_y), terrains[3]))
 
 				elif i == "H": #heart
-					background.add(Terrain((aux_x, aux_y), terrains[1], False))
-					hearts.add(Terrain((aux_x, aux_y), terrains[4], False))
+					background.add(Terrain((aux_x, aux_y), terrains[1]))
+					hearts.add(Terrain((aux_x, aux_y), terrains[4]))
 
 				elif i == "C": #character
-					background.add(Terrain((aux_x, aux_y), terrains[1], False))
+					background.add(Terrain((aux_x, aux_y), terrains[1]))
 					character_coordinates = (aux_x, aux_y - 1)
 
 				aux_x += 1
