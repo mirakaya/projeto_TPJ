@@ -32,21 +32,21 @@ class Right(Command):
         actor.move(Directions.RIGHT)
 
 
-class Dash(Command):
+'''class Dash(Command):
     def execute(self, actor):
         self.actor = actor
-        actor.dash()
+        actor.dash()'''
 
 
-class InputHandler:
+'''class InputHandler:
     command = {
         pygame.K_w: Up(),
         pygame.K_a: Left(),
         pygame.K_s: Down(),
         pygame.K_d: Right(),
-        pygame.K_e: Dash(),
+        #pygame.K_e: Dash(),
 
-    }
+    }'''
 
 '''    def handleInput(self, key):
         try:

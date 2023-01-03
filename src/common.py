@@ -13,13 +13,14 @@ GAME_EVENT = pygame.event.custom_type()
 EVENT_INCREASE_SCORE = "event_increase_score"
 EVENT_END_LEVEL = pygame.event.Event(pygame.USEREVENT, attr1='EVENT_END_LEVEL')
 
-
+#groups of sprites
 all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()  # collision
 background = pygame.sprite.Group()  # no collision
 character = pygame.sprite.Group()
 hearts = pygame.sprite.Group()
 
+#group of rect of the objects with collision
 solids = []
 end = []
 collectibles = []
@@ -88,7 +89,3 @@ class Subject:
 
 		ev = pygame.event.Event(GAME_EVENT, {'name': event, 'obj': self})
 		pygame.event.post(ev)
-
-
-def remove_values_from_list(lst, val):
-	return [value for value in lst if value != val]

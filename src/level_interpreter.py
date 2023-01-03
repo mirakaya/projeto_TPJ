@@ -44,7 +44,6 @@ class LevelInterpreter:
 		pygame.display.set_caption(window_title)
 		measures.set_display(display)
 
-		#print("lvl", lvl_content)
 		return window_title, lvl_content
 
 

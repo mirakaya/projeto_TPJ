@@ -20,10 +20,10 @@ os.environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" %(0, 30)
 score1 = 0
 score2 = 0
 
-scale = 30
+scale = 47
 
-tmp_x = 30 * 30
-tmp_y = 30 * 15
+tmp_x = scale * 30
+tmp_y = scale * 15
 
 color = (91, 104, 136)
 
@@ -96,7 +96,6 @@ for level in entries:
 		for event in pygame.event.get():
 
 			if pygame.key.get_pressed()[K_ESCAPE]:
-				print("esc")
 				game_incomplete = False
 
 			if event.type == pygame.QUIT: #quit game
@@ -106,9 +105,8 @@ for level in entries:
 				list_keys.append(event.key)
 
 
-			elif event.type == pygame.KEYUP : #a key is relased
-				list_keys = remove_values_from_list(list_keys, key)
-
+			elif event.type == pygame.KEYUP : #a key is released
+				list_keys = [value for value in list_keys if value != key]
 
 			if event == EVENT_END_LEVEL :
 				game_incomplete = False

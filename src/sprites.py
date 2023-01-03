@@ -68,8 +68,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 		else:
 			raise Exception("Invalid character type")
 
-		print(character_map)
-
 		# Load and resize images to SCALE
 		self.image_collection = {
 			name: pygame.transform.scale(
@@ -81,7 +79,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 			for (name, (a, b)) in character_map.items()
 		}
 
-		print(self.image_collection)
 
 		self.character_image = self.image_collection.get("f1")
 
@@ -100,12 +97,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 		self.update()
 
 	def update(self):
-
-		#self.character.print_vel_x()
-		if self.character.name == "Player 1":
-			print(str(self.character.jumping) + " "+ str(self.test_counter))
-			self.test_counter +=1
-
 		self.change_sprite()
 
 		self.image.fill("white")
@@ -114,16 +105,13 @@ class Character_Sprite(pygame.sprite.Sprite):
 		#if jumping, continue jump
 		if self.character.jumping == True:
 			self.character.jump()
-			if self.character.name == "Player 1":
-				print("1 - ", str(self.character.jumping) + " " + str(self.test_counter))
 
 		elif self.character.rectified == False: #else, check if feet are hitting the ground, if not, jump at max
 			is_collision = self.character.vertical_collision(solids)
 			if is_collision == 0:
 				self.character.jump_count = self.character.max_jump_val
 				self.character.jumping = True
-				if self.character.name == "Player 1":
-					print("2 - ", str(self.character.jumping) + " " + str(self.test_counter))
+
 			else:
 				self.character.rectified = True
 
@@ -151,8 +139,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character.score += 1000
 			self.character.notify(EVENT_INCREASE_SCORE)
 			pygame.event.post(EVENT_END_LEVEL)
-			print("end")
-
 
 	def change_sprite(self):
 
@@ -166,7 +152,6 @@ class Character_Sprite(pygame.sprite.Sprite):
 
 		else:
 			if self.character.vel.x > 0: #forwards
-				print("here")
 				self.aux_walk(self.sequence_f)
 
 			elif self.character.vel.x < 0: #backwards

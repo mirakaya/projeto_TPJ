@@ -44,14 +44,9 @@ class Playable_character(Actor, Subject):
 		if direction == Directions.RIGHT:
 			self.vel.x = self.velocity_value
 
-		#print(self.new_horizontal_collision(solids))
 		if self.horizontal_collision(solids) == False:
 			self.pos.x += self.vel.x
 			self.rectified = False
-
-	def print_vel_x(self):
-		print(self.vel.x)
-
 
 	def jump(self):
 
@@ -63,7 +58,6 @@ class Playable_character(Actor, Subject):
 		else: #falling
 			self.vel.y = self.velocity_value
 
-		#print(self.new_vertical_collision(solids))
 		if self.vertical_collision(solids) == 0:
 			self.pos.y += self.vel.y
 
@@ -72,12 +66,6 @@ class Playable_character(Actor, Subject):
 
 	def cancel_jump(self):
 		self.jump_count = self.max_jump_val
-
-
-#	def dash(self):
-#		self.vel.x = 4 * self.vel.x
-#		self.vel.y = 4 * self.vel.y
-#		self.pos += self.vel
 
 	def stop(self):
 		self.vel.x = 0
@@ -92,7 +80,6 @@ class Playable_character(Actor, Subject):
 
 		for i in object_list:
 			if pygame.Rect.colliderect(aux_rect, i) :
-				#self.stop()
 				return True
 
 		return False
@@ -109,7 +96,6 @@ class Playable_character(Actor, Subject):
 
 				if self.pos.y == i.top / self.measures.get_scale() - 1:
 					#hitting feet
-					#print("hitting feet\n\n")
 					self.jumping = False
 					self.jump_count = 0
 					self.stop()
@@ -117,7 +103,6 @@ class Playable_character(Actor, Subject):
 
 				else:
 					#hitting head
-					#print("hitting head")
 					self.jump_count = self.max_jump_val
 					self.stop()
 					return 2
