@@ -131,6 +131,7 @@ for level in entries:
 	solids.clear()
 	end.clear()
 	collectibles.clear()
+	spikes.clear()
 
 	#save scores for next level
 	score1 = mc.my_score
