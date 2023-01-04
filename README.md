@@ -11,5 +11,5 @@ O jogo termina quando os jogadores completam todos os níveis. No entanto, é da
 ## Recursos utilizados
 
 * Textura do chão e de fundo - https://poloviiinkin.itch.io/textures
-* Textura do coração - https://poloviiinkin.itch.io/platformer
+* Textura do coração e de espinhos - https://poloviiinkin.itch.io/platformer
 * Personagens - https://route1rodent.itch.io/16x16-rpg-character-sprite-sheet
