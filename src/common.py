@@ -32,6 +32,7 @@ hearts = pygame.sprite.Group()
 solids = []
 end = []
 collectibles = []
+spikes = []
 
 class Actor:
 	def __init__(self):

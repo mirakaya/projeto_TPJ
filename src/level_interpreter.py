@@ -76,6 +76,9 @@ class LevelInterpreter:
 					background.add(Terrain((aux_x, aux_y), terrains[1]))
 					hearts.add(Terrain((aux_x, aux_y), terrains[4]))
 
+				elif i == "P": #spikes
+					background.add(Terrain((aux_x, aux_y), terrains[5]))
+
 				elif i == "C": #character
 					background.add(Terrain((aux_x, aux_y), terrains[1]))
 					character_coordinates = (aux_x, aux_y - 1)

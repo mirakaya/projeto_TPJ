@@ -12,6 +12,7 @@ class Playable_character(Actor, Subject):
 		self.dead = 0
 		self.control_keys = dict()
 		self.measures = measures
+		self.init_pos = init_pos
 
 		self.pos = pygame.math.Vector2(init_pos)
 		self.vel = pygame.math.Vector2(0, 0)
@@ -39,6 +40,9 @@ class Playable_character(Actor, Subject):
 			cmd = self.control_keys[control]()
 			cmd.execute(self)
 			return cmd
+
+	def die(self):
+		self.pos = pygame.math.Vector2(self.init_pos)
 
 	def move(self, direction: Directions):
 

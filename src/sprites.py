@@ -119,6 +119,11 @@ class Character_Sprite(pygame.sprite.Sprite):
 				if i.rect == collected:
 					i.kill()
 
+		# check if character is hitting spikes
+		die = self.character.check_collision(spikes)
+		if die:  # create event
+			self.character.die()
+
 		# check if character reached the end
 		if self.character.check_collision(end) != None:
 			self.character.notify(EVENT_INCREASE_SCORE)
@@ -213,6 +218,11 @@ class TerrainIcon():
 			self.image = transform.scale(pygame.image.load("../resources/heart.png"),
 				(self.measures.get_scale(), self.measures.get_scale()),
 			).convert_alpha()
+
+		elif typeTerrain == 5: #load spikes
+			self.image = transform.scale(pygame.image.load("../resources/spikes.png"),
+				(self.measures.get_scale(), self.measures.get_scale()),
+			).convert_alpha()
 		else:
 			raise Exception("Invalid terrain type")
 
@@ -243,3 +253,5 @@ class Terrain(pygame.sprite.Sprite):
 			end.append(self.rect)
 		elif self.t_icon.get_type() == 4:
 			collectibles.append(self.rect)
+		elif self.t_icon.get_type() == 5:
+			spikes.append(self.rect)

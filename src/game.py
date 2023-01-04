@@ -55,7 +55,7 @@ for level in entries:
 	window_title, lvl_content = LevelInterpreter().interpret_level(lvl_dir + level, measures, scale)
 
 	# loads terrain
-	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures), TerrainIcon(2, measures), TerrainIcon(3, measures), TerrainIcon(4, measures)]
+	terrains = [TerrainIcon(0, measures), TerrainIcon(1, measures), TerrainIcon(2, measures), TerrainIcon(3, measures), TerrainIcon(4, measures), TerrainIcon(5, measures)]
 
 	#convert the content to terrain groups
 	character_coordinates = LevelInterpreter.convert_to_terrain(lvl_content, measures, terrains)
