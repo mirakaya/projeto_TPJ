@@ -6,6 +6,14 @@ GAME_EVENT = pygame.event.custom_type()
 EVENT_INCREASE_SCORE = "event_increase_score"
 EVENT_END_LEVEL = pygame.event.Event(pygame.USEREVENT, attr1='EVENT_END_LEVEL')
 
+def write_to_screen(text, size_font, x, y, displacement, measures):
+	font_t = pygame.font.Font(None, size_font)
+	text_t = font_t.render(text, True, "black")
+	textRect = text_t.get_rect()
+	textRect.center = (x // 2, y // 2 - displacement)
+	measures.get_display().blit(text_t, textRect)
+
+
 #directions
 class Directions(Enum):
 	UP = (0, -1)

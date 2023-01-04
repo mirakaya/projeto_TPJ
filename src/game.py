@@ -35,17 +35,8 @@ measures = Measures(1, 0, 0, tmp_display)
 #start screen
 measures.get_display().fill(color)
 
-font_t = pygame.font.Font(None, 80)
-text_t = font_t.render('Speed & Gather', True, "black")
-textRect = text_t.get_rect()
-textRect.center = (tmp_x // 2, tmp_y // 2 - 40)
-measures.get_display().blit(text_t, textRect)
-
-font_s = pygame.font.Font(None, 40)
-text_s = font_s.render('Press any key to start', True, "black")
-textRect = text_s.get_rect()
-textRect.center = (tmp_x // 2, tmp_y // 2 + 40)
-measures.get_display().blit(text_s, textRect)
+write_to_screen("Speed & Gather", 80, tmp_x, tmp_y, 40, measures)
+write_to_screen("Press any key to start", 40, tmp_x, tmp_y, -40, measures)
 
 pygame.display.flip()
 
@@ -158,21 +149,10 @@ for level in entries:
 #end screen
 measures.get_display().fill(color)
 
-font_t = pygame.font.Font(None, 80)
-text_t = font_t.render('Scores', True, "black")
-textRect = text_t.get_rect()
-textRect.center = (tmp_x // 2, tmp_y // 2 - 40)
-measures.get_display().blit(text_t, textRect)
-
-font_s = pygame.font.Font(None, 40)
-text_s = font_s.render(mc.name + " : " + str(mc.my_score), True, "black")
-text_s2 = font_s.render(mc2.name + " : " + str(mc2.my_score), True, "black")
-textRect_s = text_s.get_rect()
-textRect_s2 = text_s2.get_rect()
-textRect_s.center = (tmp_x // 2, tmp_y // 2 + 50)
-textRect_s2.center = (tmp_x // 2, tmp_y // 2 + 100)
-measures.get_display().blit(text_s, textRect_s)
-measures.get_display().blit(text_s2, textRect_s2)
+write_to_screen('Scores', 80, tmp_x, tmp_y, 40, measures)
+write_to_screen(mc.name + " : " + str(mc.my_score), 40, tmp_x, tmp_y, -50, measures)
+write_to_screen(mc2.name + " : " + str(mc2.my_score), 40, tmp_x, tmp_y, -100, measures)
+write_to_screen("Press any key to exit", 40, tmp_x, tmp_y, -200, measures)
 
 pygame.display.set_caption("Speed & Gather")
 pygame.display.flip()
