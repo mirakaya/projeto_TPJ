@@ -88,7 +88,7 @@ class Playable_character(Actor, Subject):
 
 		return False
 
-	def vertical_collision(self, object_list):
+	def vertical_collision(self, object_list): #0 no collision, 1 hitting feet, 2 hitting head
 
 		aux_rect = pygame.Rect(self.measures.get_scale() * self.pos.x + 2 * self.vel.x,
 		                       self.measures.get_scale() * self.pos.y + 2 * self.vel.y,
@@ -129,34 +129,3 @@ class Playable_character(Actor, Subject):
 	def set_position(self, position):
 		self.pos = position
 
-
-# -----start of transitions -----
-
-class Event(Enum):
-	JUMP = 1,
-	LAND = 2
-
-
-class Normal(State):
-	def __init__(self):
-		super().__init__(self.__class__.__name__)
-
-	@classmethod
-	def update(cls, ant):
-		ant.power_down()
-
-class Jumping(State):
-	def __init__(self):
-		super().__init__(self.__class__.__name__)
-
-	@classmethod
-	def update(cls, ant):
-		ant.power_down()
-
-
-STATES = [Normal, Jumping]
-
-TRANSITIONS = {
-	Event.JUMP: [Transition(Normal, Jumping)],
-	Event.LAND: [Transition(Jumping, Normal)],
-}

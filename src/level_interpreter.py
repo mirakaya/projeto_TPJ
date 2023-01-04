@@ -13,7 +13,7 @@ class LevelInterpreter:
 
 		is_First_line = True
 
-		with open(path) as content:
+		with open(path) as content: #read file and interpret
 			for line in content:
 
 				if counter == 0:

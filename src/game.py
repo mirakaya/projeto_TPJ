@@ -102,13 +102,6 @@ for level in entries:
 			if event == EVENT_END_LEVEL :
 				game_incomplete = False
 
-			'''if cmd:
-				command_log.append(cmd)'''
-
-			'''elif event.type == GAME_EVENT:
-				if event.name == EVENT_FOOD_EATEN:
-					pass'''
-
 		if len(list_keys) != 0 : #execute key commands
 			for key in list_keys:
 				cmd = mc.command(key)
@@ -127,8 +120,6 @@ for level in entries:
 		# update window + fps
 		pygame.display.flip()
 		clock.tick(15)
-
-		#print("FPS:", int(clock.get_fps()))
 
 	#clean up
 	all_sprites.empty()
@@ -157,6 +148,7 @@ write_to_screen("Press any key to exit", 40, tmp_x, tmp_y, -200, measures)
 pygame.display.set_caption("Speed & Gather")
 pygame.display.flip()
 
+#check if key is pressed and exit
 no_end = True
 while no_end:
 	for event in pygame.event.get():

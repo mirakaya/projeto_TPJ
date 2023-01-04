@@ -1,13 +1,11 @@
 
+class Measures(): #measures of the screen and display
 
-class Measures():
-
-	def __init__(self, scale, width, height, display, character_image_dimensions=(0,0)):
+	def __init__(self, scale, width, height, display):
 		self.scale = scale
 		self.width = width
 		self.height = height
 		self.display = display
-		self.character_image_dimensions = character_image_dimensions
 
 	def set_scale(self, new_scale):
 		self.scale = new_scale
@@ -32,9 +30,3 @@ class Measures():
 
 	def get_display(self):
 		return self.display
-
-	def set_character_image_dimensions(self, width, height):
-		self.character_image_dimensions = (width, height)
-
-	def get_character_image_dimensions(self):
-		return self.character_image_dimensions

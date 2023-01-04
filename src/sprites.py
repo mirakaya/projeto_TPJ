@@ -84,6 +84,7 @@ class Character_Sprite(pygame.sprite.Sprite):
 			self.character_image.get_width(),
 			self.character_image.get_height())
 
+		#set character dimensions for the collision
 		self.character.character_dimensions.x = self.character_image.get_width()
 		self.character.character_dimensions.y = self.character_image.get_height()
 
@@ -99,22 +100,22 @@ class Character_Sprite(pygame.sprite.Sprite):
 		if self.character.jumping == True:
 			self.character.jump()
 
-		elif self.character.rectified == False: #else, check if feet are hitting the ground, if not, jump at max
+		elif self.character.rectified == False:
 			is_collision = self.character.vertical_collision(solids)
-			if is_collision == 0:
+			if is_collision == 0: #not hitting, fall
 				self.character.jump_count = self.character.max_jump_val
 				self.character.jumping = True
 
-			else:
+			else: #does not need correction
 				self.character.rectified = True
 
 		#check if character is collecting a heart
 		collected = self.character.check_collision(collectibles)
-		if collected != None:
+		if collected != None: #create event
 			self.character.notify(EVENT_INCREASE_SCORE)
 			collectibles.remove(collected)
 
-			for i in hearts:
+			for i in hearts: #kill heart sprite
 				if i.rect == collected:
 					i.kill()
 
